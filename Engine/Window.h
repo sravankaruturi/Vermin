@@ -1,9 +1,7 @@
 //
 // Created by Sravan Karuturi on 11/6/2018.
 //
-
-#ifndef GAME_WINDOW_H
-#define GAME_WINDOW_H
+#pragma once
 
 #include <string>
 #include <glad/glad.h>
@@ -199,5 +197,3 @@ namespace vermin{
     };
 
 }
-
-#endif //GAME_WINDOW_H
