@@ -132,13 +132,15 @@ endif()
 #--------------------------------------------------------------------
 # Detect and select backend APIs
 #--------------------------------------------------------------------
+# For some reason, CygWin makes Cmake read the system as UNIX? -- Sravan 11/7
 if (WIN32)
     set(_GLFW_WIN32 1)
     message(STATUS "Using Win32 for window creation")
 elseif (APPLE)
     set(_GLFW_COCOA 1)
     message(STATUS "Using Cocoa for window creation")
-elseif (UNIX)
+elseif (UNIX AND NOT WIN32)
+    message(STATUS "On a Unix Machine")
     if (GLFW_USE_WAYLAND)
         set(_GLFW_WAYLAND 1)
         message(STATUS "Using Wayland for window creation")

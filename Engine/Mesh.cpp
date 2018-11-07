@@ -3,8 +3,6 @@
 //
 
 #include "Mesh.h"
-
-#include "Mesh.h"
 #include "Texture.h"
 #include "GLShader.h"
 #include "AssetManager.h"

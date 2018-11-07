@@ -6,13 +6,24 @@
 
 #include <memory>
 #include <map>
+
+#if _WIN32
+
+#include <dirent.h>
+#include <vector>
+#include <sstream>
+#include <iostream>
+
+#else
 #include <filesystem>
+#endif
 
 #include "Texture.h"
 #include "GLShader.h"
 #include "FolderLocations.h"
 
 #include "LoggingManager.h"
+#include "PE_GL.h"
 
 
 #ifdef _DEBUG
@@ -26,7 +37,7 @@
 
 #define ASMGR pilot::AssetManager::getInstance()
 
-namespace pilot {
+namespace vermin {
 
     class Object;
 
@@ -106,9 +117,24 @@ namespace pilot {
         bool LoadShaders() {
             LOGGER.AddToLog("Loading Shaders...");
             // Load all the shaders in the directory and compile them.
-            for (auto &p : std::experimental::filesystem::directory_iterator(shaderDir)) {
+#if _WIN32
+            DIR *dp = opendir(shaderDir.c_str());
+            struct dirent *dirp;
+            while ((dirp = readdir(dp)) != NULL) {
+                auto complete_file_name = std::string(dirp->d_name);
+                std::string extension;
+                std::stringstream ss;
+                ss.str(complete_file_name);
+                while (getline(ss, extension, '.')) {
+                }
+                extension = "." + extension;
+#else
+                for (auto &p : std::experimental::filesystem::directory_iterator(shaderDir)) {
+                        std::string extension = p.path().extension().generic_string();
+                        std::string complete_file_name = p.path().generic_string().c_str();
+#endif
                 // *. Check only vert extensions.
-                std::string extension = p.path().extension().generic_string();
+
                 if (".vert" != extension && ".shader" != extension) {
                     if (".frag" != extension) {
                         // Extensions should be Vert or Frag.
@@ -118,7 +144,13 @@ namespace pilot {
                 }
 
                 try {
+#if _WIN32
+                    std::string file_name;
+                    file_name = complete_file_name.substr(0, complete_file_name.length() - extension.length());
+#else
                     std::string file_name = p.path().filename().generic_string();
+#endif
+
 
                     // Important: This only works if the file extension is .vert.
                     if (".vert" == extension) {
@@ -139,13 +171,17 @@ namespace pilot {
                     if (".vert" == extension) {
                         // *. Get the second file as well.
                         // *. Create the Shader and load it in the map.
-                        this->shaders.insert_or_assign(file_name, std::make_shared<GLShader>(
-                                p.path().generic_string().c_str(),
-                                (shaderDir + std::string("/") + file_name + std::string(".frag")).c_str()));
+                        this->shaders.insert(std::make_pair(file_name, std::make_shared<GLShader>(
+                                complete_file_name,
+                                (shaderDir + std::string("/") + file_name + std::string(".frag")).c_str())
+                                             )
+                        );
                     } else if (".shader" == extension) {
-                        this->shaders.insert_or_assign(file_name, std::make_shared<GLShader>(
-                                p.path().generic_string().c_str()
-                                                       )
+                        this->shaders.insert(
+                                std::make_pair(
+                                        file_name, std::make_shared<GLShader>(
+                                                complete_file_name)
+                                )
                         );
                     }
 
@@ -177,7 +213,9 @@ namespace pilot {
                     }
                     file_name.pop_back();
 
-                    this->textures.insert_or_assign(file_name, std::make_shared<Texture>(p.path().generic_string()));
+                    this->textures.insert(
+                            (file_name, std::make_shared<Texture>(p.path().generic_string()))
+                    );
                 }
                 catch (...) {
                     return false;
@@ -217,7 +255,9 @@ namespace pilot {
         bool AddToTextures(const std::string &_name, std::shared_ptr<Texture> _texture) {
             if (IsTextureLoaded(_name)) return false;
             try {
-                this->textures.insert_or_assign(_name, _texture);
+                this->textures.insert(
+                        (_name, _texture)
+                );
                 LOGGER.AddToLog("Adding " + _name + " to textures.");
             }
             catch (...) {
@@ -229,7 +269,7 @@ namespace pilot {
         bool AddToObjects(const std::string &_name, std::shared_ptr<Object> _object) {
             if (IsObjectLoaded(_name)) return false;
             try {
-                this->objects.insert_or_assign(_name, _object);
+                this->objects.insert((_name, _object));
                 LOGGER.AddToLog("Adding " + _name + " to Objects.");
             }
             catch (...) {
