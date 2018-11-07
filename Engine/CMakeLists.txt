@@ -37,7 +37,7 @@ target_include_directories(IMGUI
         ${CMAKE_CURRENT_SOURCE_DIR}/Includes/
         )
 
-add_library(Vermin library.cpp library.h Window.cpp Window.h Scene.cpp Scene.h Camera.cpp Camera.h PEHelpers.cpp PEHelpers.h Entity.cpp Entity.h Object.cpp Object.h PE_GL.h Mesh.cpp Mesh.h AssetManager.cpp AssetManager.h BoundingBox.cpp BoundingBox.h Texture.cpp Texture.h GLShader.cpp GLShader.h LoggingManager.h LoggingMacros.h GUIHelpers.h)
+add_library(Vermin library.cpp library.h Window.cpp Window.h Scene.cpp Scene.h Camera.cpp Camera.h PEHelpers.cpp PEHelpers.h Entity.cpp Entity.h Object.cpp Object.h PE_GL.h Mesh.cpp Mesh.h AssetManager.cpp AssetManager.h BoundingBox.cpp BoundingBox.h Texture.cpp Texture.h GLShader.cpp GLShader.h LoggingManager.h LoggingMacros.h GUIHelpers.h AnimatedEntity.cpp AnimatedEntity.h)
 
 set(Includes
         "${CMAKE_CURRENT_SOURCE_DIR}/"

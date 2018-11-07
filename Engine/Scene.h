@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <Camera.h>
 #include <Entity.h>
+#include <AnimatedEntity.h>
 
 namespace vermin {
 

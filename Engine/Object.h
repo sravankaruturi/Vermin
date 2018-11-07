@@ -226,11 +226,11 @@ namespace vermin {
 
         void Render(std::string shaderName);
 
-        std::vector<std::shared_ptr<pilot::Mesh>> GetMeshes() const {
+        std::vector<std::shared_ptr<vermin::Mesh>> GetMeshes() const {
             return meshes;
         }
 
-        void SetMeshes(std::vector<std::shared_ptr<pilot::Mesh>> val) { meshes = val; }
+        void SetMeshes(std::vector<std::shared_ptr<vermin::Mesh>> val) { meshes = val; }
 
         void MeshDetailsImGUI();
 
