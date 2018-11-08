@@ -6,7 +6,9 @@
 #include "PEHelpers.h"
 
 #if ENABLE_GUI
-#include "../EngineDeps/external_files/ImGUI/imgui.h"
+
+#include <Deps/third_party/Imgui/imgui_impl_opengl3.h>
+#include <Deps/third_party/Imgui/imgui_impl_glfw.h>
 #endif
 
 #define		NAME_LENGTH_TO_FILE		20
@@ -800,6 +802,21 @@ namespace vermin {
 
 			this->OnRender();
 
+			// GUI Render
+			ImGui_ImplOpenGL3_NewFrame();
+			ImGui_ImplGlfw_NewFrame();
+
+			vermin::ImGuiControlVariables test_scene_vars = {
+					displayMultipleViews
+			};
+
+			this->OnImguiRender(test_scene_vars);
+
+			/*ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);*/
+
+			ImGui::Render();
+			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 			window->Update(deltaTime);
 
 		}
@@ -846,4 +863,5 @@ namespace vermin {
 		}
 
 	}
+
 }

@@ -4,7 +4,9 @@
 
 #include "Window.h"
 #include <iostream>
-#include <limits>
+#include <Configurations.h>
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
 
 namespace vermin{
 
