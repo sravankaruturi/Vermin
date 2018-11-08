@@ -131,7 +131,7 @@ namespace vermin {
 #else
                 for (auto &p : std::experimental::filesystem::directory_iterator(shaderDir)) {
                         std::string extension = p.path().extension().generic_string();
-                        std::string complete_file_name = p.path().generic_string().c_str();
+                        std::string complete_file_name = p.path().filename().generic_string().c_str();
 #endif
                 // *. Check only vert extensions.
 
@@ -152,7 +152,8 @@ namespace vermin {
                     std::string file_name;
                     file_name = complete_file_name.substr(0, complete_file_name.length() - extension.length());
 #else
-                    std::string file_name = p.path().filename().generic_string();
+					std::string file_name = p.path().filename().generic_string();
+					file_name = file_name.substr(0, complete_file_name.length() - extension.length());
 #endif
 
 
@@ -231,9 +232,9 @@ namespace vermin {
                 }
                 extension = "." + extension;
 #else
-                for (auto &p : std::experimental::filesystem::directory_iterator(shaderDir)) {
+                for (auto &p : std::experimental::filesystem::directory_iterator(textureDir)) {
                         std::string extension = p.path().extension().generic_string();
-                        std::string complete_file_name = p.path().generic_string().c_str();
+                        std::string complete_file_name = p.path().filename().generic_string();
 #endif
 
                 std::string file_name;
@@ -241,7 +242,8 @@ namespace vermin {
 #if !defined(_MSC_VER)
                     file_name = complete_file_name.substr(0, complete_file_name.length() - extension.length());
 #else
-                    file_name = p.path().filename().generic_string();
+					file_name = p.path().filename().generic_string();
+					file_name = file_name.substr(0, complete_file_name.length() - extension.length());
 #endif
 
                     this->textures.insert(

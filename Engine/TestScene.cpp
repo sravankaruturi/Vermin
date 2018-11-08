@@ -1,6 +1,9 @@
 ﻿#include "TestScene.h"
 #include "AssetManager.h"
 #include "Window.h"
+#include <glm/gtc/matrix_transform.inl>
+#include "Colours.h"
+#include "PEHelpers.h"
 
 #if ENABLE_GUI
 #include "../EngineDeps/external_files/ImGUI/imgui.h"
@@ -95,7 +98,7 @@ namespace vermin {
 		ASMGR.AddToObjects("SwordAndShieldSlash", knightSwordAnimation);
 
 
-		for (int i = 0; i < 1; i++)
+		for (int i = 0; i < 5; i++)
 		{
 
 			animatedEntities.push_back(std::make_shared<AnimatedEntity>("knight", "RTSDemo/HappyIdle.fbx", "bob_lamp", glm::vec3(-30, -0, -30), glm::vec3(30, 60, 30)));

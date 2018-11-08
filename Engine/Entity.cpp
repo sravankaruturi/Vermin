@@ -8,6 +8,7 @@
 #include "PEHelpers.h"
 
 #include "Terrain.h"
+#include <glm/gtc/matrix_transform.inl>
 
 namespace vermin {
     void Entity::SaveToFile(std::ofstream &_out) {
