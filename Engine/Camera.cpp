@@ -4,7 +4,9 @@
 
 #include "Camera.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <Includes/glm/gtc/type_ptr.inl>
 #include "PEHelpers.h"
+#include "SaveSceneHelpers.h"
 
 namespace vermin {
 
@@ -117,6 +119,27 @@ namespace vermin {
         this->mouseSensitivity = temp_variable.mouseSensitivity;
         this->viewMatrix = temp_variable.viewMatrix;
         this->type = temp_variable.type;
+
+    }
+
+    void Camera::DisplayCameraDetailsImgui()
+    {
+
+        ImGui::PushID(&this->cameraName);
+        ImGui::SliderFloat3("Position ##", glm::value_ptr(this->position), 0.1f, 20.0f);
+        ImGui::PopID();
+
+        ImGui::PushID(&this->cameraName);
+        ImGui::SliderFloat3("Front ##", glm::value_ptr(this->front), -1.0f, 1.0f);
+        ImGui::PopID();
+
+        ImGui::PushID(&this->cameraName);
+        ImGui::SliderFloat3("Up ##", glm::value_ptr(this->up), -1.0f, 1.0f);
+        ImGui::PopID();
+
+        ImGui::PushID(&this->cameraName);
+        ImGui::SliderFloat3("World Up ##", glm::value_ptr(this->worldUp), -1.0f, 1.0f);
+        ImGui::PopID();
 
     }
 

@@ -42,6 +42,18 @@ namespace vermin {
         */
         GLShader(const char *_vertexPath, const char *_fragmentPath);
 
+        GLShader(std::string _vertexPath, std::string _fragmentPath)
+            : GLShader(_vertexPath.c_str(), _fragmentPath.c_str())
+        {
+
+        };
+
+        GLShader(const std::string& _filePath)
+            : GLShader(_filePath.c_str())
+        {
+
+        }
+
         explicit GLShader(const char *_filePath);
 
         /**

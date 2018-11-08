@@ -217,7 +217,7 @@ namespace vermin {
         globalInverseTransform = assimpScene->mRootNode->mTransformation;
 
         // process ASSIMP's root node recursively
-        ProcessNode(assimpScene->mRootNode, assimpScene, GetMeshes());
+        ProcessNode(assimpScene->mRootNode, assimpScene, meshes);
 
     }
 

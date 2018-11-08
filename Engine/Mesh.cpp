@@ -13,6 +13,9 @@ namespace vermin {
     const int size_of_ints_per_input_vec = 4;
 
     void Mesh::Render(const std::string &_shaderName) {
+
+        // TODO: The Grass Texture is not being loaded properly.
+
         if (textureNames.size() != texturePointers.size()) {
             texturePointers.clear();
             for (auto it : textureNames) {

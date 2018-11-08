@@ -12,11 +12,14 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/Engine/Deps/glfw-3.2.1/)
 
+#if(NOT MSVC)
 # Assimp Stuff.
 set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE BOOL "" FORCE)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Deps/assimp-4.0.1)
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Deps/assimp/)
 
 message(STATUS ${CMAKE_LIBRARY_PATH})
+#endif()
 
 # Glad Stuff
 add_library(GLAD ${CMAKE_CURRENT_SOURCE_DIR}/Deps/third_party/glad.c)
@@ -37,7 +40,18 @@ target_include_directories(IMGUI
         ${CMAKE_CURRENT_SOURCE_DIR}/Includes/
         )
 
-add_library(Vermin library.cpp library.h Window.cpp Window.h Scene.cpp Scene.h Camera.cpp Camera.h PEHelpers.cpp PEHelpers.h Entity.cpp Entity.h Object.cpp Object.h PE_GL.h Mesh.cpp Mesh.h AssetManager.cpp AssetManager.h BoundingBox.cpp BoundingBox.h Texture.cpp Texture.h GLShader.cpp GLShader.h LoggingManager.h LoggingMacros.h GUIHelpers.h AnimatedEntity.cpp AnimatedEntity.h)
+file(GLOB VERMIN_HEADERS
+        ${CMAKE_CURRENT_SOURCE_DIR}/*.h
+        )
+
+file(GLOB VERMIN_SOURCE
+        ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+        )
+
+add_library(Vermin
+        ${VERMIN_HEADERS}
+        ${VERMIN_SOURCE}
+        )
 
 set(Includes
         "${CMAKE_CURRENT_SOURCE_DIR}/"
@@ -53,9 +67,19 @@ message("${Includes}")
 # Define the include DIRs
 target_include_directories(Vermin PUBLIC ${Includes})
 
-set(LIBS glfw ${OPENGL_LIBRARIES} GLAD Assimp IMGUI)
+#if(MSVC)
+#target_link_libraries(Vermin ${CMAKE_CURRENT_SOURCE_DIR}/Deps/binaries/assimp.lib)
+#endif()
+
+#find_package(ASSIMP REQUIRED)
+
+set(LIBS glfw ${OPENGL_LIBRARIES} GLAD assimp IMGUI)
 
 target_link_libraries(Vermin ${LIBS})
 
 find_package(OpenGL REQUIRED)
 
+if ( NOT MSVC )
+add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+endif()
+#add_compile_definitions(GLM_MESSAGES=1)

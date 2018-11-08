@@ -593,10 +593,10 @@ namespace glm {
         return Result;
     }
 
-    template<typename T>
-    GLM_FUNC_QUALIFIER mat<4, 4, T, defaultp> tweakedInfinitePerspective(T fovy, T aspect, T zNear) {
-        return tweakedInfinitePerspective(fovy, aspect, zNear, epsilon<T>());
-    }
+//    template<typename T>
+//    GLM_FUNC_QUALIFIER mat<4, 4, T, defaultp> tweakedInfinitePerspective(T fovy, T aspect, T zNear) {
+//        return tweakedInfinitePerspective(fovy, aspect, zNear, epsilon<T>());
+//    }
 
     template<typename T, typename U, qualifier Q>
     GLM_FUNC_QUALIFIER vec<3, T, Q>

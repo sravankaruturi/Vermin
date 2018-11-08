@@ -7,7 +7,7 @@
 #include <memory>
 #include <map>
 
-#if _WIN32
+#if _WIN32 && !defined(_MSC_VER)
 
 #include <dirent.h>
 #include <vector>
@@ -35,7 +35,7 @@
 #define DBG_NEW new
 #endif
 
-#define ASMGR pilot::AssetManager::getInstance()
+#define ASMGR vermin::AssetManager::getInstance()
 
 namespace vermin {
 
@@ -117,11 +117,11 @@ namespace vermin {
         bool LoadShaders() {
             LOGGER.AddToLog("Loading Shaders...");
             // Load all the shaders in the directory and compile them.
-#if _WIN32
+#if _WIN32 && !defined(_MSC_VER)
             DIR *dp = opendir(shaderDir.c_str());
             struct dirent *dirp;
             while ((dirp = readdir(dp)) != NULL) {
-                auto complete_file_name = std::string(dirp->d_name);
+                std::string complete_file_name = std::string(dirp->d_name);
                 std::string extension;
                 std::stringstream ss;
                 ss.str(complete_file_name);
@@ -135,6 +135,10 @@ namespace vermin {
 #endif
                 // *. Check only vert extensions.
 
+                if ( complete_file_name == "." || complete_file_name == ".."){
+                    continue;
+                }
+
                 if (".vert" != extension && ".shader" != extension) {
                     if (".frag" != extension) {
                         // Extensions should be Vert or Frag.
@@ -144,7 +148,7 @@ namespace vermin {
                 }
 
                 try {
-#if _WIN32
+#if _WIN32 && !defined(_MSC_VER)
                     std::string file_name;
                     file_name = complete_file_name.substr(0, complete_file_name.length() - extension.length());
 #else
@@ -153,13 +157,13 @@ namespace vermin {
 
 
                     // Important: This only works if the file extension is .vert.
-                    if (".vert" == extension) {
-                        for (auto i = 0; i < 5; i++)
-                            file_name.pop_back();
-                    } else if (".shader" == extension) {
-                        for (auto i = 0; i < 7; i++)
-                            file_name.pop_back();
-                    }
+//                    if (".vert" == extension) {
+//                        for (auto i = 0; i < 5; i++)
+//                            file_name.pop_back();
+//                    } else if (".shader" == extension) {
+//                        for (auto i = 0; i < 7; i++)
+//                            file_name.pop_back();
+//                    }
 
 
                     // *. Get the key for the Map.
@@ -171,16 +175,20 @@ namespace vermin {
                     if (".vert" == extension) {
                         // *. Get the second file as well.
                         // *. Create the Shader and load it in the map.
-                        this->shaders.insert(std::make_pair(file_name, std::make_shared<GLShader>(
-                                complete_file_name,
-                                (shaderDir + std::string("/") + file_name + std::string(".frag")).c_str())
-                                             )
-                        );
+                        this->shaders.insert(
+                                std::make_pair(
+                                file_name,
+                                std::make_shared<GLShader>(
+                                        shaderDir + complete_file_name,
+                                        (shaderDir + file_name + std::string(".frag")).c_str()
+                                        )
+                                        )
+                                        );
                     } else if (".shader" == extension) {
                         this->shaders.insert(
                                 std::make_pair(
-                                        file_name, std::make_shared<GLShader>(
-                                                complete_file_name)
+                                        file_name,
+                                        std::make_shared<GLShader>(shaderDir + complete_file_name)
                                 )
                         );
                     }
@@ -204,17 +212,45 @@ namespace vermin {
         */
         bool LoadTextures() {
             LOGGER.AddToLog("Loading Textures..");
-            for (auto &p : std::experimental::filesystem::directory_iterator(textureDir)) {
+
+
+
+#if _WIN32 && !defined(_MSC_VER)
+            DIR *dp = opendir(shaderDir.c_str());
+            struct dirent *dirp;
+            while ((dirp = readdir(dp)) != NULL) {
+                std::string complete_file_name = std::string(dirp->d_name);
+
+                if (complete_file_name == "." || complete_file_name == ".."){
+                    continue;
+                }
+
+                std::string extension;
+                std::stringstream ss;
+                ss.str(complete_file_name);
+                while (getline(ss, extension, '.')) {
+                }
+                extension = "." + extension;
+#else
+                for (auto &p : std::experimental::filesystem::directory_iterator(shaderDir)) {
+                        std::string extension = p.path().extension().generic_string();
+                        std::string complete_file_name = p.path().generic_string().c_str();
+#endif
+
                 std::string file_name;
                 try {
+#if _WIN32 && !defined(_MSC_VER)
+                    file_name = complete_file_name.substr(0, complete_file_name.length() - extension.length());
+#else
                     file_name = p.path().filename().generic_string();
+#endif
                     while (file_name.back() != '.') {
                         file_name.pop_back();
                     }
                     file_name.pop_back();
 
                     this->textures.insert(
-                            (file_name, std::make_shared<Texture>(p.path().generic_string()))
+                            std::make_pair(file_name, std::make_shared<Texture>(textureDir + complete_file_name))
                     );
                 }
                 catch (...) {
@@ -256,7 +292,7 @@ namespace vermin {
             if (IsTextureLoaded(_name)) return false;
             try {
                 this->textures.insert(
-                        (_name, _texture)
+                        std::make_pair(_name, _texture)
                 );
                 LOGGER.AddToLog("Adding " + _name + " to textures.");
             }
@@ -269,7 +305,7 @@ namespace vermin {
         bool AddToObjects(const std::string &_name, std::shared_ptr<Object> _object) {
             if (IsObjectLoaded(_name)) return false;
             try {
-                this->objects.insert((_name, _object));
+                this->objects.insert(std::make_pair(_name, _object));
                 LOGGER.AddToLog("Adding " + _name + " to Objects.");
             }
             catch (...) {
