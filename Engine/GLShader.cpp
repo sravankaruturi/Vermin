@@ -7,6 +7,9 @@
 #include <sstream>
 
 namespace vermin {
+
+
+
     GLShader::GLShader(const char *_vertexPath, const char *_fragmentPath) {
 
         // 1. retrieve the vertex/fragment source code from filePath

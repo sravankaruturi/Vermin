@@ -3,7 +3,6 @@
 //
 
 #pragma once
-
 #include "Deps/third_party/Imgui/imgui.h"
 
 namespace vermin {

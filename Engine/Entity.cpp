@@ -80,7 +80,7 @@ namespace vermin {
         if (!ASMGR.IsObjectLoaded(objectName)) {
             // This allocation would be cleared from the Asset Manager.
             std::shared_ptr<Object> object = std::make_shared<Object>(MODEL_FOLDER + _objectPath);
-            ASMGR.objects.insert_or_assign(objectName, object);
+            ASMGR.objects.insert(std::make_pair(objectName, object));
         }
 
         // Anthaa ayyipoyaaka manam Bounding Box udpate cheyyali.
@@ -112,6 +112,14 @@ namespace vermin {
         // Set the Model Matrix.
         ASMGR.shaders.at(shaderName)->setMat4("u_ModelMatrix", modelMatrix);
 
+        try{
+            std::cout << "Object at " << objectName << " is located at, " << ASMGR.objects.at(objectName) << std::endl;
+        }
+        catch (...){
+            std::cout << objectName << std::endl;
+        }
+
+
         // Render
         ASMGR.objects.at(objectName)->Render(shaderName);
         // Render.
@@ -135,4 +143,24 @@ namespace vermin {
                                                           _mouseRayDirection, _distance);
     }
 
+    void Entity::DisplayDetailsImgui()
+    {
+
+        ImGui::InputFloat3("Position", glm::value_ptr(position));
+        ImGui::InputFloat3("Rotation", glm::value_ptr(rotation));
+        ImGui::InputFloat3("Scale", glm::value_ptr(scale));
+
+        ImGui::Separator();
+
+        // Show object details.
+        ASMGR.objects.at(objectName)->MeshDetailsImGUI();
+
+        ImGui::Separator();
+        ImGui::Text("Pathing Debug");
+        ImGui::DragInt2("Target Node", glm::value_ptr(this->targetNode));
+
+        ImGui::Separator();
+        ImGui::DragFloat("Health: ", &this->gPlay.health);
+
+    }
 }
