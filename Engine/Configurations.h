@@ -4,4 +4,5 @@
 #define            DISABLE_UNIT_TESTS        1
 #define            ENABLE_GUI                0
 #define            IS_HOME_PC                FALSE
+#define            MACBOOK                   1
 #define            RELATIVE_PATHS            FALSE

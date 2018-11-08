@@ -1,6 +1,6 @@
 ﻿#shader vertex
 
-#version 430 core
+#version 410 core
 layout(location = 0) in vec4 aPos;
 layout(location = 1) in vec4 aNormal;
 layout(location = 2) in vec4 aColour;
@@ -31,7 +31,7 @@ void main()
 
 #shader geometry
 
-#version 430 core
+#version 410 core
 
 struct vData {
 	vec3 g_FragPos;
@@ -70,7 +70,7 @@ void main() {
 
 #shader fragment
 
-#version 430 core
+#version 410 core
 
 struct vData {
 	vec3 g_FragPos;

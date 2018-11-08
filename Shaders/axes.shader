@@ -1,5 +1,5 @@
 ﻿#shader vertex
-#version 430 core
+#version 410 core
 
 layout(location = 0) in vec4 aPos;
 
@@ -10,7 +10,7 @@ void main() {
 }
 
 #shader geometry
-#version 430 core
+#version 410 core
 
 layout(lines, invocations = 4) in;
 layout(line_strip, max_vertices = 10) out;
@@ -34,7 +34,7 @@ void main() {
 }
 
 #shader fragment
-#version 430 core
+#version 410 core
 
 uniform vec3 u_Colour;
 

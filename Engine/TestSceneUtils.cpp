@@ -1,7 +1,4 @@
 #include "TestScene.h"
-#include "FolderLocations.h"
-#include "Deps/third_party/Imgui/imgui.h"
-#include <glm/gtc/matrix_transform.inl>
 #include "Window.h"
 #include "AssetManager.h"
 
@@ -120,7 +117,7 @@ void vermin::TestScene::OnImguiRender(ImGuiControlVariables& _vars)
 		ImGui::Begin("Load Scene", &openLoadSceneWindow);
 
 		// Iterate through the Scenes directory and Show the Scenes.
-#if _WIN32 && !defined(_MSC_VER)
+#if !defined(_MSC_VER)
 		DIR *dp = opendir(SCENES_FOLDER);
 		struct dirent *dirp;
 		while ((dirp = readdir(dp)) != NULL) {
@@ -138,7 +135,7 @@ void vermin::TestScene::OnImguiRender(ImGuiControlVariables& _vars)
 #endif
 
 			std::string file_name;
-#if _WIN32 && !defined(_MSC_VER)
+#if !defined(_MSC_VER)
 				file_name = complete_file_name.substr(0, complete_file_name.length() - extension.length());
 #else
 				file_name = p.path().filename().generic_string();

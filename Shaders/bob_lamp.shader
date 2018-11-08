@@ -1,6 +1,6 @@
 #shader vertex
 
-#version 430 core
+#version 410 core
 
 const int MAX_BONES = 128;
 
@@ -48,7 +48,7 @@ void main()
 
 #shader geometry
 
-#version 430 core
+#version 410 core
 
 struct vData {
 	vec3 g_FragPos;
@@ -87,7 +87,7 @@ void main() {
 
 #shader fragment
 
-#version 430 core
+#version 410 core
 
 struct vData {
 	vec3 g_FragPos;

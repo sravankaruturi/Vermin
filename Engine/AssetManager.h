@@ -7,7 +7,7 @@
 #include <memory>
 #include <map>
 
-#if _WIN32 && !defined(_MSC_VER)
+#if !defined(_MSC_VER)
 
 #include <dirent.h>
 #include <vector>
@@ -117,7 +117,7 @@ namespace vermin {
         bool LoadShaders() {
             LOGGER.AddToLog("Loading Shaders...");
             // Load all the shaders in the directory and compile them.
-#if _WIN32 && !defined(_MSC_VER)
+#if !defined(_MSC_VER)
             DIR *dp = opendir(shaderDir.c_str());
             struct dirent *dirp;
             while ((dirp = readdir(dp)) != NULL) {
@@ -148,7 +148,7 @@ namespace vermin {
                 }
 
                 try {
-#if _WIN32 && !defined(_MSC_VER)
+#if !defined(_MSC_VER)
                     std::string file_name;
                     file_name = complete_file_name.substr(0, complete_file_name.length() - extension.length());
 #else
@@ -214,9 +214,8 @@ namespace vermin {
             LOGGER.AddToLog("Loading Textures..");
 
 
-
-#if _WIN32 && !defined(_MSC_VER)
-            DIR *dp = opendir(shaderDir.c_str());
+#if !defined(_MSC_VER)
+			DIR *dp = opendir(textureDir.c_str());
             struct dirent *dirp;
             while ((dirp = readdir(dp)) != NULL) {
                 std::string complete_file_name = std::string(dirp->d_name);
@@ -239,15 +238,11 @@ namespace vermin {
 
                 std::string file_name;
                 try {
-#if _WIN32 && !defined(_MSC_VER)
+#if !defined(_MSC_VER)
                     file_name = complete_file_name.substr(0, complete_file_name.length() - extension.length());
 #else
                     file_name = p.path().filename().generic_string();
 #endif
-                    while (file_name.back() != '.') {
-                        file_name.pop_back();
-                    }
-                    file_name.pop_back();
 
                     this->textures.insert(
                             std::make_pair(file_name, std::make_shared<Texture>(textureDir + complete_file_name))

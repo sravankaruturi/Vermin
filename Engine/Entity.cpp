@@ -4,9 +4,7 @@
 
 #include "Entity.h"
 #include "Object.h"
-#include "FolderLocations.h"
 #include "AssetManager.h"
-#include <glm/gtc/matrix_transform.inl>
 #include "PEHelpers.h"
 
 #include "Terrain.h"
@@ -111,14 +109,6 @@ namespace vermin {
         ASMGR.shaders.at(shaderName)->use();
         // Set the Model Matrix.
         ASMGR.shaders.at(shaderName)->setMat4("u_ModelMatrix", modelMatrix);
-
-        try{
-            std::cout << "Object at " << objectName << " is located at, " << ASMGR.objects.at(objectName) << std::endl;
-        }
-        catch (...){
-            std::cout << objectName << std::endl;
-        }
-
 
         // Render
         ASMGR.objects.at(objectName)->Render(shaderName);
