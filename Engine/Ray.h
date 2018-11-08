@@ -25,6 +25,8 @@ namespace vermin {
 
         std::vector<glm::vec3> vertices;
 
+		glm::vec3 tempVector{};
+
         void UpdateBuffers();
 
     public:

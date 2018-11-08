@@ -81,6 +81,9 @@ namespace vermin {
         glm::vec3 boundingBoxLeastVertex{-1, -1, -1};
         glm::vec3 boundingBoxHighVertex{1, 1, 1};
 
+		glm::vec3 boundingBoxScale{1.001f, 1.001f, 1.001f};
+		glm::mat4 boundingBoxModelMatrix;
+
         BoundingBox boundingBox;
 
         /**

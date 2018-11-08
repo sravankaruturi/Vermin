@@ -40,6 +40,10 @@ namespace vermin {
 		 */
 		std::unique_ptr<Entity> buildingPlacer;
 
+		const float buildingScalingFactor = 256.0f;
+		glm::vec3 buildingScalingVector = {1 / buildingScalingFactor, 1 / buildingScalingFactor,
+										   1 / buildingScalingFactor};
+
 		glm::vec2 startxz;
 		glm::vec2 endxz;
 
@@ -87,7 +91,8 @@ namespace vermin {
 	public:
 
 		explicit TestScene(std::shared_ptr<Window> _window);
-		~TestScene() = default;
+
+		~TestScene() override = default;
 
 		/**
 		 * \brief Initialize all the Entities that shall be present in the Scene when it loads.

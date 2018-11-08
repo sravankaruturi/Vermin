@@ -9,6 +9,7 @@
 
 #include "Terrain.h"
 #include <glm/gtc/matrix_transform.inl>
+#include "Colours.h"
 
 namespace vermin {
     void Entity::SaveToFile(std::ofstream &_out) {
@@ -117,11 +118,12 @@ namespace vermin {
         //object->Render(shaderName);
 
         ASMGR.shaders.at("bbox")->use();
-        ASMGR.shaders.at("bbox")->setMat4("u_ModelMatrix", glm::scale(modelMatrix, glm::vec3(1.001f, 1.001f, 1.001f)));
+        boundingBoxModelMatrix = glm::scale(modelMatrix, boundingBoxScale);
+        ASMGR.shaders.at("bbox")->setMat4("u_ModelMatrix", boundingBoxModelMatrix);
         if (selectedInScene) {
-            boundingBox.Render(glm::vec3(1.0, 1.0, 0.0));
+            boundingBox.Render(yellow);
         } else {
-            boundingBox.Render(glm::vec3(1.0, 0.0, 0.0));
+            boundingBox.Render(red);
         }
 
 

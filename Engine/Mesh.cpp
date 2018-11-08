@@ -18,7 +18,7 @@ namespace vermin {
 
         if (textureNames.size() != texturePointers.size()) {
             texturePointers.clear();
-            for (auto it : textureNames) {
+            for (const auto &it : textureNames) {
                 texturePointers.push_back(ASMGR.textures.at(it));
             }
         }
@@ -26,7 +26,7 @@ namespace vermin {
         ASMGR.shaders.at(_shaderName)->use();
 
         auto i = 0;
-        for (const auto it : texturePointers) {
+        for (const auto &it : texturePointers) {
             PE_GL(glActiveTexture(GL_TEXTURE0 + i));
             PE_GL(glBindTexture(GL_TEXTURE_2D, it->GetTextureId()));
             ASMGR.shaders.at(_shaderName)->setInt("u_Texture" + std::to_string(i), i);

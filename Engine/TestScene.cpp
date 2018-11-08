@@ -24,7 +24,7 @@ namespace vermin {
 	}
 
 	TestScene::TestScene(std::shared_ptr<Window> _window)
-		: Scene(_window)
+			: Scene(std::move(_window))
 	{
 
 		// We need to wait for the Shaders to be loaded to call this function.
@@ -60,8 +60,7 @@ namespace vermin {
 		entities.push_back(std::make_shared<Entity>("building", "Medieval_House/Medieval_House.obj", "good_test"));
 		LOGGER.AddToLog("Loaded the Medieval House");
 
-		const float building_scaling_factor = 256.0f;
-		entities[0]->SetScale(glm::vec3(1.0f / building_scaling_factor, 1.0f / building_scaling_factor, 1.0f / building_scaling_factor));
+		entities[0]->SetScale(buildingScalingVector);
 
 		/*animatedEntities.push_back(std::make_unique<AnimatedEntity>("bob", "boblamp/boblampclean.md5mesh", "bob_lamp", glm::vec3(-10, -10, 0), glm::vec3(10, 10, -60)));
 		LOGGER.AddToLog("Loaded Bob");
@@ -112,12 +111,11 @@ namespace vermin {
 			animated_entity->SetAnimationTotalTime(0.75f);
 		}
 
-		ASMGR.objects.at("Medieval_House")->GetMeshes()[0]->textureNames.push_back("building_diffuse");
+		ASMGR.objects.at("Medieval_House")->GetMeshes()[0]->textureNames.emplace_back("building_diffuse");
 
 		buildingPlacer = std::make_unique<Entity>("building", "Medieval_House/Medieval_House.obj", "buildingPlacer");
-		//buildingPlacer->SetPosition(glm::vec3(0.0f));
 
-		buildingPlacer->SetScale(glm::vec3(1.0f / building_scaling_factor, 1.0f / building_scaling_factor, 1.0f / building_scaling_factor) * 1.01f);
+		buildingPlacer->SetScale(buildingScalingVector * 1.01f);
 		ASMGR.shaders.at("buildingPlacer")->use();
 		ASMGR.shaders.at("buildingPlacer")->setVec4("u_Colour0", 0, 1, 0, 1);
 
@@ -186,7 +184,7 @@ namespace vermin {
 			}
 
 			if (it->gPlay.health <= 0) {
-				tbdAnimatedEntities.push_back(std::pair<std::shared_ptr<AnimatedEntity>, float>(it, _totalTime));
+				tbdAnimatedEntities.emplace_back(it, _totalTime);
 				
 				it->gPlay.attacker->gPlay.attackTarget = nullptr;
 				it->gPlay.attacker->gPlay.attackingMode = false;
@@ -242,9 +240,9 @@ namespace vermin {
 
 			path = testTerrain->GetPathFromPositions(startPosition, endPosition);
 
-			std::string log_temp = "The path b/w the tiles, ";
+			// std::string log_temp = "The path b/w the tiles, ";
 
-			log_temp += Vec3ToString(startPosition) + " and " + Vec3ToString(endPosition) + " has " + std::to_string(path.size()) + " nodes";
+			// log_temp += Vec3ToString(startPosition) + " and " + Vec3ToString(endPosition) + " has " + std::to_string(path.size()) + " nodes";
 
 			if (it->gPlay.attackingMode && !path.empty()) {
 				// If you are attacking, you stop one tile before the actual target.
@@ -321,7 +319,9 @@ namespace vermin {
 				glm::vec3 x_axis = glm::vec3(0, 0, 1);
 
 				glm::vec3 rotation = it->GetRotation();
-				rotation.y = (target_direction.x > 0) ?  glm::degrees(glm::acos(glm::dot(target_direction, x_axis))) : (360 - glm::degrees(glm::acos(glm::dot(target_direction, x_axis))));
+				rotation.y = static_cast<float>((target_direction.x > 0) ? glm::degrees(
+						glm::acos(glm::dot(target_direction, x_axis))) : (360 - glm::degrees(
+						glm::acos(glm::dot(target_direction, x_axis)))));
 
 				current_position.x = final_position.x;
 				current_position.z = final_position.z;
@@ -448,9 +448,9 @@ namespace vermin {
 			}
 
 			// Store the Viewport Details.
-			for (auto i = 0; i < 4; i++) {
-				out.write((char*)(&(viewportsDetails[i].isOrthogonal)), sizeof(bool));
-				pe_helpers::store_strings(viewportsDetails[i].camera->GetCameraName(), out);
+			for (auto &viewportsDetail : viewportsDetails) {
+				out.write((char *) (&(viewportsDetail.isOrthogonal)), sizeof(bool));
+				pe_helpers::store_strings(viewportsDetail.camera->GetCameraName(), out);
 			}
 
 			// Store the Terrain
@@ -521,11 +521,11 @@ namespace vermin {
 			}
 
 			// Load the Viewport Details
-			for (auto i = 0; i < 4; i++) {
-				in.read((char*)(&(viewportsDetails[i].isOrthogonal)), sizeof(bool));
+			for (auto &viewportsDetail : viewportsDetails) {
+				in.read((char *) (&(viewportsDetail.isOrthogonal)), sizeof(bool));
 				std::string camera_name;
 				pe_helpers::read_strings(camera_name, in);
-				viewportsDetails[i].camera = cameras.at(camera_name);
+				viewportsDetail.camera = cameras.at(camera_name);
 			}
 
 			// Load the Terrain
@@ -625,8 +625,6 @@ namespace vermin {
 			// #TODO: Create a separate fucntion called Add Building or something.
 			if (window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1) && isPlacingMode && test_can_place) {
 
-				glm::ivec2 target_node = testTerrain->pointedNodeIndices;
-
 				// Make sure that there are enough nodes around the pointed node.
 				if (!((target_node.x > testTerrain->GetNodeCountX() - 1 && target_node.x < 1) || (target_node.y > testTerrain->GetNodeCountZ() - 1 && target_node.y < 1))) {
 
@@ -677,9 +675,8 @@ namespace vermin {
 				it->SetSelectedInScene(false);
 			}
 
-			for (int i = 0; i < animatedEntities.size(); i++)
-			{
-				AnimatedEntity * it = animatedEntities[i].get();
+			for (auto &animatedEntitie : animatedEntities) {
+				AnimatedEntity *it = animatedEntitie.get();
 				if ((window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1)) && it->CheckIfMouseOvered(ray_start, mouse_pointer_ray, min_int_distance))
 				{
 					if (int_distance < min_int_distance)

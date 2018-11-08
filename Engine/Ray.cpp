@@ -14,14 +14,16 @@ namespace vermin {
     {
 
         // Empty the vertices.
-        vertices.clear();
+        vertices.resize(0);
 
         // Add all the vertices.
         vertices.push_back(origin);
 
         for (int i = 1; i < 20; i++)
         {
-            vertices.push_back(origin + glm::vec3(direction.x * i, direction.y * i, direction.z * i));
+            tempVector = direction;
+            tempVector *= i;
+            vertices.push_back(origin + tempVector);
         }
 
         //ASMNGR.shaders.at("axes")->use();

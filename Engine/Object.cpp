@@ -104,8 +104,8 @@ namespace vermin {
         PE_ASSERT(next_pos_index < _nodeAnim->mNumPositionKeys);
 
         // The Difference between two key frames.
-        float delta_time = (float) (_nodeAnim->mPositionKeys[next_pos_index].mTime -
-                                    _nodeAnim->mPositionKeys[position_index].mTime);
+        auto delta_time = (float) (_nodeAnim->mPositionKeys[next_pos_index].mTime -
+                                   _nodeAnim->mPositionKeys[position_index].mTime);
 
         // The Factor by which the current frame has transitioned into the next frame.
         float factor = (_animationTime - (float) _nodeAnim->mPositionKeys[position_index].mTime) / delta_time;
@@ -137,8 +137,8 @@ namespace vermin {
         PE_ASSERT(next_rot_index < _nodeAnim->mNumRotationKeys);
 
         // The Difference between two key frames.
-        float delta_time = (float) (_nodeAnim->mRotationKeys[next_rot_index].mTime -
-                                    _nodeAnim->mRotationKeys[rotation_index].mTime);
+        auto delta_time = (float) (_nodeAnim->mRotationKeys[next_rot_index].mTime -
+                                   _nodeAnim->mRotationKeys[rotation_index].mTime);
 
         // The Factor by which the current frame has transitioned into the next frame.
         float factor = (_animationTime - (float) _nodeAnim->mRotationKeys[rotation_index].mTime) / delta_time;
@@ -191,7 +191,7 @@ namespace vermin {
 
 
     Object::Object(const std::string &_name, std::vector<std::shared_ptr<Mesh>> _meshes)
-            : objectName(_name), meshes(_meshes) {
+            : objectName(_name), meshes(std::move(_meshes)) {
 
     }
 
@@ -226,7 +226,7 @@ namespace vermin {
 
     void Object::Render(const std::string _shaderName) {
         // Set any object wide uniforms here. Like Highlight colour os something.
-        PE_EXPECT(this->meshes.size() > 0);
+        PE_EXPECT(!this->meshes.empty());
         for (const std::shared_ptr<Mesh> &mesh : GetMeshes()) {
             mesh->Render(_shaderName);
         }
@@ -557,7 +557,7 @@ namespace vermin {
                 textures.push_back(key);
             } else {
                 /* We've go to load it the old fashioned way. */
-                filename = directory + '/' + filename;
+                filename = directory.append("/" + filename);
 
                 /* Create a new Texture Object and push it on to the Asset Manager. */
                 std::shared_ptr<Texture> t = std::make_shared<Texture>(filename, false);
@@ -577,13 +577,11 @@ namespace vermin {
 
         auto selectedAnimationIndex = _animationIndex;
 
-        std::string node_name = _node->mName.data;
-
         const aiAnimation *p_animation = assimpScene->mAnimations[selectedAnimationIndex];
 
         aiMatrix4x4 node_transformation = _node->mTransformation;
 
-        const aiNodeAnim *node_anim = FindNodeAnim(p_animation, node_name);
+        const aiNodeAnim *node_anim = FindNodeAnim(p_animation, _node->mName.data);
 
         if (node_anim) {
 
@@ -613,10 +611,10 @@ namespace vermin {
 
         const aiMatrix4x4 global_transformation = _parentTransform * node_transformation;
 
-        if (boneMapping.find(node_name) != boneMapping.end()) {
+        if (boneMapping.find(_node->mName.data) != boneMapping.end()) {
 
             // Update the Global Transformation.
-            auto bone_index = boneMapping[node_name];
+            auto bone_index = boneMapping[_node->mName.data];
 
             boneData[bone_index].final_transformation =
                     globalInverseTransform * global_transformation * boneData[bone_index].bone_offset;

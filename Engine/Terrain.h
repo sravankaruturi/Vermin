@@ -162,6 +162,11 @@ namespace vermin {
         glm::vec2 startxz{};
         glm::vec2 endxz{};
 
+		/**
+		 * \brief The Vector that you update with the Path, for every entity.
+		 */
+		std::vector<MapTile *> pathBetweenTiles;
+
     public:
 
         /**

@@ -14,6 +14,7 @@
 #include "PE_GL.h"
 #include <map>
 #include <glm/mat4x4.hpp>
+#include <utility>
 
 #define MAX_BONE_WEIGHTS_PER_VERTEX            8
 
@@ -230,7 +231,7 @@ namespace vermin {
             return meshes;
         }
 
-        void SetMeshes(std::vector<std::shared_ptr<vermin::Mesh>> val) { meshes = val; }
+        void SetMeshes(std::vector<std::shared_ptr<vermin::Mesh>> _val) { meshes = std::move(_val); }
 
         void MeshDetailsImGUI();
 

@@ -9,7 +9,6 @@
 #include "AssetManager.h"
 #include "Ray.h"
 
-#include <algorithm>
 #include "SaveSceneHelpers.h"
 
 #define UNPASSABLE_NAV_COST_LIMIT		1.0f
@@ -80,6 +79,9 @@ namespace vermin {
 
     void Terrain::Init()
     {
+
+		pathBetweenTiles.reserve(30);
+
         nodeCountX = (length / gridLength) + 1;
         nodeCountZ = (breadth / gridBreadth) + 1;
 
@@ -313,21 +315,20 @@ namespace vermin {
 
     std::vector<MapTile *> Terrain::GetPathFromTiles(MapTile * _startTile, MapTile * _endTile)
     {
-        std::vector<MapTile*> return_vector;
-
+		pathBetweenTiles.resize(0);
         if ( _startTile->navTileSet != _endTile->navTileSet)
         {
             // They are not in the same tile set. Return the empty stuff.
-            return return_vector;
+			return pathBetweenTiles;
         }
 
         if (!_endTile->navWalkable) {
-            return return_vector;
+			return pathBetweenTiles;
         }
 
         // Make sure that they are not the same tiles.
         if (_startTile == _endTile) {
-            return return_vector;
+			return pathBetweenTiles;
         }
 
         for ( auto i = 0 ; i < nodeCountX ; i++)
@@ -390,11 +391,11 @@ namespace vermin {
 
                 for (auto i : temp_path)
                 {
-                    return_vector.push_back(i);
+					pathBetweenTiles.push_back(i);
                     HighlightNode(i->tileIndexX, i->tileIndexZ);
                 }
 
-                return return_vector;
+				return pathBetweenTiles;
 
             }
 
@@ -448,7 +449,7 @@ namespace vermin {
         // If the open list turns up empty, then there is no path.
         // Build the path by traversing the parent pointer of the Goal Node to Start and then reverse it.
 
-        return return_vector;
+		return pathBetweenTiles;
     }
 
     std::vector<MapTile *> Terrain::GetPathFromPositions(glm::vec3 _startPosition, glm::vec3 _endPosition)

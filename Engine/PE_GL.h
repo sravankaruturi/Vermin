@@ -11,7 +11,7 @@
 
 /*@see https://www.youtube.com/watch?v=FBbPWSOQ0-w */
 // We would define the OpenGL error logging macros here.
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) && _DEBUG
 #define PE_ASSERT(x) if (!(x)) __debugbreak()
 #else
 #define PE_ASSERT(x) if (!(x)) std::cout << "Assertion failed at " << __LINE__ << ", " << __FILE__ << std::endl
