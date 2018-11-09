@@ -3,4 +3,4 @@
 *cmake-build-debug/*
 
 MSBuild/*
-Engine/Configurtions.h
+Engine/Configurations.h
