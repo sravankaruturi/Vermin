@@ -62,7 +62,7 @@ namespace vermin{
          * \param _height Height of the Window
          * \param _title Title of the Window
          */
-        Window(unsigned _width, unsigned _height, const std::string& _title);
+        Window(unsigned _width, unsigned _height, const std::string& _title, bool _fullScreen = false);
 
         /**
          * \brief Default Destructor. Calls Cleanup.

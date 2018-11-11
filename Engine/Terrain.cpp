@@ -58,11 +58,16 @@ namespace vermin {
         glm::vec3 oc = c_position - o_position;
         glm::vec3 od = d_position - o_position;
 
+		auto test = glm::cross(oa, ob);
+		test = glm::cross(ob, oc);
+		test = glm::cross(oc, od);
+		test = glm::cross(od, oa);
+
         glm::vec3 normal = glm::normalize(
-                glm::normalize(glm::cross(oa, ob)) +
-                glm::normalize(glm::cross(ob, oc)) +
-                glm::normalize(glm::cross(oc, od)) +
-                glm::normalize(glm::cross(od, oa))
+			glm::cross(oa, ob) +
+			glm::cross(ob, oc) +
+			glm::cross(oc, od) +
+			glm::cross(od, oa)
         );
 
         return normal;
@@ -285,16 +290,8 @@ namespace vermin {
     void Terrain::ClearColours()
     {
 
-        /*auto all_tile_sets = GetAllTileSets();
-        auto number_tile_sets = all_tile_sets.size();*/
-
         for (auto i = 0; i < nodeCountX; i++) {
             for (auto j = 0; j < nodeCountZ; j++) {
-
-                /*int index = std::distance( all_tile_sets.begin(), std::find(all_tile_sets.begin(), all_tile_sets.end(), tiles[i][j].navTileSet));
-
-                this->vertices[i * nodeCountZ + j].colour = glm::vec4( red * (float(index) / number_tile_sets), 0.0f);
-                this->vertices[i * nodeCountZ + j].texCoord.z = 0.5f;*/
                 vertices[i * nodeCountZ + j].colour = (tiles[i][j].navWalkable && !tiles[i][j].navObstacle) ? glm::vec4(green, 1.0f) : glm::vec4(red, 1.0f);
                 this->vertices[i * nodeCountZ + j].texCoord.z = 0.5f;
             }

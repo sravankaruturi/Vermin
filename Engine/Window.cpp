@@ -5,8 +5,10 @@
 #include "Window.h"
 #include <iostream>
 #include <Configurations.h>
+#if ENABLE_GUI
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
+#endif
 
 namespace vermin{
 
@@ -18,7 +20,8 @@ namespace vermin{
     Window::Window(
             unsigned _width,
             unsigned _height,
-            const std::string& _title):
+            const std::string& _title,
+			bool _fullScreen):
             width(_width), height(_height), title(_title) {
 
         isGlfwInit = ( GLFW_TRUE == glfwInit());
@@ -30,7 +33,15 @@ namespace vermin{
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-        window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+		int count;
+		GLFWmonitor** monitors = glfwGetMonitors(&count);
+		if (_fullScreen == true) {
+			window = glfwCreateWindow(width, height, title.c_str(), monitors[count - 1], nullptr);
+		}
+		else {
+			window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+		}
+
 
         if (nullptr == window)
         {

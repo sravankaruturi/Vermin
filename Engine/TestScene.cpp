@@ -9,6 +9,7 @@
 
 #include <Deps/third_party/Imgui/imgui_impl_opengl3.h>
 #include <Deps/third_party/Imgui/imgui_impl_glfw.h>
+
 #endif
 
 #define		NAME_LENGTH_TO_FILE		20
@@ -64,13 +65,6 @@ namespace vermin {
 
 		entities[0]->SetScale(buildingScalingVector);
 
-		/*animatedEntities.push_back(std::make_unique<AnimatedEntity>("bob", "boblamp/boblampclean.md5mesh", "bob_lamp", glm::vec3(-10, -10, 0), glm::vec3(10, 10, -60)));
-		LOGGER.AddToLog("Loaded Bob");
-
-		AnimatedEntity * animatedEntity = animatedEntities[0].get();
-		animatedEntity->SetInitialPosition(glm::vec3(4.0, 0.0, 2.0), testTerrain.get());
-		animatedEntity->SetScale(glm::vec3(0.0125f, 0.0125f, 0.0125f));
-		animatedEntity->SetRotation(glm::vec3(90.f, 0.0f, 0.00f));*/
 		AnimatedEntity * animated_entity;
 
 		std::shared_ptr<Texture> archer_diffuse = std::make_shared<Texture>(MODEL_FOLDER + std::string("archer/akai_diffuse.png"), false);
@@ -802,6 +796,8 @@ namespace vermin {
 
 			this->OnRender();
 
+#if ENABLE_GUI
+
 			// GUI Render
 			ImGui_ImplOpenGL3_NewFrame();
 			ImGui_ImplGlfw_NewFrame();
@@ -816,6 +812,8 @@ namespace vermin {
 
 			ImGui::Render();
 			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+#endif 
 
 			window->Update(deltaTime);
 

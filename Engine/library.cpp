@@ -1,8 +1,4 @@
 #include "library.h"
-#include "TestScene.h"
-#include "LoggingManager.h"
-#include <imgui_impl_opengl3.h>
-#include <imgui_impl_glfw.h>
 
 #if defined(_MSC_VER)
 #define _CRTDBG_MAP_ALLOC
@@ -18,6 +14,8 @@ void hello() {
 
 	std::shared_ptr<vermin::Window> w = std::make_shared<vermin::Window>(800, 600, "Vermin Engine");
 
+#if ENABLE_GUI
+
 	/* ImGui setup */
 	ImGui::CreateContext();
 
@@ -30,14 +28,20 @@ void hello() {
 	vermin::ImGuiLog imgui_logger;
 	LOGGER.SetImGuiLogger(&imgui_logger);
 
+#endif
+
     std::unique_ptr<vermin::TestScene> t = std::make_unique<vermin::TestScene>(w);
 
     while( !t->ShutDown()){
         t->RunScene();
     }
 
+#if ENABLE_GUI
+
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
+
+#endif
 
 }

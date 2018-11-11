@@ -81,5 +81,6 @@ find_package(OpenGL REQUIRED)
 
 if ( NOT MSVC )
 add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+add_compile_options(Wa mbig-obj)
 endif()
 #add_compile_definitions(GLM_MESSAGES=1)

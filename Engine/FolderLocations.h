@@ -23,12 +23,12 @@
 
 #elif LAB_MACHINE
 
-#define SHADER_FOLDER            "Z:/IGMProfile/Desktop/Projects/Piolot/Engine/Shaders/"
-#define TEXTURE_FOLDER            "Z:/IGMProfile/Desktop/Projects/Piolot/Engine/Assets/Textures/"
-#define MODEL_FOLDER            "Z:/IGMProfile/Desktop/Projects/Piolot/Engine/Assets/Models/"
-#define SCENES_FOLDER            "Z:/IGMProfile/Desktop/Projects/Piolot/Engine/Assets/Scenes/"
+#define SHADER_FOLDER            "Z:/IGMProfile/Desktop/Projects/Vermin/Shaders/"
+#define TEXTURE_FOLDER            "Z:/IGMProfile/Desktop/Projects/Vermin/Assets/Textures/"
+#define MODEL_FOLDER            "Z:/IGMProfile/Desktop/Projects/Vermin/Assets/Models/"
+#define SCENES_FOLDER            "Z:/IGMProfile/Desktop/Projects/Vermin/Assets/Scenes/"
 
-#define EXTERNAL_FILES            "Z:/IGMProfile/Desktop/Projects/Piolot/EngineDeps/external_files/"
+#define EXTERNAL_FILES            "Z:/IGMProfile/Desktop/Projects/Vermin/Engine/Deps/third_party/"
 
 #else
 
