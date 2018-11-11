@@ -4,3 +4,6 @@
 
 MSBuild/*
 Engine/Configurations.h
+*.shader~
+*.un~
+*.swp

@@ -142,7 +142,7 @@ namespace vermin {
                 if (".vert" != extension && ".shader" != extension) {
                     if (".frag" != extension) {
                         // Extensions should be Vert or Frag.
-                        return false;
+						LOGGER.AddToLog("Extension is not .frag, .vert or .shader. It is " + extension, PE_LOG_WARN);
                     }
                     continue;
                 }

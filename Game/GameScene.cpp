@@ -74,6 +74,9 @@ namespace v_game {
 
 			this->HandleInputs();
 
+			PE_GL(glClearColor(0.2f, 0.3f, 0.3f, 1.0f));
+			PE_GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+
 			this->OnUpdate(deltaTime, totalTime);
 
 			this->OnRender();
