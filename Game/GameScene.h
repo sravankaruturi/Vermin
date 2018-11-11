@@ -26,7 +26,7 @@ namespace v_game {
 
 		void RunScene() override;
 
-		void HandleInputs();
+		void HandleInputs(float _deltaTime);
 
 	};
 

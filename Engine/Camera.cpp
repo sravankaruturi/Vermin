@@ -11,7 +11,7 @@
 namespace vermin {
 
     void Camera::ProcessKeyboard(camera_movement _direction, float _deltaTime) {
-        auto velocity = movementSpeed * _deltaTime;
+        const auto velocity = movementSpeed * _deltaTime;
         switch (_direction) {
             case forward:
                 position += front * velocity;
@@ -25,12 +25,41 @@ namespace vermin {
             case leftside:
                 position -= right * velocity;
                 break;
+			default:
+				throw std::invalid_argument("Invalid Direction");
         }
         // Updating vectors is useless.
         UpdateMatrices();
     }
 
-    void Camera::ProcessMouseMovement(float _xoffset, float _yoffset) {
+	void Camera::ProcessIsoMetricMovement(camera_movement _direction, float _deltaTime)
+	{
+		const auto velocity = movementSpeed * _deltaTime;
+
+		switch (_direction) { 
+
+		case forward:
+			position += worldFront * velocity;
+			break;
+		case back:
+			position -= worldFront * velocity;
+			break;
+		case rightside:
+			position -= worldLeft * velocity;
+			break;
+		case leftside:
+			position += worldLeft * velocity;
+			break;
+		default:
+			throw std::invalid_argument("Invalid Direction");
+
+		}
+
+		UpdateMatrices();
+
+	}
+
+	void Camera::ProcessMouseMovement(float _xoffset, float _yoffset) {
         _xoffset *= mouseSensitivity;
         _yoffset *= mouseSensitivity;
 
@@ -72,6 +101,9 @@ namespace vermin {
         front = glm::normalize(front);
         right = glm::normalize(glm::cross(front, worldUp));
         up = glm::normalize(glm::cross(right, front));
+
+		worldLeft	= glm::normalize(glm::cross(worldUp, front));
+		worldFront	= glm::normalize(glm::cross(worldLeft, worldUp));
 
         UpdateMatrices();
 

@@ -72,7 +72,7 @@ namespace v_game {
 			deltaTime = glfwGetTime() - totalTime;
 			totalTime = glfwGetTime();
 
-			this->HandleInputs();
+			this->HandleInputs(deltaTime);
 
 			PE_GL(glClearColor(0.2f, 0.3f, 0.3f, 1.0f));
 			PE_GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
@@ -104,10 +104,31 @@ namespace v_game {
 
 	}
 
-	void GameScene::HandleInputs()
+	void GameScene::HandleInputs(float _deltaTime)
 	{
 
 		Scene::HandleInputs();
+
+		if (window->IsKeyPressedOrHeld(GLFW_KEY_W))
+		{
+			activeCamera->ProcessIsoMetricMovement(vermin::Camera::forward, _deltaTime);
+		}
+
+		if (window->IsKeyPressedOrHeld(GLFW_KEY_S))
+		{
+			activeCamera->ProcessIsoMetricMovement(vermin::Camera::back, _deltaTime);
+		}
+
+		if (window->IsKeyPressedOrHeld(GLFW_KEY_A))
+		{
+			activeCamera->ProcessIsoMetricMovement(vermin::Camera::leftside, _deltaTime);
+		}
+
+		if (window->IsKeyPressedOrHeld(GLFW_KEY_D))
+		{
+			activeCamera->ProcessIsoMetricMovement(vermin::Camera::rightside, _deltaTime);
+		}
+
 	}
 
 	GameScene::GameScene(std::shared_ptr<vermin::Window> _window)

@@ -48,6 +48,8 @@ namespace vermin {
         glm::vec3 right;
 
         glm::vec3 worldUp;
+		glm::vec3 worldLeft;
+		glm::vec3 worldFront;
 
         float movementSpeed = 0.0f;
         float mouseSensitivity = 0.0f;
@@ -57,6 +59,7 @@ namespace vermin {
         std::string cameraName;
 
         CameraType type;
+
 
     public:
         std::string &GetCameraName() {
@@ -143,6 +146,8 @@ namespace vermin {
         };
 
         void ProcessKeyboard(camera_movement _direction, float _deltaTime);
+
+		void ProcessIsoMetricMovement(camera_movement _direction, float _deltaTime);
 
         void ProcessMouseMovement(float _xoffset, float _yoffset);
 
