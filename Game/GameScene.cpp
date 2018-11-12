@@ -141,6 +141,11 @@ namespace v_game {
 			activeCamera->Clamp(camConstraints);
 		}
 
+		if (window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1))
+		{
+			activeCamera->ProcessMouseMovement(window->mouseOffsetX, 0);
+		}
+
 	}
 
 	GameScene::GameScene(std::shared_ptr<vermin::Window> _window)

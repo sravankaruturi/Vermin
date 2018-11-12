@@ -13,7 +13,7 @@ namespace v_game {
 	private:
 
 		/* Camera Constraints */
-		glm::vec4 camConstraints{-2.f, 22.f, 2.f, 26.f};
+		glm::vec4 camConstraints{1.f, 23.f, 1.f, 23.f};
 
 		std::shared_ptr<vermin::Terrain> gameTerrain;
 

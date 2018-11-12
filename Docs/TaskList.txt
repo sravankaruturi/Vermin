@@ -8,9 +8,12 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Create the Terrain Objects with Resources in them
 
-		# Camera Rotation About Global Y Axis.
-
 		# Load all the Game Models when the Game starts
+
+		# Add UI Elements to display the Wood and Metal Values,
+		  Population Count, the Cost and other Details. Just a 
+		  Plain white image with Black text should do.
+
 
 	# Perfomance Enhancements
 
@@ -18,14 +21,21 @@ This is the Task list for the Project, Vermin and the Game.
 		  Actual location attribnutes instead of the Uniforms. That should be more
 		  performant
 
-	# Engine Bugs
+	# Engine Bugs and Tasks
 
 		# ImGUI Logger Fix --> It is broken.
+		# We need text rendering for the Actual display of resources
+
+	# General
+	
+		# Look into Installing the YouCompleteMe Plugin for Vim
 
 
 # In Progress
 
 
+		# The Player starts with a villager each. Create the
+		  Villagers.
 
 
 # Done
@@ -50,6 +60,9 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# New Shaders for the Town Halls
 			--> 11/12/2018 - 3:04PM
+
+		# Camera Rotation About Global Y Axis.
+			--> 11/12/2018 - 3:22PM
 
 	# Performance Enhancements
 

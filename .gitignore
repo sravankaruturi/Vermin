@@ -10,3 +10,4 @@ Engine/Configurations.h
 *.txt~
 *.cpp~
 *.h~
+*.cpp~~

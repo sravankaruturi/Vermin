@@ -6,46 +6,46 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="Game" targetName="NightlyMemoryCheck" />
-      <config projectName="Game" targetName="ContinuousTest" />
-      <config projectName="Game" targetName="GLAD" />
-      <config projectName="Game" targetName="NightlyStart" />
-      <config projectName="Game" targetName="Vermin" />
-      <config projectName="Game" targetName="NightlyBuild" />
-      <config projectName="Game" targetName="ContinuousSubmit" />
+      <config projectName="Game" targetName="assimp" />
+      <config projectName="Game" targetName="ContinuousBuild" />
+      <config projectName="Game" targetName="unit" />
+      <config projectName="Game" targetName="zlib" />
+      <config projectName="Game" targetName="NightlyMemCheck" />
+      <config projectName="Game" targetName="ContinuousUpdate" />
+      <config projectName="Game" targetName="ExperimentalMemCheck" />
+      <config projectName="Game" targetName="Game" />
+      <config projectName="Game" targetName="zlibstatic" />
+      <config projectName="Game" targetName="NightlyTest" />
+      <config projectName="Game" targetName="NightlyUpdate" />
+      <config projectName="Game" targetName="ExperimentalCoverage" />
+      <config projectName="Game" targetName="ExperimentalConfigure" />
       <config projectName="Game" targetName="ContinuousMemCheck" />
-      <config projectName="Game" targetName="NightlyCoverage" />
-      <config projectName="Game" targetName="IMGUI" />
+      <config projectName="Game" targetName="NightlyMemoryCheck" />
+      <config projectName="Game" targetName="NightlyStart" />
+      <config projectName="Game" targetName="ContinuousConfigure" />
+      <config projectName="Game" targetName="ContinuousSubmit" />
+      <config projectName="Game" targetName="NightlyConfigure" />
       <config projectName="Game" targetName="uninstall" />
       <config projectName="Game" targetName="ContinuousStart" />
-      <config projectName="Game" targetName="Continuous" />
-      <config projectName="Game" targetName="ExperimentalMemCheck" />
-      <config projectName="Game" targetName="ContinuousConfigure" />
-      <config projectName="Game" targetName="IrrXML" />
-      <config projectName="Game" targetName="ContinuousBuild" />
-      <config projectName="Game" targetName="ExperimentalSubmit" />
-      <config projectName="Game" targetName="NightlyConfigure" />
-      <config projectName="Game" targetName="glfw" />
-      <config projectName="Game" targetName="ExperimentalStart" />
-      <config projectName="Game" targetName="NightlySubmit" />
-      <config projectName="Game" targetName="zlibstatic" />
-      <config projectName="Game" targetName="ExperimentalBuild" />
-      <config projectName="Game" targetName="ContinuousUpdate" />
-      <config projectName="Game" targetName="NightlyUpdate" />
-      <config projectName="Game" targetName="ExperimentalUpdate" />
-      <config projectName="Game" targetName="UpdateAssimpLibsDebugSymbolsAndDLLs" />
-      <config projectName="Game" targetName="ContinuousCoverage" />
       <config projectName="Game" targetName="Experimental" />
-      <config projectName="Game" targetName="NightlyTest" />
-      <config projectName="Game" targetName="ExperimentalTest" />
-      <config projectName="Game" targetName="zlib" />
-      <config projectName="Game" targetName="ExperimentalConfigure" />
+      <config projectName="Game" targetName="NightlySubmit" />
+      <config projectName="Game" targetName="ExperimentalUpdate" />
+      <config projectName="Game" targetName="GLAD" />
+      <config projectName="Game" targetName="Vermin" />
+      <config projectName="Game" targetName="ContinuousCoverage" />
       <config projectName="Game" targetName="Nightly" />
-      <config projectName="Game" targetName="NightlyMemCheck" />
-      <config projectName="Game" targetName="ExperimentalCoverage" />
-      <config projectName="Game" targetName="Game" />
-      <config projectName="Game" targetName="assimp" />
-      <config projectName="Game" targetName="unit" />
+      <config projectName="Game" targetName="UpdateAssimpLibsDebugSymbolsAndDLLs" />
+      <config projectName="Game" targetName="IMGUI" />
+      <config projectName="Game" targetName="ExperimentalTest" />
+      <config projectName="Game" targetName="ExperimentalBuild" />
+      <config projectName="Game" targetName="IrrXML" />
+      <config projectName="Game" targetName="ContinuousTest" />
+      <config projectName="Game" targetName="ExperimentalSubmit" />
+      <config projectName="Game" targetName="NightlyBuild" />
+      <config projectName="Game" targetName="NightlyCoverage" />
+      <config projectName="Game" targetName="Continuous" />
+      <config projectName="Game" targetName="ExperimentalStart" />
+      <config projectName="Game" targetName="glfw" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -55,26 +55,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54e7c460-0c2a-4eb3-b23a-e48c50f795a5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Game/Barracks.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Barracks.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Building.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Building.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Catapult.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Catapult.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Player.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Player.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/SiegeFactory.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/SiegeFactory.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Unit.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Unit.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Villager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Villager.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Warrior.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/Warrior.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/Design.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Design.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docs/TaskList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/TaskList.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/GameScene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GameScene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/GameScene.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GameScene.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,12 +72,13 @@
     <session id="-307272908">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
+          <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.3" value="3" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -205,8 +190,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Game/SiegeFactory.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="180">
+              <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -279,8 +264,8 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-3" />
-    <option name="y" value="-21" />
+    <option name="x" value="-2002" />
+    <option name="y" value="-8" />
     <option name="width" value="1616" />
     <option name="height" value="876" />
   </component>
@@ -292,7 +277,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -309,6 +293,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -428,11 +413,12 @@
       <workItem from="1541887941120" duration="2777000" />
       <workItem from="1541989839965" duration="62000" />
       <workItem from="1542045797193" duration="465000" />
+      <workItem from="1542055979423" duration="71000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22351000" />
+    <option name="totallyTimeSpent" value="22422000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -444,9 +430,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22014925" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22228146" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -699,10 +685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-          <folding>
-            <element signature="e#125#150#0" expanded="true" />
-            <element signature="e#194#258#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -784,8 +766,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Game/SiegeFactory.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="180">
+          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
         </state>
       </provider>
     </entry>
