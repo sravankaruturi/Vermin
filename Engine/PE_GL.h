@@ -14,8 +14,10 @@
 #if defined(_MSC_VER) && _DEBUG
 #define PE_ASSERT(x) if (!(x)) __debugbreak()
 #else
-#define PE_ASSERT(x) if (!(x)) std::cout << "Assertion failed at " << __LINE__ << ", " << __FILE__ << std::endl
+#define PE_ASSERT(x)
 #endif
+
+/* if (!(x)) std::cout << "Assertion failed at " << __LINE__ << ", " << __FILE__ << std::endl */
 
 /* Check this. */
 #if _DEBUG
