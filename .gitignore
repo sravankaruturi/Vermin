@@ -8,3 +8,5 @@ Engine/Configurations.h
 *.un~
 *.swp
 *.txt~
+*.cpp~
+*.h~

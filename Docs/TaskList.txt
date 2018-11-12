@@ -8,7 +8,15 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Create the Terrain Objects with Resources in them
 
+		# Camera Rotation About Global Y Axis.
 
+		# Load all the Game Models when the Game starts
+
+	# Perfomance Enhancements
+
+		# Convert the Logic of Drawing in a specific colour to use
+		  Actual location attribnutes instead of the Uniforms. That should be more
+		  performant
 
 	# Engine Bugs
 
@@ -18,7 +26,6 @@ This is the Task list for the Project, Vermin and the Game.
 # In Progress
 
 
-		# Create a Game Manager that contains all the Game Data.
 
 
 # Done
@@ -28,6 +35,23 @@ This is the Task list for the Project, Vermin and the Game.
 		# Terrain Loading
 		# Camera Movement
 		# Camera Movement Constraints
+		# Create the Player Class
+		# Create the Unit Class
+
+
+		# Create a Game Manager that contains all the Game Data.
+			--> 11/12/2018 - 2:11PM
+
+		# You should be able to start the Game
+		# You should be able to Update the Game
+		# You should be able to quit when the Game ends.
+			--> 11/12/2018 - 2:30PM
+
+
+		# New Shaders for the Town Halls
+			--> 11/12/2018 - 3:04PM
+
+	# Performance Enhancements
 
 	# Engine Tasks
 

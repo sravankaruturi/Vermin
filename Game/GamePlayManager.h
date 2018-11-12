@@ -5,17 +5,52 @@
 #ifndef GAME_GAMEPLAYMANAGER_H
 #define GAME_GAMEPLAYMANAGER_H
 
+#include "Player.h"
+#include <memory>
 
-class GamePlayManager {
+namespace v_game
+{
+	
+	class GamePlayManager {
 
-private: 
+	private:
+
+		std::unique_ptr<Player> humanPlayer;
+		std::unique_ptr<Player> aiPlayer;
+
+		vermin::Terrain * gameTerrain;
+
+	public:
+
+		vermin::Terrain* GameTerrain() const
+		{
+			return gameTerrain;
+		}
+
+		void SetGameTerrain(vermin::Terrain* _gameTerrain)
+		{
+			gameTerrain = _gameTerrain;
+		}
+
+		static const int max_population = 20;
 
 
-public:
+		GamePlayManager();
 
-	static const int max_population = 20;
+		~GamePlayManager() = default;
 
-};
+		void StartGame();
 
+		void UpdateGame(float _deltaTime, float _totalTime);
+
+		void Render();
+
+		void HandleInputs();
+
+		void CleanUp();
+
+	};
+
+}
 
 #endif //GAME_GAMEPLAYMANAGER_H

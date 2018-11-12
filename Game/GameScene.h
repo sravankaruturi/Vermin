@@ -4,6 +4,8 @@
 #include "../Engine/Terrain.h"
 #include "glm/detail/type_mat.hpp"
 
+#include "GamePlayManager.h"
+
 namespace v_game {
 
 	class GameScene : public vermin::Scene{
@@ -17,6 +19,8 @@ namespace v_game {
 
 		vermin::Grid grid;
 		glm::mat4 projectionMatrix;
+
+		std::unique_ptr<GamePlayManager> gManager;
 
 	public:
 

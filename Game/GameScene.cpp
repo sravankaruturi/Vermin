@@ -58,6 +58,8 @@ namespace v_game {
 		gameTerrain->Render();
 		grid.Render();
 
+		gManager->Render();
+
 	}
 
 	void GameScene::OnImguiRender()
@@ -150,6 +152,9 @@ namespace v_game {
 		gameTerrain = std::make_shared<vermin::Terrain>(25, 25, 0.5, 0.5, std::string(TEXTURE_FOLDER) + std::string("heightmap.jpg"));
 		LOGGER.AddToLog("Terrain Loaded...");
 
+		gManager = std::make_unique<GamePlayManager>();
+		gManager->SetGameTerrain(gameTerrain.get());
+
 	}
 
 	void GameScene::InitEntities()
@@ -161,6 +166,9 @@ namespace v_game {
 		ActivateCamera(cameras.at("First"));
 
 		LOGGER.AddToLog("Cameras Initialized...");
+
+		gManager->StartGame();
+
 	}
 
 	void GameScene::OnUpdate(float _deltaTime, float _totalTime)
@@ -175,6 +183,8 @@ namespace v_game {
 		gameTerrain->Update(_deltaTime, _totalTime);
 
 		grid.Update(activeCamera->GetViewMatrix(), projectionMatrix);
+
+		gManager->UpdateGame(_deltaTime, _totalTime);
 
 	}
 

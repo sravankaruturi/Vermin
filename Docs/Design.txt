@@ -109,9 +109,28 @@
 # A Player Class which would have the handles to all the Units and Buildigs of
 a particular player.
 
+	# The Player Class contains the Resources a Player has
+
+# The Building Class
+
+	-> The Building Class would extend from the Entity Class.
+	-> We can draw the Building
+	-> We should be able to destroy it when it health drops to zero.
+
+
 # The Game Manager would have two different instances of this Player Class,
 one for the Human and one for the AI
 
+# FLOW:
 
+	# The Game Manager Init is called when Initializing the Game Scene.
+
+	# It is then updated every frame
+
+	# We make sure that each frame is exactly 16.67 ms ( 60 fps )
+
+	# In this update, the Player is first updated, and then the AI
+
+	# The AI player extends from the Player Object
 
 
