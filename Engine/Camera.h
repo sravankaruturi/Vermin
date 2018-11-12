@@ -161,6 +161,8 @@ namespace vermin {
         void SaveToStream(std::ofstream &_out);
 
         void LoadFromStream(std::ifstream &_in);
+
+		void Clamp(glm::vec4 _constraints);
     };
 
 }

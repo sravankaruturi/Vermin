@@ -3,7 +3,6 @@
 //
 
 #include "Game.h"
-#include <iostream>
 
 namespace v_game {
 
@@ -20,7 +19,7 @@ namespace v_game {
 #if ENABLE_GUI
 		ImGui::CreateContext();
 
-		ImGui_ImplGlfw_InitForOpenGL(w->GetWindow(), false);
+		ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), false);
 		ImGui_ImplOpenGL3_Init();
 
 		// Setup style

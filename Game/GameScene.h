@@ -1,20 +1,27 @@
 #pragma once
 
 #include "../Engine/library.h"
-#include "../Engine/Configurations.h"
-#include "../Engine/FolderLocations.h"
 #include "../Engine/Terrain.h"
+#include "glm/detail/type_mat.hpp"
 
 namespace v_game {
 
 	class GameScene : public vermin::Scene{
 
+	private:
+
+		/* Camera Constraints */
+		glm::vec4 camConstraints{-2.f, 22.f, 2.f, 26.f};
+
+		std::shared_ptr<vermin::Terrain> gameTerrain;
+
+		vermin::Grid grid;
+		glm::mat4 projectionMatrix;
+
 	public:
 
 		GameScene(std::shared_ptr<vermin::Window> _window);
 		~GameScene() = default;
-
-		std::shared_ptr<vermin::Terrain> gameTerrain;
 
 		void InitEntities() override;
 

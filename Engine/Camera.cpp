@@ -154,7 +154,17 @@ namespace vermin {
 
     }
 
-    void Camera::DisplayCameraDetailsImgui()
+	void Camera::Clamp(glm::vec4 _constraints)
+	{
+
+		position.x = (position.x < _constraints.x) ? _constraints.x : position.x;
+		position.x = (position.x > _constraints.y) ? _constraints.y : position.x;
+		position.z = (position.z < _constraints.z) ? _constraints.z : position.z;
+		position.z = (position.z > _constraints.w) ? _constraints.w : position.z;
+
+	}
+
+	void Camera::DisplayCameraDetailsImgui()
     {
 
         ImGui::PushID(&this->cameraName);

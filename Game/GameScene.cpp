@@ -56,11 +56,21 @@ namespace v_game {
 
 
 		gameTerrain->Render();
+		grid.Render();
 
 	}
 
 	void GameScene::OnImguiRender()
 	{
+
+		ImGui::Begin("Camera Constraint");
+
+		float distance = glm::distance(activeCamera->GetPosition(), gameTerrain->GetPosition());
+
+		ImGui::Text("The Distance between the Camera Position and the Terrain Position , %f", distance);
+
+		ImGui::End();
+
 	}
 
 	void GameScene::RunScene()
@@ -77,6 +87,8 @@ namespace v_game {
 			PE_GL(glClearColor(0.2f, 0.3f, 0.3f, 1.0f));
 			PE_GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
+			PE_GL(glViewport(0, 0, window->GetWidth(), window->GetHeight()));
+
 			this->OnUpdate(deltaTime, totalTime);
 
 			this->OnRender();
@@ -84,15 +96,9 @@ namespace v_game {
 #if ENABLE_GUI
 			// GUI Render
 			ImGui_ImplOpenGL3_NewFrame();
-			ImGui_ImplGlfw_NewFrame();
+			ImGui_ImplGlfw_NewFrame();;
 
-			vermin::ImGuiControlVariables test_scene_vars = {
-				displayMultipleViews
-			};
-
-			this->OnImguiRender(test_scene_vars);
-
-			/*ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);*/
+			this->OnImguiRender();
 
 			ImGui::Render();
 			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -112,21 +118,25 @@ namespace v_game {
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_W))
 		{
 			activeCamera->ProcessIsoMetricMovement(vermin::Camera::forward, _deltaTime);
+			activeCamera->Clamp(camConstraints);
 		}
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_S))
 		{
 			activeCamera->ProcessIsoMetricMovement(vermin::Camera::back, _deltaTime);
+			activeCamera->Clamp(camConstraints);
 		}
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_A))
 		{
 			activeCamera->ProcessIsoMetricMovement(vermin::Camera::leftside, _deltaTime);
+			activeCamera->Clamp(camConstraints);
 		}
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_D))
 		{
 			activeCamera->ProcessIsoMetricMovement(vermin::Camera::rightside, _deltaTime);
+			activeCamera->Clamp(camConstraints);
 		}
 
 	}
@@ -134,7 +144,9 @@ namespace v_game {
 	GameScene::GameScene(std::shared_ptr<vermin::Window> _window)
 		: Scene(_window)
 	{
-		
+
+		grid.Init();
+
 		gameTerrain = std::make_shared<vermin::Terrain>(25, 25, 0.5, 0.5, std::string(TEXTURE_FOLDER) + std::string("heightmap.jpg"));
 		LOGGER.AddToLog("Terrain Loaded...");
 
@@ -156,10 +168,13 @@ namespace v_game {
 
 		gameTerrain->ClearColours();
 
+		projectionMatrix = glm::perspective(45.0f, float(window->GetWidth()) / window->GetHeight(), 0.1f, 100.0f);
 
 
 
 		gameTerrain->Update(_deltaTime, _totalTime);
+
+		grid.Update(activeCamera->GetViewMatrix(), projectionMatrix);
 
 	}
 
