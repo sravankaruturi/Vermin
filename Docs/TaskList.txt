@@ -1,0 +1,34 @@
+# Task List.
+
+This is the Task list for the Project, Vermin and the Game.
+
+# To DO
+
+	# Gameplay Tasks
+
+		# Create the Terrain Objects with Resources in them
+
+
+
+	# Engine Bugs
+
+		# ImGUI Logger Fix --> It is broken.
+
+
+# In Progress
+
+
+		# Create a Game Manager that contains all the Game Data.
+
+
+# Done
+
+	# Gameplay Tasks
+
+		# Terrain Loading
+		# Camera Movement
+		# Camera Movement Constraints
+
+	# Engine Tasks
+
+

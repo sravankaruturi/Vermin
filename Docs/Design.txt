@@ -1,0 +1,117 @@
+# Design
+
+
+# Resources
+
+1. Stone
+
+	Rocks ??	
+
+2. Wood
+
+	Trees
+
+
+3. Time -> Optional
+
+# Units
+
+1. Villager
+
+	Can be created from the Town Center
+	Can Gather Resources
+	Can Fight, but with less Attack.
+
+	Attack: 5
+	Health: 20
+	Speed: 1
+	Resource Per Second: 2
+	
+	Cost: 30 Wood.
+
+2. Warrior
+
+	Can be created from the Barracks.
+	Can Fight
+	Can Gather Resources, but with way less speed.
+
+	Attack: 10
+	Health: 30
+	Speed: 1
+	Resource Per Second: 0.5
+	
+	Cost: 30 Wood. 30 Stone
+
+3. Catapult
+
+	Can be created in the Siege Workshop
+	Can only attack buildings.
+	Cannnot Gather Resources
+
+	Attack: 40
+	Health: 30
+	Speed: 1
+	Resource Per Second: 0.5
+	
+	Cost: 40 Wood. 40 Stone
+
+# Buildings
+
+1. Town Center / Base
+
+	Provided by Default.
+	Cannot be reconstructed.	
+	Is the only source of Villagers.
+
+	Health: 1000
+
+2. Barracks
+
+	Cost: 120 Wood
+	Health: 600
+
+	Can be constructed by a Villager.
+	Produces Warriors
+	
+
+3. Siege Factory	
+
+	Cost: 120 Wood + 120 Stone
+	Health: 800
+
+	Can be constructed by a Villager.
+	Produces Catapults
+
+# Code Design
+
+# A Game Manager Class to hold most of the constants.
+
+# A Unit Class which deals with
+
+	1. Animations
+	2. Health
+	3. Attack Function
+	4. Death Check.
+	5. Movement Function.
+	6. Gather Resources
+
+# Individual Unit Classes Like, 
+
+	1. Villager	::	Unit
+		
+		-> Build the Builings Function, just the Barracks
+	
+	2. Warrior	:: 	Unit
+		
+		-> Shouldn't need any new functions.  
+
+
+# A Player Class which would have the handles to all the Units and Buildigs of
+a particular player.
+
+# The Game Manager would have two different instances of this Player Class,
+one for the Human and one for the AI
+
+
+
+
