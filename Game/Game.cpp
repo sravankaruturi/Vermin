@@ -18,6 +18,7 @@ namespace v_game {
 
 #if ENABLE_GUI
 		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO();
 
 		ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), false);
 		ImGui_ImplOpenGL3_Init();

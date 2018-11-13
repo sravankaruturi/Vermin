@@ -65,13 +65,21 @@ namespace v_game {
 	void GameScene::OnImguiRender()
 	{
 
-		ImGui::Begin("Camera Constraint");
+		ImGui::NewFrame();
 
-		float distance = glm::distance(activeCamera->GetPosition(), gameTerrain->GetPosition());
+		if ( ImGui::BeginMainMenuBar()){
+			if ( ImGui::BeginMenu("Windows")){
+				if ( ImGui::MenuItem("Log") ){
+					displayLogWindow = true;
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndMainMenuBar();
+		}
 
-		ImGui::Text("The Distance between the Camera Position and the Terrain Position , %f", distance);
-
-		ImGui::End();
+		if ( displayLogWindow ){
+			LOGGER.Render(&displayLogWindow);
+		}
 
 	}
 

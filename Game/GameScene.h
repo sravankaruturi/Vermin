@@ -12,6 +12,9 @@ namespace v_game {
 
 	private:
 
+		/* GUI Variables */
+		bool displayLogWindow = false;
+
 		/* Camera Constraints */
 		glm::vec4 camConstraints{1.f, 23.f, 1.f, 23.f};
 

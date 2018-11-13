@@ -9,8 +9,6 @@
 
 #define LOGGER vermin::LoggingManager::GetInstance()
 
-#define IMGUI_WORKING 0
-
 namespace vermin {
 
     enum LogType {
@@ -55,11 +53,9 @@ namespace vermin {
 
             log += str_to_log;
 
-#if IMGUI_WORKING
             if (nullptr != imguiLogger) {
                 imguiLogger->AddLog(str_to_log.c_str());
             }
-#endif
 
             std::cout << str_to_log;
         }
