@@ -7,7 +7,7 @@
 namespace v_game {
 
 	Unit::Unit()
-		: AnimatedEntity("Unit", "RTSDemo/HappyIdle.fbx", "bob_lamp")
+		: AnimatedEntity("Unit", "RTSDemo/HappyIdle.fbx", "unit")
 	{
 
 		this->SetScale(glm::vec3(1 / 128.0f));

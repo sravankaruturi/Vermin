@@ -8,7 +8,6 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Create the Terrain Objects with Resources in them
 
-
 		# Add UI Elements to display the Wood and Metal Values,
 		  Population Count, the Cost and other Details. Just a 
 		  Plain white image with Black text should do.
@@ -17,10 +16,8 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Use the Proper Assets for the Player.
 		
-		# Use the Proper Colour to respresent the Players
 
 		# Add all the unit Classes, like the villagers, Warriors and Catapults.
-
 
 	# Perfomance Enhancements
 
@@ -78,6 +75,10 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Load all the Game Models when the Game starts
 			--> 11/12/2018 - 8:50PM
+
+		# Use the Proper Colour to respresent the Players
+			--> 11/13/2018 - 10:25AM
+
 
 	# Performance Enhancements
 

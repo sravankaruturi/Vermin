@@ -52,9 +52,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54e7c460-0c2a-4eb3-b23a-e48c50f795a5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Docs/TaskList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/TaskList.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/LoggingManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/LoggingManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Game.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/Configurations.h" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/Configurations.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -127,16 +125,17 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cpp" value="2" />
-          <entry key="h" value="12" />
+          <entry key="h" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="14" />
+          <entry key="ObjectiveC" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -434,12 +433,12 @@
       <workItem from="1541989839965" duration="62000" />
       <workItem from="1542045797193" duration="465000" />
       <workItem from="1542055979423" duration="71000" />
-      <workItem from="1542083995367" duration="655000" />
+      <workItem from="1542083995367" duration="887000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23077000" />
+    <option name="totallyTimeSpent" value="23309000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -452,7 +451,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2253635" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -460,7 +458,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49307036" weight="0.3273906" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.6929638" visible="true" weight="0.3987034" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6929638" weight="0.3987034" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.3285528" />

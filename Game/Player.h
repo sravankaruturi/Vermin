@@ -36,7 +36,8 @@ namespace v_game
 		std::vector<std::unique_ptr<Building>> buildings;
 		std::vector<std::unique_ptr<Unit>> units;
 
-		vermin::GLShader * shaderPointer;
+		vermin::GLShader * tcShaderPointer;
+		vermin::GLShader * unitShaderPointer;
 
 		glm::vec3 baseStartPosition;
 		glm::vec3 villagerStartPosition;

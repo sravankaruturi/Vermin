@@ -29,7 +29,8 @@ namespace v_game
 		this->units.emplace_back(std::make_unique<Unit>());
 		this->units[0]->SetPosition(villagerStartPosition);
 
-		shaderPointer = ASMGR.shaders.at("town_center").get();
+		tcShaderPointer = ASMGR.shaders.at("town_center").get();
+		unitShaderPointer = ASMGR.shaders.at("unit").get();
 
 	}
 
@@ -50,12 +51,16 @@ namespace v_game
 
 	void Player::Render()
 	{
-		shaderPointer->use();
-		shaderPointer->setVec4("u_PlayerColour", pColour.x, pColour.y, pColour.z, 0.3);
+		tcShaderPointer->use();
+		tcShaderPointer->setVec4("u_PlayerColour", pColour.x, pColour.y, pColour.z, 0.3);
 		
 		for (auto& it : buildings) {
 			it->Render();
 		}
+
+
+		unitShaderPointer->use();
+		unitShaderPointer->setVec4("u_Colour", pColour.x, pColour.y, pColour.z, 0.3);
 
 		for (auto& it : units) {
 			it->Render();
