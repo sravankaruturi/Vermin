@@ -14,6 +14,14 @@ This is the Task list for the Project, Vermin and the Game.
 		  Population Count, the Cost and other Details. Just a 
 		  Plain white image with Black text should do.
 
+		# Move the Players
+
+		# Use the Proper Assets for the Player.
+		
+		# Use the Proper Colour to respresent the Players
+
+		# Add all the unit Classes, like the villagers, Warriors and Catapults.
+
 
 	# Perfomance Enhancements
 
@@ -34,8 +42,6 @@ This is the Task list for the Project, Vermin and the Game.
 # In Progress
 
 
-		# The Player starts with a villager each. Create the
-		  Villagers.
 
 
 # Done
@@ -63,6 +69,11 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Camera Rotation About Global Y Axis.
 			--> 11/12/2018 - 3:22PM
+
+
+		# The Player starts with a villager each. Create the
+		  Villagers.
+			--> 11/12/2018 - 8:45PM
 
 	# Performance Enhancements
 
