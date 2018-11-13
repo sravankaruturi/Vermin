@@ -7,6 +7,8 @@
 
 #include "Building.h"
 #include "GLShader.h"
+#include <memory>
+#include "Unit.h"
 
 namespace v_game
 {
@@ -31,9 +33,13 @@ namespace v_game
 
 		glm::vec3 pColour;
 
-		std::unique_ptr<Building> buildings;
+		std::vector<std::unique_ptr<Building>> buildings;
+		std::vector<std::unique_ptr<Unit>> units;
 
 		vermin::GLShader * shaderPointer;
+
+		glm::vec3 baseStartPosition;
+		glm::vec3 villagerStartPosition;
 
 	public:
 

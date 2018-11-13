@@ -49,6 +49,8 @@ namespace v_game
 
 		void CleanUp();
 
+		void LoadAssets();
+
 	};
 
 }

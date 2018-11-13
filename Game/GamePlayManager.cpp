@@ -21,8 +21,7 @@ namespace v_game
 		const float y2 = gameTerrain->GetHeightAtPos(22, 22);
 
 
-		std::shared_ptr<vermin::Texture> building_diffuse = std::make_shared<vermin::Texture>(MODEL_FOLDER + std::string("Medieval_House/Medieval_House_Diff.png"), false);
-		ASMGR.AddToTextures("building_diffuse", building_diffuse);
+		LoadAssets();
 
 		// Create the Player Objects.
 		humanPlayer = std::make_unique<Player>(glm::vec3(2, y1, 2), PlayerType::Human);
@@ -52,6 +51,33 @@ namespace v_game
 	{
 
 
+
+	}
+
+	void GamePlayManager::LoadAssets()
+	{
+
+		std::shared_ptr<vermin::Texture> building_diffuse = std::make_shared<vermin::Texture>(MODEL_FOLDER + std::string("Medieval_House/Medieval_House_Diff.png"), false);
+		ASMGR.AddToTextures("building_diffuse", building_diffuse);
+
+		std::shared_ptr<vermin::Texture> knight_diffuse = std::make_shared<vermin::Texture>(MODEL_FOLDER + std::string("RTSDemo/Materials/DemoTexture.png"), false);
+		ASMGR.AddToTextures("knight_demo", knight_diffuse);
+
+		std::shared_ptr<vermin::Object> knightWalkAnimation = std::make_shared<vermin::Object>(MODEL_FOLDER + std::string("RTSDemo/Walking.fbx"));
+		knightWalkAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
+		ASMGR.AddToObjects("Walking", knightWalkAnimation);
+
+		std::shared_ptr<vermin::Object> knightDyingAnimation = std::make_shared<vermin::Object>(MODEL_FOLDER + std::string("RTSDemo/Dying.fbx"));
+		knightDyingAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
+		ASMGR.AddToObjects("Dying", knightDyingAnimation);
+
+		std::shared_ptr<vermin::Object> knightIdleAnimation = std::make_shared<vermin::Object>(MODEL_FOLDER + std::string("RTSDemo/HappyIdle.fbx"));
+		knightIdleAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
+		ASMGR.AddToObjects("HappyIdle", knightIdleAnimation);
+
+		std::shared_ptr<vermin::Object> knightSwordAnimation = std::make_shared<vermin::Object>(MODEL_FOLDER + std::string("RTSDemo/SwordAndShieldSlash.fbx"));
+		knightSwordAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
+		ASMGR.AddToObjects("SwordAndShieldSlash", knightSwordAnimation);
 
 	}
 }
