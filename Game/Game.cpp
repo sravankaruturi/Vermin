@@ -26,8 +26,7 @@ namespace v_game {
 		// Setup style
 		ImGui::StyleColorsDark();
 
-		vermin::ImGuiLog imgui_logger;
-		LOGGER.SetImGuiLogger(&imgui_logger);
+		LOGGER.SetImGuiLogger(&imguiLogger);
 #endif
 
 		currentScene = std::make_unique<v_game::GameScene>(window);
