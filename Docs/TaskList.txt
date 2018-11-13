@@ -21,6 +21,8 @@ This is the Task list for the Project, Vermin and the Game.
 		  Objects just have a handle to them, and not any sort of control over the
 		  lifespan of it.
 
+		# Make sure the game runs on Mac without us having to move it.
+
 	# Perfomance Enhancements
 
 		# Convert the Logic of Drawing in a specific colour to use
