@@ -17,7 +17,7 @@ namespace v_game {
 
 		std::unique_ptr<v_game::GameScene> currentScene;
 
-		vermin::ImGuiLog imgui_logger;
+		vermin::ImGuiLog imguiLogger;
 
 	public:
 

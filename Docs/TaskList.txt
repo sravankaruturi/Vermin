@@ -36,7 +36,6 @@ This is the Task list for the Project, Vermin and the Game.
 
 # In Progress
 
-		# ImGUI Logger Fix --> It is broken.
 
 # Done
 
@@ -83,6 +82,10 @@ This is the Task list for the Project, Vermin and the Game.
 		# ImGUI is completely broken. Not just the logs --> Pushed a fix to ignore it for now and
 		  and run the program on a mac.
 			--> 11/13/2018 - 1:58PM
+
+
+		# ImGUI Logger Fix --> It is broken.
+			--> 11/13/2018 - 3:04PM
 
 	# General
 
