@@ -12,12 +12,14 @@ This is the Task list for the Project, Vermin and the Game.
 		  Population Count, the Cost and other Details. Just a 
 		  Plain white image with Black text should do.
 
-		# Move the Players
 
 		# Use the Proper Assets for the Player.
-		
 
 		# Add all the unit Classes, like the villagers, Warriors and Catapults.
+
+		# Make sure that the all the Entities belong to the Scene and the Player
+		  Objects just have a handle to them, and not any sort of control over the
+		  lifespan of it.
 
 	# Perfomance Enhancements
 
@@ -36,6 +38,8 @@ This is the Task list for the Project, Vermin and the Game.
 
 # In Progress
 
+
+		# Move the Players
 
 # Done
 

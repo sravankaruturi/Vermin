@@ -109,6 +109,9 @@
 # A Player Class which would have the handles to all the Units and Buildigs of
 a particular player.
 
+	# These are just that. Handles. The entities to all the Units and Buildings belong
+	  to the scene itself.
+
 	# The Player Class contains the Resources a Player has
 
 # The Building Class
