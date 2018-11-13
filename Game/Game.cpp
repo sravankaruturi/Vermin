@@ -11,7 +11,7 @@ namespace v_game {
 #if _DEBUG
 		window = std::make_shared<vermin::Window>(800, 600, "The Game", false);
 #else
-		window = std::make_shared<vermin::Window>(1920, 1080, "The Game", true);
+		window = std::make_shared<vermin::Window>(1920, 1080, "The Game", false);
 #endif
 
 		

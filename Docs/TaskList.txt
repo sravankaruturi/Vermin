@@ -8,7 +8,6 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Create the Terrain Objects with Resources in them
 
-		# Load all the Game Models when the Game starts
 
 		# Add UI Elements to display the Wood and Metal Values,
 		  Population Count, the Cost and other Details. Just a 
@@ -33,10 +32,12 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# ImGUI Logger Fix --> It is broken.
 		# We need text rendering for the Actual display of resources
+		# ImGUI is completely broken. Not just the logs --> Pushed a fix to ignore it for now and
+		  and run the program on a mac.
 
 	# General
+
 	
-		# Look into Installing the YouCompleteMe Plugin for Vim
 
 
 # In Progress
@@ -75,8 +76,16 @@ This is the Task list for the Project, Vermin and the Game.
 		  Villagers.
 			--> 11/12/2018 - 8:45PM
 
+		# Load all the Game Models when the Game starts
+			--> 11/12/2018 - 8:50PM
+
 	# Performance Enhancements
 
 	# Engine Tasks
+
+	# General
+
+		# Look into Installing the YouCompleteMe Plugin for Vim
+			--> 11/12/2018 - 10:45PM
 
 

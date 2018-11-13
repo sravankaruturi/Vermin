@@ -6,46 +6,43 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="Game" targetName="assimp" />
-      <config projectName="Game" targetName="ContinuousBuild" />
-      <config projectName="Game" targetName="unit" />
-      <config projectName="Game" targetName="zlib" />
-      <config projectName="Game" targetName="NightlyMemCheck" />
-      <config projectName="Game" targetName="ContinuousUpdate" />
-      <config projectName="Game" targetName="ExperimentalMemCheck" />
-      <config projectName="Game" targetName="Game" />
-      <config projectName="Game" targetName="zlibstatic" />
-      <config projectName="Game" targetName="NightlyTest" />
-      <config projectName="Game" targetName="NightlyUpdate" />
-      <config projectName="Game" targetName="ExperimentalCoverage" />
-      <config projectName="Game" targetName="ExperimentalConfigure" />
-      <config projectName="Game" targetName="ContinuousMemCheck" />
       <config projectName="Game" targetName="NightlyMemoryCheck" />
+      <config projectName="Game" targetName="ContinuousTest" />
+      <config projectName="Game" targetName="GLAD" />
       <config projectName="Game" targetName="NightlyStart" />
-      <config projectName="Game" targetName="ContinuousConfigure" />
+      <config projectName="Game" targetName="Vermin" />
+      <config projectName="Game" targetName="NightlyBuild" />
       <config projectName="Game" targetName="ContinuousSubmit" />
-      <config projectName="Game" targetName="NightlyConfigure" />
+      <config projectName="Game" targetName="ContinuousMemCheck" />
+      <config projectName="Game" targetName="NightlyCoverage" />
+      <config projectName="Game" targetName="IMGUI" />
       <config projectName="Game" targetName="uninstall" />
       <config projectName="Game" targetName="ContinuousStart" />
-      <config projectName="Game" targetName="Experimental" />
-      <config projectName="Game" targetName="NightlySubmit" />
-      <config projectName="Game" targetName="ExperimentalUpdate" />
-      <config projectName="Game" targetName="GLAD" />
-      <config projectName="Game" targetName="Vermin" />
-      <config projectName="Game" targetName="ContinuousCoverage" />
-      <config projectName="Game" targetName="Nightly" />
-      <config projectName="Game" targetName="UpdateAssimpLibsDebugSymbolsAndDLLs" />
-      <config projectName="Game" targetName="IMGUI" />
-      <config projectName="Game" targetName="ExperimentalTest" />
-      <config projectName="Game" targetName="ExperimentalBuild" />
-      <config projectName="Game" targetName="IrrXML" />
-      <config projectName="Game" targetName="ContinuousTest" />
-      <config projectName="Game" targetName="ExperimentalSubmit" />
-      <config projectName="Game" targetName="NightlyBuild" />
-      <config projectName="Game" targetName="NightlyCoverage" />
       <config projectName="Game" targetName="Continuous" />
-      <config projectName="Game" targetName="ExperimentalStart" />
+      <config projectName="Game" targetName="ExperimentalMemCheck" />
+      <config projectName="Game" targetName="ContinuousConfigure" />
+      <config projectName="Game" targetName="IrrXML" />
+      <config projectName="Game" targetName="ContinuousBuild" />
+      <config projectName="Game" targetName="ExperimentalSubmit" />
+      <config projectName="Game" targetName="NightlyConfigure" />
       <config projectName="Game" targetName="glfw" />
+      <config projectName="Game" targetName="ExperimentalStart" />
+      <config projectName="Game" targetName="NightlySubmit" />
+      <config projectName="Game" targetName="ExperimentalBuild" />
+      <config projectName="Game" targetName="ContinuousUpdate" />
+      <config projectName="Game" targetName="NightlyUpdate" />
+      <config projectName="Game" targetName="ExperimentalUpdate" />
+      <config projectName="Game" targetName="ContinuousCoverage" />
+      <config projectName="Game" targetName="Experimental" />
+      <config projectName="Game" targetName="NightlyTest" />
+      <config projectName="Game" targetName="ExperimentalTest" />
+      <config projectName="Game" targetName="ExperimentalConfigure" />
+      <config projectName="Game" targetName="Nightly" />
+      <config projectName="Game" targetName="NightlyMemCheck" />
+      <config projectName="Game" targetName="ExperimentalCoverage" />
+      <config projectName="Game" targetName="Game" />
+      <config projectName="Game" targetName="assimp" />
+      <config projectName="Game" targetName="unit" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -55,10 +52,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54e7c460-0c2a-4eb3-b23a-e48c50f795a5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docs/TaskList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/TaskList.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/GameScene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GameScene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/GameScene.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GameScene.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/LoggingManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/LoggingManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Game.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -119,23 +115,30 @@
     <session id="-1488193780">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="h" value="1" />
+          <entry key="cpp" value="3" />
+          <entry key="h" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="ObjectiveC" value="1" />
+          <entry key="ObjectiveC" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="1" />
-          <entry key="h" value="11" />
+          <entry key="cpp" value="2" />
+          <entry key="h" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="12" />
+          <entry key="ObjectiveC" value="14" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -143,55 +146,88 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Game/Warrior.cpp">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/Engine/AssetManager.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="214" selection-start-line="214" selection-end-line="214" />
+              <folding>
+                <element signature="e#63#80#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Game/Warrior.h">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/Engine/Deps/third_party/Imgui/imgui.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="6437" column="18" selection-start-line="6437" selection-start-column="18" selection-end-line="6437" selection-end-column="18" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Game/Catapult.cpp">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Game/Catapult.h">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Game/Building.cpp">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Game/Building.h">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Game/Barracks.cpp">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Game/Barracks.h">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Game/SiegeFactory.cpp">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/Engine/Deps/glfw-3.2.1/deps/glad/glad.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="360" column="11" selection-start-line="360" selection-start-column="11" selection-end-line="360" selection-end-column="11" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Game/SiegeFactory.h">
+        <entry file="file://$PROJECT_DIR$/Engine/Configurations.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+            <state relative-caret-position="72">
+              <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Engine/Deps/third_party/Imgui/imgui.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="1824" selection-start-line="1824" selection-end-line="1824" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Engine/GUIHelpers.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Engine/LoggingManager.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="59" selection-start-line="59" selection-end-line="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Game/GameScene.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="67" selection-start-line="67" selection-end-line="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Engine/Terrain.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="201" selection-start-line="201" selection-end-line="201" />
+              <folding>
+                <element signature="e#43#63#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -216,6 +252,8 @@
       <find>move(</find>
       <find>error</find>
       <find>Error</find>
+      <find>ENABLE_</find>
+      <find>ENABLE_GUI</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -249,10 +287,11 @@
         <option value="$PROJECT_DIR$/Engine/Object.h" />
         <option value="$PROJECT_DIR$/Engine/Scene.cpp" />
         <option value="$PROJECT_DIR$/Engine/TestScene.cpp" />
-        <option value="$PROJECT_DIR$/Engine/Configurations.h" />
         <option value="$PROJECT_DIR$/Game/main.cpp" />
         <option value="$PROJECT_DIR$/Engine/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Game/GamePlayManager.h" />
+        <option value="$PROJECT_DIR$/Engine/Deps/third_party/Imgui/imgui.cpp" />
+        <option value="$PROJECT_DIR$/Engine/Configurations.h" />
       </list>
     </option>
   </component>
@@ -263,11 +302,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-2002" />
-    <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="876" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1280" />
+    <option name="height" value="709" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -345,11 +383,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UpdateAssimpLibsDebugSymbolsAndDLLs" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Game" TARGET_NAME="UpdateAssimpLibsDebugSymbolsAndDLLs" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Vermin" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Game" TARGET_NAME="Vermin" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -370,27 +403,14 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="zlib" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Game" TARGET_NAME="zlib" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="zlibstatic" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Game" TARGET_NAME="zlibstatic" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Build All" />
       <item itemvalue="Application.Game" />
       <item itemvalue="Application.GLAD" />
       <item itemvalue="Application.IMGUI" />
       <item itemvalue="Application.Vermin" />
-      <item itemvalue="Application.UpdateAssimpLibsDebugSymbolsAndDLLs" />
       <item itemvalue="Application.assimp" />
       <item itemvalue="Application.IrrXML" />
-      <item itemvalue="Application.zlib" />
-      <item itemvalue="Application.zlibstatic" />
       <item itemvalue="Application.uninstall" />
       <item itemvalue="Application.glfw" />
     </list>
@@ -414,11 +434,12 @@
       <workItem from="1541989839965" duration="62000" />
       <workItem from="1542045797193" duration="465000" />
       <workItem from="1542055979423" duration="71000" />
+      <workItem from="1542083995367" duration="655000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22422000" />
+    <option name="totallyTimeSpent" value="23077000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -430,15 +451,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="709" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22228146" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2253635" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49307036" weight="0.3273906" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6929638" weight="0.3997833" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.6929638" visible="true" weight="0.3987034" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.3285528" />
@@ -447,7 +469,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5090618" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49946696" weight="0.3285528" />
       <window_info anchor="bottom" id="CMake" order="11" sideWeight="0.49946696" weight="0.32827735" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49093816" visible="true" weight="0.5503792" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49093816" weight="0.5503792" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32985657" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -503,16 +525,6 @@
           <line>39</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Engine/Terrain.cpp</url>
-          <line>196</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Engine/AssetManager.h</url>
-          <line>214</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -541,12 +553,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h" />
-    <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h" />
-    <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tree.h" />
-    <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h" />
-    <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h" />
-    <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_map.h" />
     <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h" />
     <entry file="file://$PROJECT_DIR$/Engine/GLShader.cpp">
       <provider selected="true" editor-type-id="text-editor">
@@ -558,36 +564,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/Terrain.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3222">
-          <caret line="179" selection-start-line="179" selection-end-line="179" />
-          <folding>
-            <element signature="e#43#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Engine/Camera.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2304">
           <caret line="128" column="52" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/AssetManager.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="227" column="38" selection-start-line="227" selection-start-column="38" selection-end-line="227" selection-end-column="38" />
-          <folding>
-            <element signature="e#63#80#0" expanded="true" />
-            <element signature="e#109#128#0" expanded="true" />
-            <element signature="e#223#243#0" expanded="true" />
-            <element signature="e#3498#3755#0" expanded="true" />
-            <element signature="e#4317#4378#0" expanded="true" />
-            <element signature="e#7066#7323#0" expanded="true" />
-            <element signature="e#7542#7591#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -629,7 +609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/Configurations.h" />
     <entry file="file://$PROJECT_DIR$/Engine/Scene.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -709,65 +688,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Game/GamePlayManager.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/GamePlayManager.h">
+    <entry file="file://$PROJECT_DIR$/Game/GamePlayManager.cpp" />
+    <entry file="file://$PROJECT_DIR$/Game/GamePlayManager.h" />
+    <entry file="file://$PROJECT_DIR$/Game/Player.cpp" />
+    <entry file="file://$PROJECT_DIR$/Game/Player.h" />
+    <entry file="file://$PROJECT_DIR$/Game/Unit.cpp" />
+    <entry file="file://$PROJECT_DIR$/Game/Unit.h" />
+    <entry file="file://$PROJECT_DIR$/Game/Villager.cpp" />
+    <entry file="file://$PROJECT_DIR$/Game/Villager.h" />
+    <entry file="file://$PROJECT_DIR$/Game/Warrior.cpp" />
+    <entry file="file://$PROJECT_DIR$/Game/Warrior.h" />
+    <entry file="file://$PROJECT_DIR$/Game/Catapult.cpp" />
+    <entry file="file://$PROJECT_DIR$/Game/Catapult.h" />
+    <entry file="file://$PROJECT_DIR$/Game/Building.cpp" />
+    <entry file="file://$PROJECT_DIR$/Game/Building.h" />
+    <entry file="file://$PROJECT_DIR$/Game/Barracks.cpp" />
+    <entry file="file://$PROJECT_DIR$/Game/Barracks.h" />
+    <entry file="file://$PROJECT_DIR$/Game/SiegeFactory.cpp" />
+    <entry file="file://$PROJECT_DIR$/Game/SiegeFactory.h" />
+    <entry file="file://$PROJECT_DIR$/Engine/AssetManager.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        <state relative-caret-position="270">
+          <caret line="214" selection-start-line="214" selection-end-line="214" />
+          <folding>
+            <element signature="e#63#80#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Player.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Player.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Unit.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Unit.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Villager.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Villager.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Warrior.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Warrior.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Catapult.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Catapult.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Building.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Building.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Barracks.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/Barracks.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/SiegeFactory.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game/SiegeFactory.h">
+    <entry file="file://$PROJECT_DIR$/Engine/Deps/third_party/Imgui/imgui.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+        <state relative-caret-position="102">
+          <caret line="1824" selection-start-line="1824" selection-end-line="1824" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/GUIHelpers.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/LoggingManager.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/Terrain.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="201" selection-start-line="201" selection-end-line="201" />
+          <folding>
+            <element signature="e#43#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Game/GameScene.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/Deps/third_party/Imgui/imgui.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="6437" column="18" selection-start-line="6437" selection-start-column="18" selection-end-line="6437" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/Deps/glfw-3.2.1/deps/glad/glad.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="360" column="11" selection-start-line="360" selection-start-column="11" selection-end-line="360" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/Configurations.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
         </state>
       </provider>
     </entry>
