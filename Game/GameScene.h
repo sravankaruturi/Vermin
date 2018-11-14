@@ -4,9 +4,60 @@
 #include "../Engine/Terrain.h"
 #include "glm/detail/type_mat.hpp"
 
+
 #include "GamePlayManager.h"
+#include "Building.h"
+#include "Unit.h"
 
 namespace v_game {
+
+	enum class PlayerType
+	{
+		Human,
+		Ai
+	};
+
+	struct Player{
+
+		unsigned int rWood = 0;
+		unsigned int rStone = 0;
+
+		PlayerType pType = PlayerType::Ai;
+
+		glm::vec3 pColour{0 ,0, 1};
+
+		std::vector<std::shared_ptr<Building>> buildings{};
+		std::vector<std::shared_ptr<Unit>> units{};
+
+		glm::vec3 baseStartPosition{0};
+		glm::vec3 villagerStartPosition{0};
+
+		Player() = default;
+
+		Player(glm::vec3 _baseStartPosition, PlayerType _pType){
+
+			baseStartPosition = _baseStartPosition;
+
+			villagerStartPosition = baseStartPosition;
+			villagerStartPosition.x += 1.5;
+			villagerStartPosition.z -= 1.5;
+
+			// Let us give some wood and stone to the Player.
+			rWood = 100;
+			rStone = 100;
+
+			pColour = (pType == PlayerType::Human) ? glm::vec3(1, 0, 0) : glm::vec3(0, 0, 1);
+
+			// Add One Building.
+			this->buildings.emplace_back(std::make_shared<Building>(500));
+			this->buildings[0]->SetPosition(baseStartPosition);
+
+			this->units.emplace_back(std::make_shared<Unit>());
+			this->units[0]->SetPosition(villagerStartPosition);
+
+		}
+
+	};
 
 	class GameScene : public vermin::Scene{
 
@@ -24,6 +75,9 @@ namespace v_game {
 		glm::mat4 projectionMatrix;
 
 		std::unique_ptr<GamePlayManager> gManager;
+
+		Player aiPlayer;
+		Player humanPlayer;
 
 	public:
 

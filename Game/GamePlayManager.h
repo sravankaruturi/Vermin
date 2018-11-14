@@ -5,8 +5,8 @@
 #ifndef GAME_GAMEPLAYMANAGER_H
 #define GAME_GAMEPLAYMANAGER_H
 
-#include "Player.h"
 #include <memory>
+#include <../Engine/Terrain.h>
 
 namespace v_game
 {
@@ -14,9 +14,6 @@ namespace v_game
 	class GamePlayManager {
 
 	private:
-
-		std::unique_ptr<Player> humanPlayer;
-		std::unique_ptr<Player> aiPlayer;
 
 		vermin::Terrain * gameTerrain;
 

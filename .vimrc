@@ -15,3 +15,5 @@ set path+=**
 
 nnoremap <F5> :! cd ./cmake-build-debug/; make; ./Game<cr>
 "nnoremap <F5> :!./cmake-build-debug/Game<cr>
+"
+nnoremap <F4> :! cd ./cmake-build-debug/; make; lldb ./Game;<cr>

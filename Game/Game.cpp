@@ -40,7 +40,7 @@ namespace v_game {
 	void Game::Init()
 	{
 
-		currentScene->InitEntities();
+		// currentScene->InitEntities();
 
 	}
 

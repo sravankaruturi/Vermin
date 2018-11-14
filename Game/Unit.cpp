@@ -10,7 +10,8 @@ namespace v_game {
 		: AnimatedEntity("Unit", "RTSDemo/HappyIdle.fbx", "unit")
 	{
 
-		this->SetScale(glm::vec3(1 / 128.0f));
+		this->SetScale(glm::vec3(1 / 32.0f));
+		this->SetRotation(glm::vec3(0, 0, 0));
 
 	}
 }
