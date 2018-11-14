@@ -81,6 +81,16 @@ namespace v_game {
 		Player aiPlayer;
 		Player humanPlayer;
 
+		/*
+		 * Ray Picking variables
+		 */
+
+		glm::vec3 mousePointerRay{};
+		float intDistance = 0;
+		float minIntDistance = INT_MAX;
+		glm::vec3 rayStart;
+
+
 	public:
 
 		GameScene(std::shared_ptr<vermin::Window> _window);
@@ -97,6 +107,11 @@ namespace v_game {
 		void RunScene() override;
 
 		void HandleInputs(float _deltaTime);
+
+		template <class T>
+		void CheckIfPicked(std::vector<std::shared_ptr<T>> _entities);
+
+		void RayPicking();
 
 	};
 

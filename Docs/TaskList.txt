@@ -23,6 +23,9 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Make sure the game runs on Mac without us having to move it.
 
+		# Remove Bounding Boxes from the Render Sequence and add a visual highlight 
+		  when a Unit is selected. Like, a different Colour perhaps.
+
 	# Perfomance Enhancements
 
 		# Convert the Logic of Drawing in a specific colour to use

@@ -70,13 +70,13 @@ namespace vermin {
 
     }
 
-    glm::vec3 Camera::GetMouseRayDirection(float _mouseX, float _mouseY, int _windowWidth, int _windowHeight,
+    glm::vec3 Camera::GetMouseRayDirection(double _mouseX, double _mouseY, int _windowWidth, int _windowHeight,
                                            glm::mat4 _projectionMatrix) {
 
         // Following the video at https://www.youtube.com/watch?v=DLKN0jExRIM
 
-        const float normalized_x = (2.0f * _mouseX) / _windowWidth - 1.0f;
-        const float normalized_y = 1.0f - (2.0f * _mouseY) / _windowHeight;
+        const float normalized_x = (2.0f * (float)_mouseX) / _windowWidth - 1.0f;
+        const float normalized_y = 1.0f - (2.0f * (float)_mouseY) / _windowHeight;
 
         glm::vec4 clip_coordinates = glm::vec4(normalized_x, normalized_y, -1.0f, 0.f);
 

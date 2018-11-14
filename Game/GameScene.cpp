@@ -243,6 +243,8 @@ namespace v_game {
 
 		gManager->UpdateGame(_deltaTime, _totalTime);
 
+		this->RayPicking();
+
 		for ( const auto& it: humanPlayer.buildings ){
 			it->Update(_deltaTime);
 		}
@@ -263,6 +265,53 @@ namespace v_game {
 			it->Update(_deltaTime);
 			it->PlayAnimation(_deltaTime, _totalTime);
 
+		}
+
+	}
+
+	template <class T>
+	void GameScene::CheckIfPicked(std::vector<std::shared_ptr<T>> _entities){
+
+		for (auto& it : _entities)
+		{
+			// We cast all the Units to Entity*
+			auto entIt = (vermin::Entity*)(it.get());
+
+			if ((window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1)) && (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance)))
+			{
+				if (intDistance < minIntDistance)
+				{
+					minIntDistance = intDistance;
+					if (!window->IsKeyPressedOrHeld(GLFW_KEY_LEFT_SHIFT)) {
+						selectedEntities.clear();
+					}
+					if (std::find(selectedEntities.begin(), selectedEntities.end(), entIt) == selectedEntities.end()) {
+						selectedEntities.push_back(entIt);
+					}
+				}
+			}
+			entIt->SetSelectedInScene(false);
+		}
+	}
+
+
+	void GameScene::RayPicking() {
+
+		rayStart = this->activeCamera->GetPosition();
+		mousePointerRay = activeCamera->GetMouseRayDirection(window->mouseX, window->mouseY, window->GetWidth(), window->GetHeight(), projectionMatrix);
+
+		// This would be the Target on the Terrain.
+		const glm::ivec2 target_node = gameTerrain->pointedNodeIndices;
+
+		this->CheckIfPicked<vermin::Entity>(entities);
+		this->CheckIfPicked<vermin::AnimatedEntity>(animatedEntities);
+		this->CheckIfPicked<Building>(humanPlayer.buildings);
+		this->CheckIfPicked<Unit>(humanPlayer.units);
+		this->CheckIfPicked<Building>(aiPlayer.buildings);
+		this->CheckIfPicked<Unit>(aiPlayer.units);
+
+		for ( auto it: selectedEntities){
+			it->SetSelectedInScene(true);
 		}
 
 	}

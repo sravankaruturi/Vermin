@@ -151,7 +151,7 @@ namespace vermin {
 
         void ProcessMouseMovement(float _xoffset, float _yoffset);
 
-        glm::vec3 GetMouseRayDirection(float _mouseX, float _mouseY, int _windowWidth, int _windowHeight,
+        glm::vec3 GetMouseRayDirection(double _mouseX, double _mouseY, int _windowWidth, int _windowHeight,
                                        glm::mat4 _projectionMatrix);
 
         void UpdateVectors();
