@@ -251,7 +251,7 @@ namespace v_game {
 
 		for ( const auto& it: humanPlayer.units ){
 
-			it->Update(_deltaTime);
+			it->Update(_deltaTime, gameTerrain.get());
 			it->PlayAnimation(_deltaTime, _totalTime);
 			
 		}
@@ -262,7 +262,7 @@ namespace v_game {
 
 		for (const auto& it : aiPlayer.units) {
 
-			it->Update(_deltaTime);
+			it->Update(_deltaTime, gameTerrain.get());
 			it->PlayAnimation(_deltaTime, _totalTime);
 
 		}
@@ -300,7 +300,12 @@ namespace v_game {
 		rayStart = this->activeCamera->GetPosition();
 		mousePointerRay = activeCamera->GetMouseRayDirection(window->mouseX, window->mouseY, window->GetWidth(), window->GetHeight(), projectionMatrix);
 
-		// This would be the Target on the Terrain.
+		if (nullptr != activeCamera)
+		{
+			vermin::Ray mouse_pointer_ray_ray{ activeCamera->GetPosition(), mousePointerRay };
+			gameTerrain->GetMouseRayPoint(mouse_pointer_ray_ray);
+		}
+
 		const glm::ivec2 target_node = gameTerrain->pointedNodeIndices;
 
 		this->CheckIfPicked<vermin::Entity>(entities);
@@ -312,6 +317,31 @@ namespace v_game {
 
 		for ( auto it: selectedEntities){
 			it->SetSelectedInScene(true);
+		}
+
+		if ( window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_2))
+		{
+			
+			const int number_of_selected_entities = selectedEntities.size();
+			const int number_of_rows = glm::ceil(glm::sqrt(number_of_selected_entities));
+			const int number_of_columns = glm::ceil((float)number_of_selected_entities / number_of_rows);
+			int entity_counter = 0;
+
+			for (int row_counter = 0; row_counter < number_of_rows; row_counter++) {
+				for (int column_counter = 0; column_counter < number_of_columns; column_counter++) {
+
+					if (entity_counter >= number_of_selected_entities) {
+						break;
+					}
+
+					glm::ivec2 temp_target_node = target_node;
+					temp_target_node.x += (row_counter - number_of_rows / 2);
+					temp_target_node.y += (column_counter - number_of_rows / 2);
+					selectedEntities[entity_counter++]->setTargetNode(temp_target_node);
+
+				}
+			}
+
 		}
 
 	}

@@ -5,6 +5,8 @@
 #ifndef GAME_UNIT_H
 #define GAME_UNIT_H
 #include "AnimatedEntity.h"
+#include "../Engine/Terrain.h"
+
 
 namespace v_game {
 
@@ -24,6 +26,13 @@ namespace v_game {
 		Unit();
 		~Unit() = default;
 
+		void Update(float _deltaTime, vermin::Terrain * _terrain);
+
+	protected:
+		/* Pathing Stuff */
+		std::vector<vermin::MapTile *> path;
+		float totalTimeCounterForPathing = 0;
+		float movementSpeed = 5.0f;
 	};
 
 }
