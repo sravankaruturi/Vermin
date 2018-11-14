@@ -95,6 +95,13 @@ namespace v_game {
 			LOGGER.Render(&displayLogWindow);
 		}
 
+		{
+			ImGui::Begin("Test");
+			ImGui::Text("DeltaTime: %lf", deltaTime);
+			ImGui::Text("TotalTime: %lf", totalTime);
+			ImGui::End();
+		}
+
 	}
 
 	void GameScene::RunScene()
@@ -173,6 +180,9 @@ namespace v_game {
 	GameScene::GameScene(std::shared_ptr<vermin::Window> _window)
 		: Scene(_window)
 	{
+
+		deltaTime = glfwGetTime() - 0.0f;
+		totalTime = glfwGetTime();
 
 		grid.Init();
 

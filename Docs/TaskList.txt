@@ -80,6 +80,9 @@ This is the Task list for the Project, Vermin and the Game.
 		# Use the Proper Colour to respresent the Players
 			--> 11/13/2018 - 10:25AM
 
+		# Animation Not working on Mac
+			--> 11/14/2018 - 11:04AM
+
 
 	# Performance Enhancements
 
