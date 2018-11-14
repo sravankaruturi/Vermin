@@ -52,18 +52,26 @@ namespace v_game {
 			it->Render();
 		}
 
+		ASMGR.shaders.at("unit")->use();
+		ASMGR.shaders.at("unit")->setVec4("u_PlayerColour", humanPlayer.pColour);
 		for (const auto& it : humanPlayer.units) {
 			it->Render();
 		}
 
+		ASMGR.shaders.at("town_center")->use();
+		ASMGR.shaders.at("town_center")->setVec4("u_PlayerColour", humanPlayer.pColour);
 		for (const auto& it : humanPlayer.buildings) {
 			it->Render();
 		}
 
+		ASMGR.shaders.at("unit")->use();
+		ASMGR.shaders.at("unit")->setVec4("u_PlayerColour", aiPlayer.pColour);
 		for (const auto& it : aiPlayer.units) {
 			it->Render();
 		}
 
+		ASMGR.shaders.at("town_center")->use();
+		ASMGR.shaders.at("town_center")->setVec4("u_PlayerColour", aiPlayer.pColour);
 		for (const auto& it : aiPlayer.buildings) {
 			it->Render();
 		}
@@ -187,8 +195,8 @@ namespace v_game {
 		grid.Init();
 
 		gameTerrain = std::make_shared<vermin::Terrain>(
-				25, 25, 0.5, 0.5, std::string(TEXTURE_FOLDER) + std::string("heightmap.jpg")
-				);
+			25, 25, 0.5, 0.5, std::string(TEXTURE_FOLDER) + std::string("heightmap.jpg")
+			);
 		LOGGER.AddToLog("Terrain Loaded...");
 
 		gManager = std::make_unique<GamePlayManager>();
@@ -201,10 +209,10 @@ namespace v_game {
 		const float y2 = gameTerrain->GetHeightAtPos(22, 22);
 
 		// TODO: Fill the values properly.
-		humanPlayer = Player(glm::vec3(2, y1, 2), PlayerType::Human);
-		aiPlayer = Player(glm::vec3(22, y2, 22), PlayerType::Ai);
+		humanPlayer = { glm::vec3(2, y1, 2), PlayerType::Human };
+		aiPlayer = { glm::vec3(22, y2, 22), PlayerType::Ai };
 
-	}
+	};
 
 	void GameScene::InitEntities()
 	{
@@ -244,6 +252,17 @@ namespace v_game {
 			it->Update(_deltaTime);
 			it->PlayAnimation(_deltaTime, _totalTime);
 			
+		}
+
+		for (const auto& it : aiPlayer.buildings) {
+			it->Update(_deltaTime);
+		}
+
+		for (const auto& it : aiPlayer.units) {
+
+			it->Update(_deltaTime);
+			it->PlayAnimation(_deltaTime, _totalTime);
+
 		}
 
 	}

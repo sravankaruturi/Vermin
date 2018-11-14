@@ -93,7 +93,7 @@ struct vData {
 };
 
 uniform sampler2D u_Texture0;
-uniform vec4 u_Colour;
+uniform vec4 u_PlayerColour;
 
 out vec4 FragColour;
 
@@ -102,7 +102,7 @@ in vData f_Stuff;
 void main() {
 
 	FragColour = mix(vec4(texture(u_Texture0, f_Stuff.g_TexCoords.xy)), 
-						vec4(u_Colour.xyz, 1.0), u_Colour.w);
+						vec4(u_PlayerColour.xyz, 1.0), u_PlayerColour.w);
 	/*FragColour = mix(texture(u_Texture0, f_Stuff.g_TexCoords), vec4(f_Stuff.g_Colour, 1.0), 0.1);*/
 
 }

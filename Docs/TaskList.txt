@@ -83,6 +83,9 @@ This is the Task list for the Project, Vermin and the Game.
 		# Animation Not working on Mac
 			--> 11/14/2018 - 11:04AM
 
+		# Proper Colours and both teams showing Up with Animations
+			--> 11/14/2018 - 1:56PM
+
 
 	# Performance Enhancements
 

@@ -24,7 +24,7 @@ namespace v_game {
 
 		PlayerType pType = PlayerType::Ai;
 
-		glm::vec3 pColour{0 ,0, 1};
+		glm::vec4 pColour{0 ,0, 1, 0.3};
 
 		std::vector<std::shared_ptr<Building>> buildings{};
 		std::vector<std::shared_ptr<Unit>> units{};
@@ -38,6 +38,8 @@ namespace v_game {
 
 			baseStartPosition = _baseStartPosition;
 
+			pType = _pType;
+
 			villagerStartPosition = baseStartPosition;
 			villagerStartPosition.x += 1.5;
 			villagerStartPosition.z -= 1.5;
@@ -46,7 +48,7 @@ namespace v_game {
 			rWood = 100;
 			rStone = 100;
 
-			pColour = (pType == PlayerType::Human) ? glm::vec3(1, 0, 0) : glm::vec3(0, 0, 1);
+			pColour = (pType == PlayerType::Human) ? glm::vec4(1, 0, 0, 0.3) : glm::vec4(0, 0, 1, 0.3);
 
 			// Add One Building.
 			this->buildings.emplace_back(std::make_shared<Building>(500));

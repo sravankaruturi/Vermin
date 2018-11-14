@@ -76,8 +76,10 @@ namespace v_game
 		std::shared_ptr<vermin::Object> knightIdleAnimation = std::make_shared<vermin::Object>(
 				MODEL_FOLDER + std::string("RTSDemo/HappyIdle.fbx")
 				);
-		knightIdleAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
-		ASMGR.AddToObjects("HappyIdle", knightIdleAnimation);
+		if (knightIdleAnimation->GetMeshes().size() > 0) {
+			knightIdleAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
+			ASMGR.AddToObjects("HappyIdle", knightIdleAnimation);
+		}
 
 		std::shared_ptr<vermin::Object> knightSwordAnimation = std::make_shared<vermin::Object>(
 				MODEL_FOLDER + std::string("RTSDemo/SwordAndShieldSlash.fbx")
