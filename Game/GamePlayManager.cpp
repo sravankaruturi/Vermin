@@ -62,23 +62,23 @@ namespace v_game
 		ASMGR.objects.at("Medieval_House")->GetMeshes()[0]->textureNames.emplace_back("building_diffuse");
 
 		std::shared_ptr<vermin::Object> knightWalkAnimation = std::make_shared<vermin::Object>(
-				MODEL_FOLDER + std::string("RTSDemo/Walking.fbx")
+				MODEL_FOLDER + std::string("RTSDemo/Knight_Walking.fbx")
 				);
 		knightWalkAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
-		ASMGR.AddToObjects("Walking", knightWalkAnimation);
+		ASMGR.AddToObjects("Knight_Walking", knightWalkAnimation);
 
 		std::shared_ptr<vermin::Object> knightDyingAnimation = std::make_shared<vermin::Object>(
-				MODEL_FOLDER + std::string("RTSDemo/Dying.fbx")
+				MODEL_FOLDER + std::string("RTSDemo/Knight_Dying.fbx")
 				);
 		knightDyingAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
-		ASMGR.AddToObjects("Dying", knightDyingAnimation);
+		ASMGR.AddToObjects("Knight_Dying", knightDyingAnimation);
 
 		std::shared_ptr<vermin::Object> knightIdleAnimation = std::make_shared<vermin::Object>(
-				MODEL_FOLDER + std::string("RTSDemo/HappyIdle.fbx")
+				MODEL_FOLDER + std::string("RTSDemo/Knight_Happy_Idle.fbx")
 				);
 		if (knightIdleAnimation->GetMeshes().size() > 0) {
 			knightIdleAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
-			ASMGR.AddToObjects("HappyIdle", knightIdleAnimation);
+			ASMGR.AddToObjects("Knight_Happy_Idle", knightIdleAnimation);
 		}
 
 		std::shared_ptr<vermin::Object> knightSwordAnimation = std::make_shared<vermin::Object>(
@@ -86,6 +86,29 @@ namespace v_game
 				);
 		knightSwordAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
 		ASMGR.AddToObjects("SwordAndShieldSlash", knightSwordAnimation);
+
+		std::shared_ptr<vermin::Texture> allBaseUnits = std::make_shared<vermin::Texture>(
+			MODEL_FOLDER + std::string("Villager/WK_Standard_Units.tga"), false
+			);
+		ASMGR.AddToTextures("base_units", allBaseUnits);
+
+		std::shared_ptr<vermin::Object> villagerBase = std::make_shared<vermin::Object>(
+			MODEL_FOLDER + std::string("Villager/Worker_Happy_Idle.fbx")
+			);
+		villagerBase->GetMeshes()[0]->textureNames[0] = ("base_units");
+		ASMGR.AddToObjects("Worker_Happy_Idle", villagerBase);
+
+		std::shared_ptr<vermin::Object> workerWalking = std::make_shared<vermin::Object>(
+			MODEL_FOLDER + std::string("Villager/Worker_Walking.fbx")
+			);
+		workerWalking->GetMeshes()[0]->textureNames[0] = ("base_units");
+		ASMGR.AddToObjects("Worker_Walking", workerWalking);
+
+		std::shared_ptr<vermin::Object> workerDying = std::make_shared<vermin::Object>(
+			MODEL_FOLDER + std::string("Villager/Worker_Dying.fbx")
+			);
+		workerDying->GetMeshes()[0]->textureNames[0] = ("base_units");
+		ASMGR.AddToObjects("Worker_Dying", workerDying);
 
 	}
 }

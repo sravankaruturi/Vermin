@@ -54,7 +54,7 @@ namespace v_game {
 			this->buildings.emplace_back(std::make_shared<Building>(500));
 			this->buildings[0]->SetPosition(baseStartPosition);
 
-			this->units.emplace_back(std::make_shared<Unit>());
+			this->units.emplace_back(std::make_shared<Unit>(UnitType::villager));
 			this->units[0]->SetPosition(villagerStartPosition);
 
 		}

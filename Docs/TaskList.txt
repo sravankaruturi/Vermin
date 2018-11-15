@@ -12,7 +12,6 @@ This is the Task list for the Project, Vermin and the Game.
 		  Population Count, the Cost and other Details. Just a 
 		  Plain white image with Black text should do.
 
-
 		# Use the Proper Assets for the Player.
 
 		# Add all the unit Classes, like the villagers, Warriors and Catapults.
@@ -23,8 +22,16 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Make sure the game runs on Mac without us having to move it.
 
-		# Remove Bounding Boxes from the Render Sequence and add a visual highlight 
+		# Remove Bounding Boxes from the Render Sequence and add a visual highlight
 		  when a Unit is selected. Like, a different Colour perhaps.
+
+		# Deal with the Catapult Stuff
+
+		# Create Add Building Function
+
+		# Create Add Unit Function
+
+		# Call AddBuilding and AddUnit from ImGUI
 
 	# Perfomance Enhancements
 
@@ -43,8 +50,6 @@ This is the Task list for the Project, Vermin and the Game.
 
 # In Progress
 
-
-		# Move the Players
 
 # Done
 
@@ -65,13 +70,11 @@ This is the Task list for the Project, Vermin and the Game.
 		# You should be able to quit when the Game ends.
 			--> 11/12/2018 - 2:30PM
 
-
 		# New Shaders for the Town Halls
 			--> 11/12/2018 - 3:04PM
 
 		# Camera Rotation About Global Y Axis.
 			--> 11/12/2018 - 3:22PM
-
 
 		# The Player starts with a villager each. Create the
 		  Villagers.
@@ -89,6 +92,17 @@ This is the Task list for the Project, Vermin and the Game.
 		# Proper Colours and both teams showing Up with Animations
 			--> 11/14/2018 - 1:56PM
 
+		# Move the Entities
+			--> 11/14/2018 - 6:49PM
+
+		# Store the Animations in a Const Global Array
+			--> 11/14/2018 - 8:23PM
+
+		# Fix Animation for Worker Walking
+			--> 11/14/2018 - 8:29PM
+
+		# Add Multiple Units and their Animations
+			--> 11/14/2018 - 8:38PM
 
 	# Performance Enhancements
 

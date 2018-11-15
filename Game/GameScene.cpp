@@ -87,8 +87,6 @@ namespace v_game {
 	void GameScene::OnImguiRender()
 	{
 
-		ImGui::NewFrame();
-
 		if ( ImGui::BeginMainMenuBar()){
 			if ( ImGui::BeginMenu("Windows")){
 				if ( ImGui::MenuItem("Log") ){
@@ -128,15 +126,19 @@ namespace v_game {
 
 			PE_GL(glViewport(0, 0, window->GetWidth(), window->GetHeight()));
 
-			this->OnUpdate(deltaTime, totalTime);
-
-			this->OnRender();
-
 #if ENABLE_GUI
 			// GUI Render
 			ImGui_ImplOpenGL3_NewFrame();
 			ImGui_ImplGlfw_NewFrame();;
 
+			ImGui::NewFrame();
+
+#endif
+			this->OnUpdate(deltaTime, totalTime);
+
+			this->OnRender();
+
+#if ENABLE_GUI
 			this->OnImguiRender();
 
 			ImGui::Render();

@@ -4,12 +4,19 @@
 
 #include "Unit.h"
 #include <glm/detail/func_trigonometric.inl>
+#include "LoggingManager.h"
 
 namespace v_game {
 
-	Unit::Unit()
-		: AnimatedEntity("Unit", "RTSDemo/HappyIdle.fbx", "unit", glm::vec3(-10, 0, -10), glm::vec3(10, 50, 10))
+	Unit::Unit(UnitType _type)
+		: AnimatedEntity("Unit", "Villager/Worker_Happy_Idle.FBX", "unit", glm::vec3(-10, 0, -10), glm::vec3(10, 50, 10))
 	{
+
+		this->objectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::idle)];
+
+		this->idleObjectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::idle)];
+		this->walkObjectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::walking)];
+		this->deathObjectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::death)];
 
 		this->SetScale(glm::vec3(1 / 64.0f));
 		this->SetRotation(glm::vec3(0, 0, 0));
@@ -74,18 +81,19 @@ namespace v_game {
 		{
 			if (path.empty())
 			{
-				if ("HappyIdle" != this->objectName && "Dying" != this->objectName)
+				if (idleObjectName != this->objectName && deathObjectName != this->objectName)
 				{
 					this->SetAnimationTotalTime(0);
-					this->SetObjectName("HappyIdle");
+					//this->SetObjectName("HappyIdle");
+					this->SetObjectName(idleObjectName);
 				}
 			}
 			else
 			{
-				if ("Walking" != this->objectName)
+				if (walkObjectName != this->objectName)
 				{
 					this->SetAnimationTotalTime(0);
-					this->SetObjectName("Walking");
+					this->SetObjectName(walkObjectName);
 				}
 			}
 		}
