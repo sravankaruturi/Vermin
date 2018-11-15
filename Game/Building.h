@@ -9,16 +9,24 @@
 
 namespace v_game
 {
-	
+
+	enum class BuildingType{
+		towncenter,
+		barracks,
+		siegefactory
+	};
+
 	class Building : public vermin::Entity{
 
 	private:
 
 		unsigned int health = 0;
 
+		glm::vec3 spawnPoint;
+
 	public:
 
-		explicit Building(unsigned _health);
+		explicit Building(unsigned _health, BuildingType _type, glm::vec3 _spawnPoint, glm::vec3 _position);
 
 		~Building() = default;
 

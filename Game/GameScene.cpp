@@ -108,18 +108,19 @@ namespace v_game {
 			ImGui::End();
 		}
 
-		{
-			ImGui::Begin("Cursor Debug");
-			double x = 0;
-			double y = 0;
-			this->window->GetMousePosition(x, y);
-			ImGui::Text("Mouse Coordinates: %lf, %lf\n", x, y);
-			ImGui::Text("Screen Dimensions: %d, %d\n", 
-					this->window->GetWidth(), this->window->GetHeight());
-			ImGui::End();
-		}
+//		{
+//			ImGui::Begin("Cursor Debug");
+//			double x = 0;
+//			double y = 0;
+//			this->window->GetMousePosition(x, y);
+//			ImGui::Text("Mouse Coordinates: %lf, %lf\n", x, y);
+//			ImGui::Text("Screen Dimensions: %d, %d\n",
+//					this->window->GetWidth(), this->window->GetHeight());
+//			ImGui::End();
+//		}
 
-		{
+		// IF One of the Buildings is selected.
+		if ( buildingSelected ) {
 			ImGui::Begin("Adding Units");
 			
 			if ( ImGui::Button("Create a New Worker" ) ){
@@ -133,20 +134,20 @@ namespace v_game {
 			ImGui::End();
 			
 		}
-		{
-			ImGui::Begin("Players: ");
-
-				ImGui::Text("Human: ");
-
-				for( auto& it: humanPlayer.units){
-					ImGui::PushID(&it);
-					ImGui::Text("%s", it->GetEntityName().c_str());
-					ImGui::PopID();
-				}
-
-			ImGui::End();
-
-		}
+//		{
+//			ImGui::Begin("Players: ");
+//
+//				ImGui::Text("Human: ");
+//
+//				for( auto& it: humanPlayer.units){
+//					ImGui::PushID(&it);
+//					ImGui::Text("%s", it->GetEntityName().c_str());
+//					ImGui::PopID();
+//				}
+//
+//			ImGui::End();
+//
+//		}
 
 	}
 
@@ -307,6 +308,16 @@ namespace v_game {
 			it->Update(_deltaTime, gameTerrain.get());
 			it->PlayAnimation(_deltaTime, _totalTime);
 
+		}
+
+
+		/* Update Selection Flags */
+		this->sBuilding = nullptr;
+		for ( const auto& it: humanPlayer.buildings){
+			this->buildingSelected |= it->IsSelectedInScene();
+			if ( it->IsSelectedInScene() ){
+				this->sBuilding = it.get();
+			}
 		}
 
 	}

@@ -137,3 +137,17 @@ one for the Human and one for the AI
 	# The AI player extends from the Player Object
 
 
+# Each Building and Unit Class Should have their overloaded function
+  that implements the necessary UI Elements
+
+
+# Next Week Targets:
+
+    # All the Models, Units working as intended.
+
+    # Attacking Working.
+
+    # Resource Gathering Working.
+
+
+    # Start working on the AI.

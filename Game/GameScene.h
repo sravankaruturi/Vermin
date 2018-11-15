@@ -51,8 +51,7 @@ namespace v_game {
 			pColour = (pType == PlayerType::Human) ? glm::vec4(1, 0, 0, 0.3) : glm::vec4(0, 0, 1, 0.3);
 
 			// Add One Building.
-			this->buildings.emplace_back(std::make_shared<Building>(500));
-			this->buildings[0]->SetPosition(baseStartPosition);
+			this->buildings.emplace_back(std::make_shared<Building>(1000, BuildingType::towncenter, baseStartPosition, villagerStartPosition));
 
 			this->units.emplace_back(std::make_shared<Unit>(UnitType::villager));
 			this->units[0]->SetPosition(villagerStartPosition);
@@ -93,10 +92,17 @@ namespace v_game {
 		float minIntDistance = INT_MAX;
 		glm::vec3 rayStart;
 
+		/* UI Toggles */
+		bool buildingSelected = false;
+		Building * sBuilding = nullptr;	// Selected Building Pointer
+
+		bool workerSelected = false;
+		Unit * wSelected = nullptr;
+
 
 	public:
 
-		GameScene(std::shared_ptr<vermin::Window> _window);
+		explicit GameScene(std::shared_ptr<vermin::Window> _window);
 		~GameScene() = default;
 
 		void InitEntities() override;
