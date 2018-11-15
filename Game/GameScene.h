@@ -97,7 +97,7 @@ namespace v_game {
 		Building * sBuilding = nullptr;	// Selected Building Pointer
 
 		bool workerSelected = false;
-		Unit * wSelected = nullptr;
+		Unit * sWorker = nullptr;
 
 
 	public:

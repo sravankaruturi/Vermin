@@ -313,10 +313,20 @@ namespace v_game {
 
 		/* Update Selection Flags */
 		this->sBuilding = nullptr;
+		this->buildingSelected = false;
 		for ( const auto& it: humanPlayer.buildings){
 			this->buildingSelected |= it->IsSelectedInScene();
 			if ( it->IsSelectedInScene() ){
 				this->sBuilding = it.get();
+			}
+		}
+
+		this->sWorker = nullptr;
+		this->workerSelected = false;
+		for (const auto& it : humanPlayer.units) {
+			this->workerSelected |= it->IsSelectedInScene();
+			if (it->IsSelectedInScene()) {
+				this->sWorker = it.get();
 			}
 		}
 
@@ -406,7 +416,7 @@ namespace v_game {
 		int s_cost = required_stone[static_cast<int>(_type)];
 
 		if ( _player.rWood < w_cost || _player.rStone < s_cost ){
-			LOGGER.AddToLog("Not Enough resources");
+			LOGGER.AddToLog("Not Enough resources", vermin::PE_LOG_WARN);
 			return false;
 		}
 
