@@ -43,13 +43,15 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# We need text rendering for the Actual display of resources
 
+		# Fix Ray Picking on Mac	
+
 	# General
 
-	
 
 
 # In Progress
 
+		# Display Resources
 
 # Done
 

@@ -108,6 +108,46 @@ namespace v_game {
 			ImGui::End();
 		}
 
+		{
+			ImGui::Begin("Cursor Debug");
+			double x = 0;
+			double y = 0;
+			this->window->GetMousePosition(x, y);
+			ImGui::Text("Mouse Coordinates: %lf, %lf\n", x, y);
+			ImGui::Text("Screen Dimensions: %d, %d\n", 
+					this->window->GetWidth(), this->window->GetHeight());
+			ImGui::End();
+		}
+
+		{
+			ImGui::Begin("Adding Units");
+			
+			if ( ImGui::Button("Create a New Worker" ) ){
+				this->AddUnit(UnitType::villager, humanPlayer);
+			}
+
+			if ( ImGui::Button("Create a New Warrior") ){
+				this->AddUnit(UnitType::villager, humanPlayer);
+			}
+
+			ImGui::End();
+			
+		}
+		{
+			ImGui::Begin("Players: ");
+
+				ImGui::Text("Human: ");
+
+				for( auto& it: humanPlayer.units){
+					ImGui::PushID(&it);
+					ImGui::Text("%s", it->GetEntityName().c_str());
+					ImGui::PopID();
+				}
+
+			ImGui::End();
+
+		}
+
 	}
 
 	void GameScene::RunScene()
@@ -345,6 +385,30 @@ namespace v_game {
 			}
 
 		}
+
+	}
+
+	bool GameScene::AddUnit(UnitType _type, Player& _player){
+
+		// We Get the Unit Cost
+		int w_cost = required_wood[static_cast<int>(_type)];
+		int s_cost = required_stone[static_cast<int>(_type)];
+
+		if ( _player.rWood < w_cost || _player.rStone < s_cost ){
+			LOGGER.AddToLog("Not Enough resources");
+			return false;
+		}
+
+		_player.rWood -= w_cost;
+		_player.rStone -= s_cost;
+
+		unsigned t_index = _player.units.size();
+
+		_player.units.emplace_back(
+				std::make_shared<Unit>(_type)
+				);
+
+		_player.units[t_index]->SetPosition(_player.villagerStartPosition);
 
 	}
 

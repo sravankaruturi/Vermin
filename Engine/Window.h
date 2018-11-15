@@ -54,7 +54,11 @@ namespace vermin{
          */
         GLFWwindow * window = nullptr;
 
+		bool isRetina = false;
+
     public:
+
+		inline bool IsRetina() { return isRetina; };
 
         /**
          * \brief Creates the Window and Opens it.

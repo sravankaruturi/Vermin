@@ -46,6 +46,14 @@ namespace v_game {
 		}
 	};
 
+	const int required_wood[3] = {
+		30, 30, 40
+	};
+
+	const int required_stone[3] = {
+		30, 40, 40
+	};
+
 	class Unit : public vermin::AnimatedEntity {
 
 	public:

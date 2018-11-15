@@ -57,6 +57,9 @@ namespace v_game {
 			this->units.emplace_back(std::make_shared<Unit>(UnitType::villager));
 			this->units[0]->SetPosition(villagerStartPosition);
 
+			villagerStartPosition.x -= 1.5;
+			villagerStartPosition.z += 1.5;
+
 		}
 
 	};
@@ -112,6 +115,9 @@ namespace v_game {
 		void CheckIfPicked(std::vector<std::shared_ptr<T>> _entities);
 
 		void RayPicking();
+
+		/* Game Functions */
+		bool AddUnit(UnitType _type, Player& _player);
 
 	};
 
