@@ -127,7 +127,7 @@ namespace v_game {
 			}
 
 			if ( ImGui::Button("Create a New Warrior") ){
-				this->AddUnit(UnitType::villager, humanPlayer);
+				this->AddUnit(UnitType::warrior, humanPlayer);
 			}
 
 			ImGui::End();
@@ -409,6 +409,11 @@ namespace v_game {
 				);
 
 		_player.units[t_index]->SetPosition(_player.villagerStartPosition);
+
+		_player.villagerStartPosition.x += 1.5;
+		_player.villagerStartPosition.z += 1.5;
+
+		return true;
 
 	}
 
