@@ -6,6 +6,7 @@
 #define GAME_GAMEPLAYMANAGER_H
 
 #include <memory>
+#include <array>
 #include <../Engine/Terrain.h>
 
 namespace v_game
@@ -47,6 +48,10 @@ namespace v_game
 		void CleanUp();
 
 		void LoadAssets();
+
+		void LoadModelAndAssociateWithTexture(
+				const std::array<std::string, 4> _data
+		) const;
 
 	};
 

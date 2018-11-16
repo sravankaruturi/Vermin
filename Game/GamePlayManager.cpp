@@ -42,50 +42,77 @@ namespace v_game
 
 	}
 
+
+	// ModelPath, ModelName, TexturePath, TextureName
+	void GamePlayManager::LoadModelAndAssociateWithTexture(
+			const std::array<std::string, 4> _data
+			) const
+	{
+
+		// We first Check if the Texture already exists
+		const bool texture_load_check = ASMGR.IsTextureLoaded(_data[3]);
+		if ( !texture_load_check ){
+			ASMGR.AddToTextures(
+					_data[3], 
+					std::make_shared<vermin::Texture>(_data[2], false)
+					);
+		}
+
+
+		std::shared_ptr<vermin::Object> temp_obj = std::make_shared<vermin::Object>(
+				_data[0]
+				);
+		ASMGR.AddToObjects(_data[1], temp_obj);
+		auto temp_vector = temp_obj->GetMeshes();
+		if (!temp_vector[0]->textureNames.empty()){
+			temp_vector[0]->textureNames[0] = _data[3];
+		}else{
+			temp_vector[0]->textureNames.emplace_back(_data[3]);
+		}
+
+	}
+
 	void GamePlayManager::LoadAssets()
 	{
 
-		std::shared_ptr<vermin::Texture> building_diffuse = std::make_shared<vermin::Texture>(
-				MODEL_FOLDER + std::string("Medieval_House/Medieval_House_Diff.png"), false
-				);
-		ASMGR.AddToTextures("building_diffuse", building_diffuse);
+		std::vector<std::array<std::string, 4>> mod_tex_array = {
+			{
+				MODEL_FOLDER + std::string("Medieval_House/Medieval_House.obj"),
+				std::string("Medieval_House"),
+				MODEL_FOLDER + std::string("Medieval_House/Medieval_House_Diff.png"),
+				std::string("Medieval_House_Diff")
+			},
+			{
+				MODEL_FOLDER + std::string("RTSDemo/Knight_Walking.fbx"),
+				std::string("Knight_Walking"),
+				MODEL_FOLDER + std::string("RTSDemo/Materials/DemoTexture.png"),
+				std::string("Knight_Diffuse")
+			},
+			{
+				MODEL_FOLDER + std::string("RTSDemo/Knight_Dying.fbx"),
+				std::string("Knight_Dying"),
+				MODEL_FOLDER + std::string("RTSDemo/Materials/DemoTexture.png"),
+				std::string("Knight_Diffuse")
+			},
+			{
+				MODEL_FOLDER + std::string("RTSDemo/Knight_Happy_Idle.fbx"),
+				std::string("Knight_Happy_Idle"),
+				MODEL_FOLDER + std::string("RTSDemo/Materials/DemoTexture.png"),
+				std::string("Knight_Diffuse")
+			},
+			{
+				MODEL_FOLDER + std::string("RTSDemo/SwordAndShieldSlash.fbx"),
+				std::string("Knight_Sword_Slash"),
+				MODEL_FOLDER + std::string("RTSDemo/Materials/DemoTexture.png"),
+				std::string("Knight_Diffuse")
+			}
+		};
 
-		std::shared_ptr<vermin::Texture> knight_diffuse = std::make_shared<vermin::Texture>(
-				MODEL_FOLDER + std::string("RTSDemo/Materials/DemoTexture.png"), false
-				);
-		ASMGR.AddToTextures("knight_demo", knight_diffuse);
-
-		std::shared_ptr<vermin::Object> building_obj = std::make_shared<vermin::Object>(
-				MODEL_FOLDER + std::string("Medieval_House/Medieval_House.obj")
-				);
-		ASMGR.AddToObjects("Medieval_House", building_obj);
-		ASMGR.objects.at("Medieval_House")->GetMeshes()[0]->textureNames.emplace_back("building_diffuse");
-
-		std::shared_ptr<vermin::Object> knightWalkAnimation = std::make_shared<vermin::Object>(
-				MODEL_FOLDER + std::string("RTSDemo/Knight_Walking.fbx")
-				);
-		knightWalkAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
-		ASMGR.AddToObjects("Knight_Walking", knightWalkAnimation);
-
-		std::shared_ptr<vermin::Object> knightDyingAnimation = std::make_shared<vermin::Object>(
-				MODEL_FOLDER + std::string("RTSDemo/Knight_Dying.fbx")
-				);
-		knightDyingAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
-		ASMGR.AddToObjects("Knight_Dying", knightDyingAnimation);
-
-		std::shared_ptr<vermin::Object> knightIdleAnimation = std::make_shared<vermin::Object>(
-				MODEL_FOLDER + std::string("RTSDemo/Knight_Happy_Idle.fbx")
-				);
-		if (knightIdleAnimation->GetMeshes().size() > 0) {
-			knightIdleAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
-			ASMGR.AddToObjects("Knight_Happy_Idle", knightIdleAnimation);
+		for ( const auto& it: mod_tex_array ){
+			this->LoadModelAndAssociateWithTexture(
+					it
+					);
 		}
-
-		std::shared_ptr<vermin::Object> knightSwordAnimation = std::make_shared<vermin::Object>(
-				MODEL_FOLDER + std::string("RTSDemo/SwordAndShieldSlash.fbx")
-				);
-		knightSwordAnimation->GetMeshes()[0]->textureNames[0] = ("knight_demo");
-		ASMGR.AddToObjects("SwordAndShieldSlash", knightSwordAnimation);
 
 		std::shared_ptr<vermin::Texture> allBaseUnits = std::make_shared<vermin::Texture>(
 			MODEL_FOLDER + std::string("Villager/WK_Standard_Units.tga"), false
