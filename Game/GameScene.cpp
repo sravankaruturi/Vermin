@@ -1,11 +1,13 @@
 #include "GameScene.h"
 #include <glm/gtc/matrix_transform.inl>
+#include <imgui_internal.h>
 
 namespace v_game {
 
 	void GameScene::OnRender()
 	{
 
+		int test = '0';
 		// TODO: This can actually be a constant variable since we are going for full screen.
 		this->projectionMatrix = glm::perspective(45.0f, float(window->GetWidth()) / window->GetHeight(), 0.1f, 100.0f);
 
@@ -87,6 +89,7 @@ namespace v_game {
 	void GameScene::OnImguiRender()
 	{
 
+#if _DEBUG
 		if ( ImGui::BeginMainMenuBar()){
 			if ( ImGui::BeginMenu("Windows")){
 				if ( ImGui::MenuItem("Log") ){
@@ -94,30 +97,44 @@ namespace v_game {
 				}
 				ImGui::EndMenu();
 			}
+
+			ImGui::VerticalSeparator();
+
+			ImGui::Text("DeltaTime: %lf", deltaTime);
+			ImGui::Text("TotalTime: %lf", totalTime);
+
 			ImGui::EndMainMenuBar();
 		}
+#endif
+
+		ImGuiWindowFlags flags =
+			ImGuiWindowFlags_NoCollapse
+			| ImGuiWindowFlags_NoInputs
+			| ImGuiWindowFlags_NoResize
+			| ImGuiWindowFlags_NoSavedSettings
+			| ImGuiWindowFlags_NoTitleBar
+			;
+
+		ImVec2 resource_window_size = ImVec2(
+			200,
+			60
+		);
+
+		ImVec2 rwpos = ImVec2(
+			window->GetWidth() - resource_window_size.x,
+			18
+		);
+
+		ImGui::SetNextWindowPos(rwpos);
+
+		ImGui::Begin("ResourceDisplay", NULL, resource_window_size, 0.4f, flags);
+		ImGui::LabelText("Wood", "%d", humanPlayer.rWood);
+		ImGui::LabelText("Stone", "%d", humanPlayer.rStone);
+		ImGui::End();
 
 		if ( displayLogWindow ){
 			LOGGER.Render(&displayLogWindow);
 		}
-
-		{
-			ImGui::Begin("Test");
-			ImGui::Text("DeltaTime: %lf", deltaTime);
-			ImGui::Text("TotalTime: %lf", totalTime);
-			ImGui::End();
-		}
-
-//		{
-//			ImGui::Begin("Cursor Debug");
-//			double x = 0;
-//			double y = 0;
-//			this->window->GetMousePosition(x, y);
-//			ImGui::Text("Mouse Coordinates: %lf, %lf\n", x, y);
-//			ImGui::Text("Screen Dimensions: %d, %d\n",
-//					this->window->GetWidth(), this->window->GetHeight());
-//			ImGui::End();
-//		}
 
 		// IF One of the Buildings is selected.
 		if ( buildingSelected ) {

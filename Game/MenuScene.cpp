@@ -13,13 +13,32 @@ namespace v_game{
 
 	void MenuScene::OnImguiRender(){
 
-		ImGui::Begin("##Menu");
+		ImVec2 windowPos = ImVec2(window->GetWidth() / 4, window->GetHeight() / 4);
 
-		if ( ImGui::Button("Start Game") ){
+		ImVec2 windowSize = ImVec2(window->GetWidth() / 2, window->GetHeight() / 2);
+
+		ImGui::SetNextWindowBgAlpha(0.0f);
+		ImGui::SetNextWindowPos(windowPos);
+		ImGui::SetNextWindowSize(windowSize);
+		ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar
+			| ImGuiWindowFlags_NoResize
+			| ImGuiWindowFlags_NoMove
+			| ImGuiWindowFlags_NoScrollbar
+			| ImGuiWindowFlags_NoSavedSettings
+			;
+
+		ImGuiIO& io = ImGui::GetIO();
+		io.FontGlobalScale = 3.0f;
+
+		ImGui::Begin("##Menu", NULL, flags);
+
+		ImVec2 buttonSize = ImVec2(windowSize.x * 0.96f, windowSize.y * 0.47f);
+
+		if ( ImGui::Button("Start Game", buttonSize ) ){
 			startGame = true;
 		}
 
-		if ( ImGui::Button("Quit") ){
+		if ( ImGui::Button("Quit", buttonSize) ){
 			quitGame = true;
 		}
 
@@ -71,6 +90,11 @@ namespace v_game{
 			window->Update(deltaTime);
 
 		}
+
+#if ENABLE_GUI
+		ImGuiIO& io = ImGui::GetIO();
+		io.FontGlobalScale = 1.0f;
+#endif
 
 	}
 

@@ -48,12 +48,16 @@ namespace v_game {
 	void Game::Run()
 	{
 
-		while ( !menuScene->StartGame() ){
+		while ( !menuScene->StartGame() && !menuScene->QuitGame()){
 			menuScene->RunScene();
 		}
 
-		while (!currentScene->ShutDown()) {
-			currentScene->RunScene();
+		if ( menuScene->StartGame() ){
+			while (!currentScene->ShutDown()) {
+				currentScene->RunScene();
+			}
+		}else if ( menuScene->QuitGame() ){
+			return;
 		}
 
 	}
