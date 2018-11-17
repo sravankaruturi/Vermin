@@ -58,6 +58,9 @@ namespace vermin{
 
         glfwSwapInterval(0);
 
+		// Update the Pixel Width and Height
+		glfwGetFramebufferSize(window, &pixelWidth, &pixelHeight);
+
 #if ENABLE_GUI
 
         glfwSetCharCallback(window, ImGui_ImplGlfw_CharCallback);
@@ -87,14 +90,26 @@ namespace vermin{
 
     unsigned Window::GetWidth()
     {
-        glfwGetFramebufferSize(window, &this->width, &this->height);
+        glfwGetWindowSize(window, &this->width, &this->height);
         return width;
     }
 
     unsigned Window::GetHeight()
     {
-        glfwGetFramebufferSize(window, &this->width, &this->height);
+        glfwGetWindowSize(window, &this->width, &this->height);
         return height;
+    }
+
+    unsigned Window::GetPixelWidth()
+    {
+        glfwGetFramebufferSize(window, &this->pixelWidth, &this->pixelHeight);
+        return pixelWidth;
+    }
+
+    unsigned Window::GetPixelHeight()
+    {
+        glfwGetFramebufferSize(window, &this->pixelWidth, &this->pixelHeight);
+        return pixelHeight;
     }
 
     std::string Window::GetTitle() const
@@ -178,8 +193,12 @@ namespace vermin{
 
     void Window::UpdateFrameSize()
     {
-        glfwGetFramebufferSize(this->window, &this->width, &this->height);
+        glfwGetFramebufferSize(this->window, &this->pixelWidth, &this->pixelHeight);
     }
+
+	void Window::UpdateWindowSize(){
+		glfwGetWindowSize(this->window, &width, &height);
+	}
 
     void Window::HandleInput() const
     {

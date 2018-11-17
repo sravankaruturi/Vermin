@@ -41,9 +41,7 @@ This is the Task list for the Project, Vermin and the Game.
 
 	# Engine Bugs and Tasks
 
-		# We need text rendering for the Actual display of resources
 
-		# Fix Ray Picking on Mac	
 
 	# General
 
@@ -51,7 +49,6 @@ This is the Task list for the Project, Vermin and the Game.
 
 # In Progress
 
-		# Display Resources
 
 # Done
 
@@ -106,6 +103,10 @@ This is the Task list for the Project, Vermin and the Game.
 		# Add Multiple Units and their Animations
 			--> 11/14/2018 - 8:38PM
 
+		# Display Resources
+			--> 11/14/2018 - 8:38PM
+
+
 	# Performance Enhancements
 
 	# Engine Tasks
@@ -117,6 +118,15 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# ImGUI Logger Fix --> It is broken.
 			--> 11/13/2018 - 3:04PM
+
+		# Fix Ray Picking on Mac	
+			--> 11/17/2018 - 5:30PM
+
+		# GUI Messed up on Mac
+			--> 11/17/2018 - 5:30PM
+
+		# We need text rendering for the Actual display of resources
+			--> 11/17/2018 - 5:30PM
 
 	# General
 

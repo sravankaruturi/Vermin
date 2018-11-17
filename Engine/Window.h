@@ -25,14 +25,24 @@ namespace vermin{
     protected:
 
         /**
-         * \brief Width of the Window in Pixels.
+         * \brief Width of the Window in Screen Coordinates.
          */
         int width;
 
         /**
-         * \brief Height of the Window in Pixels.
+         * \brief Height of the Window in Screen Coordinates.
          */
         int height;
+
+        /**
+         * \brief Width of the Window in Pixels.
+         */
+		int pixelWidth;
+
+        /**
+         * \brief Height of the Window in Pixels.
+         */
+		int pixelHeight;
 
         /**
          * \brief Title of the Window.
@@ -82,6 +92,10 @@ namespace vermin{
 
         unsigned GetHeight();
 
+		unsigned GetPixelWidth();
+
+		unsigned GetPixelHeight();
+
         std::string GetTitle() const;
 
         bool IsGladInit() const;
@@ -112,6 +126,8 @@ namespace vermin{
             Depends on a GLFW Call.
          */
         void UpdateFrameSize();
+
+		void UpdateWindowSize();
 
 
         /**

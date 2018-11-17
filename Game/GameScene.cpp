@@ -169,7 +169,7 @@ namespace v_game {
 			PE_GL(glClearColor(0.2f, 0.3f, 0.3f, 1.0f));
 			PE_GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
-			PE_GL(glViewport(0, 0, window->GetWidth(), window->GetHeight()));
+			PE_GL(glViewport(0, 0, window->GetPixelWidth(), window->GetPixelHeight()));
 
 #if ENABLE_GUI
 			// GUI Render
