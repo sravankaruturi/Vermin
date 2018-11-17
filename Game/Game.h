@@ -16,6 +16,7 @@ namespace v_game {
 		bool exitGame = false;
 
 		std::unique_ptr<v_game::GameScene> currentScene;
+		std::unique_ptr<v_game::MenuScene> menuScene;
 
 		vermin::ImGuiLog imguiLogger;
 

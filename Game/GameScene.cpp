@@ -7,9 +7,9 @@ namespace v_game {
 	{
 
 		// TODO: This can actually be a constant variable since we are going for full screen.
-		const auto persp_projection_matrix = glm::perspective(45.0f, float(window->GetWidth()) / window->GetHeight(), 0.1f, 100.0f);
+		this->projectionMatrix = glm::perspective(45.0f, float(window->GetWidth()) / window->GetHeight(), 0.1f, 100.0f);
 
-		glm::mat4 projection_matrices[4] = { persp_projection_matrix };
+		glm::mat4 projection_matrices[4] = { projectionMatrix };
 		glm::mat4 view_matrices[4] = { this->activeCamera->GetViewMatrix() };
 
 		for (auto it : ASMGR.shaders)
@@ -78,7 +78,7 @@ namespace v_game {
 
 
 		gameTerrain->Render();
-		grid.Render();
+		// grid.Render();
 
 		gManager->Render();
 
@@ -134,20 +134,7 @@ namespace v_game {
 			ImGui::End();
 			
 		}
-//		{
-//			ImGui::Begin("Players: ");
-//
-//				ImGui::Text("Human: ");
-//
-//				for( auto& it: humanPlayer.units){
-//					ImGui::PushID(&it);
-//					ImGui::Text("%s", it->GetEntityName().c_str());
-//					ImGui::PopID();
-//				}
-//
-//			ImGui::End();
-//
-//		}
+		ImGui::ShowDemoWindow();
 
 	}
 
@@ -287,6 +274,10 @@ namespace v_game {
 		gManager->UpdateGame(_deltaTime, _totalTime);
 
 		this->RayPicking();
+
+		for (auto& it : entities) {
+			it->Update(_deltaTime);
+		}
 
 		for ( const auto& it: humanPlayer.buildings ){
 			it->Update(_deltaTime);

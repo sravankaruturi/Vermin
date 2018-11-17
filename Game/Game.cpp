@@ -29,6 +29,7 @@ namespace v_game {
 		LOGGER.SetImGuiLogger(&imguiLogger);
 #endif
 
+		menuScene = std::make_unique<v_game::MenuScene>(window);
 		currentScene = std::make_unique<v_game::GameScene>(window);
 
 	}
@@ -47,10 +48,12 @@ namespace v_game {
 	void Game::Run()
 	{
 
+		while ( !menuScene->StartGame() ){
+			menuScene->RunScene();
+		}
+
 		while (!currentScene->ShutDown()) {
-
 			currentScene->RunScene();
-
 		}
 
 	}
