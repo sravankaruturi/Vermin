@@ -17,6 +17,9 @@ add_executable(
         Game/GamePlayManager.cpp
         Game/GamePlayManager.h
         Game/Unit.cpp
-        Game/Unit.h Game/Villager.cpp Game/Villager.h Game/Warrior.cpp Game/Warrior.h Game/Catapult.cpp Game/Catapult.h Game/Building.cpp Game/Building.h Game/Barracks.cpp Game/Barracks.h Game/SiegeFactory.cpp Game/SiegeFactory.h)
+        Game/Unit.h Game/Villager.cpp Game/Villager.h Game/Warrior.cpp Game/Warrior.h Game/Catapult.cpp Game/Catapult.h Game/Building.cpp Game/Building.h Game/Barracks.cpp Game/Barracks.h Game/SiegeFactory.cpp Game/SiegeFactory.h
+        Game/MenuScene.h
+        Game/MenuScene.cpp
+)
 
 target_link_libraries(Game Vermin)

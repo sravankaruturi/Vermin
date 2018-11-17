@@ -19,7 +19,7 @@ namespace v_game {
 			if (it.first != "terrain" && it.first != "axes" && it.first != "bob_lamp")
 			{
 				it.second->setMat4("u_ViewMatrix", this->activeCamera->GetViewMatrix());
-				it.second->setMat4("u_ProjectionMatrix", persp_projection_matrix);
+				it.second->setMat4("u_ProjectionMatrix", projectionMatrix);
 			}
 
 		}

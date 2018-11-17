@@ -5,6 +5,7 @@
 
 #include "../Engine/library.h"
 #include "GameScene.h"
+#include "MenuScene.h"
 
 namespace v_game {
 

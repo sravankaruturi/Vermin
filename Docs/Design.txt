@@ -149,5 +149,9 @@ one for the Human and one for the AI
 
     # Resource Gathering Working.
 
+	# Building.. buildings using the Player.
+	
+	# Getting basic UI using textured Quads.
+
 
     # Start working on the AI.
