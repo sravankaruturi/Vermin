@@ -316,10 +316,10 @@ namespace vermin {
                     ImGui::NextColumn();
                     ImGui::Text("%d", it.second->GetTextureId());
                     ImGui::NextColumn();
-                    ImGui::Image((void *) it.second->GetTextureId(), ImVec2(30, 30));
+					ImGui::Image((ImTextureID) it.second->GetTextureId(), ImVec2(30, 30));
                     if (ImGui::IsItemHovered()) {
                         ImGui::BeginTooltip();
-                        ImGui::Image((void *) it.second->GetTextureId(), ImVec2(200, 200));
+						ImGui::Image((ImTextureID) it.second->GetTextureId(), ImVec2(200, 200));
                         ImGui::EndTooltip();
                     }
                     ImGui::NextColumn();

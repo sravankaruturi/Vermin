@@ -67,6 +67,29 @@ namespace v_game {
 
 	private:
 
+		/* GUI Variables for the HUD */
+		const float distanceFromEdges = 10.0f;
+
+		ImGuiWindowFlags resWinFlags =
+				ImGuiWindowFlags_NoCollapse
+				| ImGuiWindowFlags_NoInputs
+				| ImGuiWindowFlags_NoResize
+				| ImGuiWindowFlags_NoSavedSettings
+				| ImGuiWindowFlags_NoTitleBar;
+
+		ImVec2 resWinSize = ImVec2(200, 60);
+
+		int resWinCorner = 1;
+
+		// Player Character Controls
+		int pccCorner = 3;
+		ImVec2 pccSize = ImVec2(300, 400);
+
+		ImGuiWindowFlags pccFlags =
+				ImGuiWindowFlags_NoCollapse
+				| ImGuiWindowFlags_NoResize
+				| ImGuiWindowFlags_NoSavedSettings;
+
 		/* GUI Variables */
 		bool displayLogWindow = false;
 

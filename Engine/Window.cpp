@@ -4,7 +4,7 @@
 
 #include "Window.h"
 #include <iostream>
-#include <Configurations.h>
+
 #if ENABLE_GUI
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -215,6 +215,15 @@ namespace vermin{
         // Swap Buffers
         glfwSwapBuffers(window);
 
+#if __APPLE__
+		if (windowMoved < 3) {
+			int x, y;
+			glfwGetWindowPos(window, &x, &y);
+			x += 1 * (windowMoved - 1);
+			glfwSetWindowPos(window, x, y);
+			windowMoved++;
+		}
+#endif
         /**/
         // పాతవన్నీ ఒకచోట దాచుకొని మళ్ళీ చూడు
         for (auto i = 0; i < MAX_KEYS; i++)

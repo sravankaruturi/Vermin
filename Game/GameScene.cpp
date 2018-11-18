@@ -1,6 +1,4 @@
 #include "GameScene.h"
-#include <glm/gtc/matrix_transform.inl>
-#include <imgui_internal.h>
 
 namespace v_game {
 
@@ -107,29 +105,45 @@ namespace v_game {
 		}
 #endif
 
-		ImGuiWindowFlags flags =
-			ImGuiWindowFlags_NoCollapse
-			| ImGuiWindowFlags_NoInputs
-			| ImGuiWindowFlags_NoResize
-			| ImGuiWindowFlags_NoSavedSettings
-			| ImGuiWindowFlags_NoTitleBar
-			;
+		ImVec2 window_pos = ImVec2(
+				(resWinCorner & 1) ? ImGui::GetIO().DisplaySize.x - distanceFromEdges : distanceFromEdges,
+				(resWinCorner & 2) ? ImGui::GetIO().DisplaySize.y - distanceFromEdges : distanceFromEdges);
+		ImVec2 window_pos_pivot = ImVec2((resWinCorner & 1) ? 1.0f : 0.0f, (resWinCorner & 2) ? 1.0f : 0.0f);
+		if (resWinCorner != -1)
+			ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
+		ImGui::SetNextWindowBgAlpha(0.3f); // Transparent background
 
-		ImVec2 resource_window_size = ImVec2(
-			200,
-			60
-		);
 
-		ImVec2 rwpos = ImVec2(
-			window->GetWidth() - resource_window_size.x,
-			18
-		);
-
-		ImGui::SetNextWindowPos(rwpos);
-
-		ImGui::Begin("ResourceDisplay", NULL, resource_window_size, 0.4f, flags);
+		ImGui::Begin("Resources", nullptr, resWinSize, 0.4f, resWinFlags | ImGuiWindowFlags_NoTitleBar);
 		ImGui::LabelText("Wood", "%d", humanPlayer.rWood);
 		ImGui::LabelText("Stone", "%d", humanPlayer.rStone);
+		ImGui::End();
+
+		window_pos = ImVec2((pccCorner & 1) ? ImGui::GetIO().DisplaySize.x - distanceFromEdges : distanceFromEdges,
+							(pccCorner & 2) ? ImGui::GetIO().DisplaySize.y - distanceFromEdges : distanceFromEdges);
+		window_pos_pivot = ImVec2((pccCorner & 1) ? 1.0f : 0.0f, (pccCorner & 2) ? 1.0f : 0.0f);
+		if (pccCorner != -1)
+			ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
+		ImGui::SetNextWindowBgAlpha(0.8f); // Transparent background
+		ImGui::SetNextWindowSize(pccSize);
+
+
+		ImGui::Begin("Your Units", nullptr, pccFlags);
+
+		{
+
+			for (auto &it: humanPlayer.units) {
+				ImGui::Text("%s", it->GetEntityName().c_str());
+			}
+
+			ImGui::Separator();
+
+			for (auto &it: humanPlayer.units) {
+				ImGui::Text("%s", it->GetEntityName().c_str());
+			}
+
+		}
+
 		ImGui::End();
 
 		if ( displayLogWindow ){
@@ -158,6 +172,9 @@ namespace v_game {
 	void GameScene::RunScene()
 	{
 
+#if __APPLE__
+		window->UpdateFrameSize();
+#endif
 		while (!shutDown)
 		{
 
@@ -230,10 +247,14 @@ namespace v_game {
 			activeCamera->ProcessMouseMovement(window->mouseOffsetX, 0);
 		}
 
+		if (window->IsKeyPressedAndReleased(GLFW_KEY_BACKSLASH)) {
+			this->displayLogWindow = !this->displayLogWindow;
+		}
+
 	}
 
 	GameScene::GameScene(std::shared_ptr<vermin::Window> _window)
-		: Scene(_window)
+			: Scene(std::move(_window))
 	{
 
 		deltaTime = glfwGetTime() - 0.0f;

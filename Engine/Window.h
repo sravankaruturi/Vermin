@@ -64,11 +64,14 @@ namespace vermin{
          */
         GLFWwindow * window = nullptr;
 
-		bool isRetina = false;
+		/**
+		 * @brief This is to make sure that we draw the window properly from the beginning on MacOS Mojave.
+		 *
+		 * @see https://github.com/glfw/glfw/issues/1334
+		 */
+		int windowMoved = 0;
 
     public:
-
-		inline bool IsRetina() { return isRetina; };
 
         /**
          * \brief Creates the Window and Opens it.

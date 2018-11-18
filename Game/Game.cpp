@@ -34,9 +34,7 @@ namespace v_game {
 
 	}
 
-	Game::~Game() {
-
-	}
+	Game::~Game() = default;
 
 	void Game::Init()
 	{

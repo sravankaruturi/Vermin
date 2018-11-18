@@ -50,7 +50,7 @@ namespace v_game
 		void LoadAssets();
 
 		void LoadModelAndAssociateWithTexture(
-				const std::array<std::string, 4> _data
+				std::array<std::string, 4> _data
 		) const;
 
 	};

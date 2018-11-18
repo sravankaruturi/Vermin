@@ -3,16 +3,12 @@
 //
 
 #include "GamePlayManager.h"
-#include "../Engine/Terrain.h"
-#include "FolderLocations.h"
 #include "AssetManager.h"
 
 namespace v_game
 {
 	GamePlayManager::GamePlayManager()
-	{
-		
-	}
+	= default;
 
 	void GamePlayManager::StartGame()
 	{
@@ -137,5 +133,9 @@ namespace v_game
 		workerDying->GetMeshes()[0]->textureNames[0] = ("base_units");
 		ASMGR.AddToObjects("Worker_Dying", workerDying);
 
+	}
+
+	void GamePlayManager::HandleInputs() {
+		throw std::runtime_error("Function not implemented");
 	}
 }

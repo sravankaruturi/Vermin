@@ -20,7 +20,6 @@ This is the Task list for the Project, Vermin and the Game.
 		  Objects just have a handle to them, and not any sort of control over the
 		  lifespan of it.
 
-		# Make sure the game runs on Mac without us having to move it.
 
 		# Remove Bounding Boxes from the Render Sequence and add a visual highlight
 		  when a Unit is selected. Like, a different Colour perhaps.
@@ -49,6 +48,7 @@ This is the Task list for the Project, Vermin and the Game.
 
 # In Progress
 
+	# Display all the Player Controller Entities in a side bar and their status
 
 # Done
 
@@ -105,6 +105,9 @@ This is the Task list for the Project, Vermin and the Game.
 
 		# Display Resources
 			--> 11/14/2018 - 8:38PM
+
+		# Make sure the game runs on Mac without us having to move it.
+			--> 11/17/2018 - 8:03PM
 
 
 	# Performance Enhancements
