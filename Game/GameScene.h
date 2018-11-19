@@ -51,7 +51,7 @@ namespace v_game {
 			pColour = (pType == PlayerType::Human) ? glm::vec4(1, 0, 0, 0.3) : glm::vec4(0, 0, 1, 0.3);
 
 			// Add One Building.
-			this->buildings.emplace_back(std::make_shared<Building>(1000, BuildingType::towncenter, baseStartPosition, villagerStartPosition));
+			this->buildings.emplace_back(std::make_shared<Building>(300, BuildingType::towncenter, baseStartPosition, villagerStartPosition));
 
 			this->units.emplace_back(std::make_shared<Unit>(UnitType::villager));
 			this->units[0]->SetPosition(villagerStartPosition);
@@ -81,6 +81,8 @@ namespace v_game {
 
 		int resWinCorner = 1;
 
+		/* GUI Variables */
+
 		// Player Character Controls
 		int pccCorner = 3;
 		ImVec2 pccSize = ImVec2(300, 400);
@@ -90,8 +92,23 @@ namespace v_game {
 				| ImGuiWindowFlags_NoResize
 				| ImGuiWindowFlags_NoSavedSettings;
 
-		/* GUI Variables */
 		bool displayLogWindow = false;
+
+		// Selection Window variables.
+		ImGuiWindowFlags swFlags =
+			ImGuiWindowFlags_NoCollapse
+			| ImGuiWindowFlags_NoResize
+			| ImGuiWindowFlags_NoSavedSettings;
+
+		ImVec2 swSize = ImVec2(300, 200);
+
+		/* UI Toggles */
+		bool buildingSelected = false;
+		Building * sBuilding = nullptr;	// Selected Building Pointer
+
+		bool workerSelected = false;
+		Unit * sWorker = nullptr;
+
 
 		/* Camera Constraints */
 		glm::vec4 camConstraints{1.f, 23.f, 1.f, 23.f};
@@ -114,13 +131,6 @@ namespace v_game {
 		float intDistance = 0;
 		float minIntDistance = INT_MAX;
 		glm::vec3 rayStart;
-
-		/* UI Toggles */
-		bool buildingSelected = false;
-		Building * sBuilding = nullptr;	// Selected Building Pointer
-
-		bool workerSelected = false;
-		Unit * sWorker = nullptr;
 
 
 	public:

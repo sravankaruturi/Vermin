@@ -12,8 +12,8 @@
 
 int main(){
 
-#if defined(_MSC_VER)
-//	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#if defined(_MSC_VER) && _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
     
 	v_game::Game g;

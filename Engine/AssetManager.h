@@ -196,6 +196,11 @@ namespace vermin {
         bool LoadTextures() {
             LOGGER.AddToLog("Loading Textures..");
 
+				const std::vector<std::string> no_flip_textures =
+				{
+					"WorkerFace",
+					"KnightFace"
+				};
 
 #if !defined(_MSC_VER)
 			DIR *dp = opendir(textureDir.c_str());
@@ -227,10 +232,19 @@ namespace vermin {
 					file_name = p.path().filename().generic_string();
 					file_name = file_name.substr(0, complete_file_name.length() - extension.length());
 #endif
+					if( std::find(no_flip_textures.begin(), no_flip_textures.end(), file_name) == no_flip_textures.end())
+					{
+						this->textures.insert(
+							std::make_pair(file_name, std::make_shared<Texture>(textureDir + complete_file_name))
+						);
+					}else
+					{
+						this->textures.insert(
+							std::make_pair(file_name, std::make_shared<Texture>(textureDir + complete_file_name, false))
+						);
+					}
 
-                    this->textures.insert(
-                            std::make_pair(file_name, std::make_shared<Texture>(textureDir + complete_file_name))
-                    );
+                    
                 }
                 catch (...) {
                     return false;

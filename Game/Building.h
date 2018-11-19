@@ -20,11 +20,27 @@ namespace v_game
 
 	private:
 
-		unsigned int health = 0;
+		unsigned short health = 200;
+
+	public:
+		unsigned short Health() const
+		{
+			return health;
+		}
+
+		void SetHealth(unsigned short _health)
+		{
+			health = _health;
+		}
+
+	private:
+		const unsigned short maxHealth = 1000;
 
 		glm::vec3 spawnPoint;
 
 	public:
+
+		float GetCurrentHPPerc();
 
 		explicit Building(unsigned _health, BuildingType _type, glm::vec3 _spawnPoint, glm::vec3 _position);
 

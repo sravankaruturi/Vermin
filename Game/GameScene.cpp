@@ -2,6 +2,8 @@
 #include <glm/gtc/matrix_transform.inl>
 #include <imgui_internal.h>
 
+#define		NO_CAMERA_CONSTRAINTS	1
+
 namespace v_game {
 
 	void GameScene::OnRender()
@@ -131,7 +133,6 @@ namespace v_game {
 
 
 		ImGui::Begin("Your Units", nullptr, pccFlags);
-
 		{
 
 			for (auto &it: humanPlayer.units) {
@@ -152,21 +153,44 @@ namespace v_game {
 			LOGGER.Render(&displayLogWindow);
 		}
 
+		// If Anthing Selected? Show that window.
+
 		// IF One of the Buildings is selected.
-		if ( buildingSelected ) {
-			ImGui::Begin("Adding Units");
+		if (buildingSelected) {
 			
-			if ( ImGui::Button("Create a New Worker" ) ){
+			window_pos.y = ImGui::GetIO().DisplaySize.y - distanceFromEdges;
+			window_pos.x = ImGui::GetIO().DisplaySize.x / 2;
+
+			window_pos_pivot.y = 1;
+			window_pos_pivot.x = 0.5;
+
+			ImGui::SetNextWindowSize(swSize);
+			ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
+
+			ImGui::Begin("Adding Units", nullptr, swFlags);
+
+			ImGui::ProgressBar(sBuilding->GetCurrentHPPerc(), ImVec2(-1, 0), "Health");
+
+			ImGui::Separator();
+
+			if (ImGui::ImageButton((ImTextureID)ASMGR.textures.at("WorkerFace")->GetTextureId(), ImVec2(50, 50))) {
 				this->AddUnit(UnitType::villager, humanPlayer);
 			}
 
-			if ( ImGui::Button("Create a New Warrior") ){
+			ImGui::SameLine();
+
+			if (ImGui::ImageButton((ImTextureID)ASMGR.textures.at("KnightFace")->GetTextureId(), ImVec2(50, 50))) {
 				this->AddUnit(UnitType::warrior, humanPlayer);
 			}
 
 			ImGui::End();
-			
+
 		}
+
+
+
+		
+		
 		ImGui::ShowDemoWindow();
 
 	}
@@ -222,31 +246,55 @@ namespace v_game {
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_W))
 		{
+			
+#if NO_CAMERA_CONSTRAINTS
+			activeCamera->ProcessKeyboard(vermin::Camera::forward, _deltaTime);
+#else
 			activeCamera->ProcessIsoMetricMovement(vermin::Camera::forward, _deltaTime);
 			activeCamera->Clamp(camConstraints);
+#endif
 		}
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_S))
 		{
+			
+#if NO_CAMERA_CONSTRAINTS
+			activeCamera->ProcessKeyboard(vermin::Camera::back, _deltaTime);
+#else
 			activeCamera->ProcessIsoMetricMovement(vermin::Camera::back, _deltaTime);
 			activeCamera->Clamp(camConstraints);
+#endif
 		}
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_A))
 		{
+			
+#if NO_CAMERA_CONSTRAINTS
+			activeCamera->ProcessKeyboard(vermin::Camera::leftside, _deltaTime);
+#else
 			activeCamera->ProcessIsoMetricMovement(vermin::Camera::leftside, _deltaTime);
 			activeCamera->Clamp(camConstraints);
+#endif
 		}
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_D))
 		{
+			
+#if NO_CAMERA_CONSTRAINTS
+			activeCamera->ProcessKeyboard(vermin::Camera::rightside, _deltaTime);
+#else
 			activeCamera->ProcessIsoMetricMovement(vermin::Camera::rightside, _deltaTime);
 			activeCamera->Clamp(camConstraints);
+#endif
 		}
 
 		if (window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1))
 		{
+#if NO_CAMERA_CONSTRAINTS
+			activeCamera->ProcessMouseMovement(window->mouseOffsetX, window->mouseOffsetY);
+#else
 			activeCamera->ProcessMouseMovement(window->mouseOffsetX, 0);
+#endif
 		}
 
 		if (window->IsKeyPressedAndReleased(GLFW_KEY_BACKSLASH)) {
