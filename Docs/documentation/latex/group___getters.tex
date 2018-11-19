@@ -1,0 +1,99 @@
+\hypertarget{group___getters}{}\section{Getters}
+\label{group___getters}\index{Getters@{Getters}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const glm\+::vec3 \& \mbox{\hyperlink{group___getters_ga1534921bb22645320614b4cf02268906}{piolot\+::\+Bounding\+Box\+::\+Get\+Minimum\+Point}} () const
+\item 
+const glm\+::vec3 \& \mbox{\hyperlink{group___getters_gafd9222c8fb47c5484c873ace9d66a37d}{piolot\+::\+Bounding\+Box\+::\+Get\+Maximum\+Point}} () const
+\item 
+unsigned int \mbox{\hyperlink{group___getters_ga57651f343f21133fc6c89c8c5619ed84}{piolot\+::\+Bounding\+Box\+::\+Get\+Vertices\+Size}} () const
+\item 
+\mbox{\hyperlink{group___getters_ga699e27e8e646be7a0a47f89abb35778d}{piolot\+::\+Bounding\+Box\+::\+Bounding\+Box}} (glm\+::vec3 \+\_\+minimum\+Point=glm\+::vec3(-\/0.\+2f, -\/0.\+2f, -\/0.\+2f), glm\+::vec3 \+\_\+maximum\+Point=glm\+::vec3(0.\+2f, 0.\+2f, 0.\+2f))
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group___getters_ga552fcdb461cdc71c5da0fed7b486246d}{piolot\+::\+Bounding\+Box\+::\+Check\+For\+Collision\+With\+Ray}} (const glm\+::mat4 \+\_\+model\+Matrix, const glm\+::vec3 \+\_\+scale, const glm\+::vec3 \+\_\+ray\+Origin, const glm\+::vec3 \+\_\+ray\+Direction, float \&\+\_\+intersection\+Distance) const
+\begin{DoxyCompactList}\small\item\em Check if the Bounding Box Collides with the \mbox{\hyperlink{classpiolot_1_1_ray}{Ray}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___getters_ga3ef9f966674be7fa0448d388b7a3d776}{piolot\+::\+Bounding\+Box\+::\+Render}} (glm\+::vec3 \+\_\+colour)
+\begin{DoxyCompactList}\small\item\em Render the Bounding Box. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___getters_ga699e27e8e646be7a0a47f89abb35778d}\label{group___getters_ga699e27e8e646be7a0a47f89abb35778d}} 
+\index{Getters@{Getters}!Bounding\+Box@{Bounding\+Box}}
+\index{Bounding\+Box@{Bounding\+Box}!Getters@{Getters}}
+\subsubsection{\texorpdfstring{Bounding\+Box()}{BoundingBox()}}
+{\footnotesize\ttfamily piolot\+::\+Bounding\+Box\+::\+Bounding\+Box (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{\+\_\+minimum\+Point = {\ttfamily glm\+:\+:vec3(-\/0.2f,~-\/0.2f,~-\/0.2f)},  }\item[{glm\+::vec3}]{\+\_\+maximum\+Point = {\ttfamily glm\+:\+:vec3(0.2f,~0.2f,~0.2f)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+minimum\+Point} & Min Point \\
+\hline
+{\em \+\_\+maximum\+Point} & Max Point \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___getters_ga552fcdb461cdc71c5da0fed7b486246d}\label{group___getters_ga552fcdb461cdc71c5da0fed7b486246d}} 
+\index{Getters@{Getters}!Check\+For\+Collision\+With\+Ray@{Check\+For\+Collision\+With\+Ray}}
+\index{Check\+For\+Collision\+With\+Ray@{Check\+For\+Collision\+With\+Ray}!Getters@{Getters}}
+\subsubsection{\texorpdfstring{Check\+For\+Collision\+With\+Ray()}{CheckForCollisionWithRay()}}
+{\footnotesize\ttfamily bool piolot\+::\+Bounding\+Box\+::\+Check\+For\+Collision\+With\+Ray (\begin{DoxyParamCaption}\item[{const glm\+::mat4}]{\+\_\+model\+Matrix,  }\item[{const glm\+::vec3}]{\+\_\+scale,  }\item[{const glm\+::vec3}]{\+\_\+ray\+Origin,  }\item[{const glm\+::vec3}]{\+\_\+ray\+Direction,  }\item[{float \&}]{\+\_\+intersection\+Distance }\end{DoxyParamCaption}) const}
+
+
+
+Check if the Bounding Box Collides with the \mbox{\hyperlink{classpiolot_1_1_ray}{Ray}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+model\+Matrix} & Model Matrix of the \mbox{\hyperlink{classpiolot_1_1_entity}{Entity}} \\
+\hline
+{\em \+\_\+scale} & Scale of the \mbox{\hyperlink{classpiolot_1_1_entity}{Entity}}. \\
+\hline
+{\em \+\_\+ray\+Origin} & \mbox{\hyperlink{classpiolot_1_1_ray}{Ray}} origin \\
+\hline
+{\em \+\_\+ray\+Direction} & \mbox{\hyperlink{classpiolot_1_1_ray}{Ray}} Direction \\
+\hline
+{\em \+\_\+intersection\+Distance} & Return the Intersection Distance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If Intersected, return true. Else, False. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group___getters_gafd9222c8fb47c5484c873ace9d66a37d}\label{group___getters_gafd9222c8fb47c5484c873ace9d66a37d}} 
+\index{Getters@{Getters}!Get\+Maximum\+Point@{Get\+Maximum\+Point}}
+\index{Get\+Maximum\+Point@{Get\+Maximum\+Point}!Getters@{Getters}}
+\subsubsection{\texorpdfstring{Get\+Maximum\+Point()}{GetMaximumPoint()}}
+{\footnotesize\ttfamily const glm\+::vec3\& piolot\+::\+Bounding\+Box\+::\+Get\+Maximum\+Point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{group___getters_ga1534921bb22645320614b4cf02268906}\label{group___getters_ga1534921bb22645320614b4cf02268906}} 
+\index{Getters@{Getters}!Get\+Minimum\+Point@{Get\+Minimum\+Point}}
+\index{Get\+Minimum\+Point@{Get\+Minimum\+Point}!Getters@{Getters}}
+\subsubsection{\texorpdfstring{Get\+Minimum\+Point()}{GetMinimumPoint()}}
+{\footnotesize\ttfamily const glm\+::vec3\& piolot\+::\+Bounding\+Box\+::\+Get\+Minimum\+Point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{group___getters_ga57651f343f21133fc6c89c8c5619ed84}\label{group___getters_ga57651f343f21133fc6c89c8c5619ed84}} 
+\index{Getters@{Getters}!Get\+Vertices\+Size@{Get\+Vertices\+Size}}
+\index{Get\+Vertices\+Size@{Get\+Vertices\+Size}!Getters@{Getters}}
+\subsubsection{\texorpdfstring{Get\+Vertices\+Size()}{GetVerticesSize()}}
+{\footnotesize\ttfamily unsigned int piolot\+::\+Bounding\+Box\+::\+Get\+Vertices\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{group___getters_ga3ef9f966674be7fa0448d388b7a3d776}\label{group___getters_ga3ef9f966674be7fa0448d388b7a3d776}} 
+\index{Getters@{Getters}!Render@{Render}}
+\index{Render@{Render}!Getters@{Getters}}
+\subsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily void piolot\+::\+Bounding\+Box\+::\+Render (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{\+\_\+colour }\end{DoxyParamCaption})}
+
+
+
+Render the Bounding Box. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+colour} & The Colour to Render the B\+Box in \\
+\hline
+\end{DoxyParams}
