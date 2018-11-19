@@ -4,6 +4,7 @@
 .idea/*
 
 MSBuild/*
+MSBuild2/*
 Engine/Configurations.h
 *.shader~
 *.un~
