@@ -59,11 +59,15 @@ namespace v_game {
 	public:
 
 		explicit Unit(UnitType _type);
+
+		float GetCurrentHPPerc();
+
 		~Unit() = default;
 
 		void Update(float _deltaTime, vermin::Terrain * _terrain);
 
 	protected:
+
 		/* Pathing Stuff */
 		std::vector<vermin::MapTile *> path;
 		float totalTimeCounterForPathing = 0;
@@ -73,6 +77,21 @@ namespace v_game {
 		std::string walkObjectName;
 		std::string deathObjectName;
 
+		short health = 0;
+		short maxHealth = 100;
+
+		unsigned int faceTextureID;
+
+	public:
+		unsigned FaceTextureId() const
+		{
+			return faceTextureID;
+		}
+
+		void SetFaceTextureId(unsigned _faceTextureId)
+		{
+			faceTextureID = _faceTextureId;
+		}
 	};
 
 }

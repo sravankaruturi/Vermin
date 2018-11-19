@@ -6,6 +6,69 @@
 
 namespace v_game {
 
+	void DrawHealthBars(float _perc)
+	{
+
+		ImVec2 size_arg = ImVec2(-1, 0);
+		const char * overlay = "Health";
+		ImVec4 bar_colour = ImVec4();
+
+		if (_perc < 0.25)
+		{
+			bar_colour = ImVec4(0.90, 0.2, 0.2, 1.0);
+		}
+		else if (_perc > 0.75)
+		{
+			bar_colour = ImVec4(0.2, 0.90, 0.2, 1.0);
+		}
+		else
+		{
+			bar_colour = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
+		}
+
+		//ImGui::ProgressBar(_perc, ImVec2(-1, 0), "Health");
+
+		ImGuiWindow *window = ImGui::GetCurrentWindow();
+		if (window->SkipItems)
+			return;
+
+		ImGuiContext &g = *GImGui;
+		const ImGuiStyle &style = g.Style;
+
+		ImVec2 pos = window->DC.CursorPos;
+		ImVec2 size = ImGui::CalcItemSize(size_arg, ImGui::CalcItemWidth(), g.FontSize + style.FramePadding.y * 2.0f);
+		ImVec2 other_pos = ImVec2(pos.x + size.x, pos.y + size.y);
+		ImRect bb(
+			pos,
+			other_pos
+		);
+		ImGui::ItemSize(bb, style.FramePadding.y);
+		if (!ImGui::ItemAdd(bb, 0))
+			return;
+
+		// Render
+		_perc = ImSaturate(_perc);
+		ImGui::RenderFrame(bb.Min, bb.Max, ImGui::GetColorU32(ImGuiCol_FrameBg), true, style.FrameRounding);
+		bb.Expand(ImVec2(-style.FrameBorderSize, -style.FrameBorderSize));
+		const ImVec2 fill_br = ImVec2(ImLerp(bb.Min.x, bb.Max.x, _perc), bb.Max.y);
+		ImGui::RenderRectFilledRangeH(window->DrawList, bb, ImGui::ColorConvertFloat4ToU32(bar_colour), 0.0f, _perc,
+			style.FrameRounding);
+
+		// Default displaying the fraction as percentage string, but user can override it
+		char overlay_buf[32];
+		if (!overlay) {
+			ImFormatString(overlay_buf, IM_ARRAYSIZE(overlay_buf), "%.0f%%", _perc * 100 + 0.01f);
+			overlay = overlay_buf;
+		}
+
+		ImVec2 overlay_size = ImGui::CalcTextSize(overlay, NULL);
+		if (overlay_size.x > 0.0f)
+			ImGui::RenderTextClipped(ImVec2(ImClamp(fill_br.x + style.ItemSpacing.x, bb.Min.x,
+				bb.Max.x - overlay_size.x - style.ItemInnerSpacing.x), bb.Min.y), bb.Max,
+				overlay, NULL, &overlay_size, ImVec2(0.0f, 0.5f), &bb);
+
+	}
+
 	void GameScene::OnRender()
 	{
 
@@ -167,9 +230,9 @@ namespace v_game {
 			ImGui::SetNextWindowSize(swSize);
 			ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
 
-			ImGui::Begin("Adding Units", nullptr, swFlags);
+			ImGui::Begin("Town Center", nullptr, swFlags);
 
-			ImGui::ProgressBar(sBuilding->GetCurrentHPPerc(), ImVec2(-1, 0), "Health");
+			DrawHealthBars(sBuilding->GetCurrentHPPerc());
 
 			ImGui::Separator();
 
@@ -182,6 +245,27 @@ namespace v_game {
 			if (ImGui::ImageButton((ImTextureID)ASMGR.textures.at("KnightFace")->GetTextureId(), ImVec2(50, 50))) {
 				this->AddUnit(UnitType::warrior, humanPlayer);
 			}
+
+			ImGui::End();
+
+		}else if (workerSelected)
+		{
+			window_pos.y = ImGui::GetIO().DisplaySize.y - distanceFromEdges;
+			window_pos.x = ImGui::GetIO().DisplaySize.x / 2;
+
+			window_pos_pivot.y = 1;
+			window_pos_pivot.x = 0.5;
+
+			ImGui::SetNextWindowSize(swSize);
+			ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
+
+			ImGui::Begin("Worker", nullptr, swFlags);
+
+			ImGui::Image((ImTextureID)sWorker->FaceTextureId(), ImVec2(50, 50));
+
+			DrawHealthBars(sWorker->GetCurrentHPPerc());
+
+			ImGui::Separator();
 
 			ImGui::End();
 

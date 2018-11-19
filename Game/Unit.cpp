@@ -3,8 +3,8 @@
 //
 
 #include "Unit.h"
-#include <glm/detail/func_trigonometric.inl>
 #include "LoggingManager.h"
+#include "AssetManager.h"
 
 namespace v_game {
 
@@ -21,6 +21,30 @@ namespace v_game {
 		this->SetScale(glm::vec3(1 / 64.0f));
 		this->SetRotation(glm::vec3(0, 0, 0));
 
+		switch (_type)
+		{
+		case UnitType::villager:
+			this->health = 50;
+			this->maxHealth = 100;
+			this->faceTextureID = ASMGR.textures.at("WorkerFace")->GetTextureId();
+			break;
+		case UnitType::warrior:
+			this->health = 29;
+			this->maxHealth = 120;
+			this->faceTextureID = ASMGR.textures.at("KnightFace")->GetTextureId();
+			break;
+		default:
+			this->health = 0;
+			this->maxHealth = 0;
+			this->faceTextureID = 0;
+			break;
+		}
+
+	}
+
+	float Unit::GetCurrentHPPerc()
+	{
+		return (float)health / maxHealth;
 	}
 
 	void Unit::Update(float _deltaTime, vermin::Terrain * _terrain)

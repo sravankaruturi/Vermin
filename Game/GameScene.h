@@ -98,7 +98,9 @@ namespace v_game {
 		ImGuiWindowFlags swFlags =
 			ImGuiWindowFlags_NoCollapse
 			| ImGuiWindowFlags_NoResize
-			| ImGuiWindowFlags_NoSavedSettings;
+			| ImGuiWindowFlags_NoSavedSettings
+			| ImGuiWindowFlags_NoTitleBar
+		;
 
 		ImVec2 swSize = ImVec2(300, 200);
 
