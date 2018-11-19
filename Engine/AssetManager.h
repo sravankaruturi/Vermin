@@ -139,16 +139,6 @@ namespace vermin {
 #endif
 
 
-                    // Important: This only works if the file extension is .vert.
-//                    if (".vert" == extension) {
-//                        for (auto i = 0; i < 5; i++)
-//                            file_name.pop_back();
-//                    } else if (".shader" == extension) {
-//                        for (auto i = 0; i < 7; i++)
-//                            file_name.pop_back();
-//                    }
-
-
                     // *. Get the key for the Map.
                     // *. Check if the Shader already exists and skip if it does log the anamoly.
                     if (this->shaders.count(file_name)) {
