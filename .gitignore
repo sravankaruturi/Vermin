@@ -13,3 +13,5 @@ Engine/Configurations.h
 *.cpp~
 *.h~
 *.cpp~~
+
+docs/.idea/*

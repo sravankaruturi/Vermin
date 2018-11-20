@@ -198,7 +198,7 @@ namespace v_game {
 		ImGui::Begin("Your Units", nullptr, pccFlags);
 		{
 
-			for (auto &it: humanPlayer.units) {
+			for (auto &it: humanPlayer.buildings) {
 				ImGui::Text("%s", it->GetEntityName().c_str());
 			}
 
