@@ -3,6 +3,7 @@
 //
 
 #include "Building.h"
+#include <time.h>
 
 namespace v_game
 {
@@ -20,6 +21,19 @@ namespace v_game
 
 		// Set the spawn points based on the Current Position.
 
+		this->spawnPoints.clear();
+		this->spawnPoints.reserve(4);
+		this->spawnPoints.emplace_back(glm::vec3(this->position.x + 1, this->position.y, this->position.z));
+		this->spawnPoints.emplace_back(glm::vec3(this->position.x - 1, this->position.y, this->position.z));
+		this->spawnPoints.emplace_back(glm::vec3(this->position.x, this->position.y, this->position.z + 1));
+		this->spawnPoints.emplace_back(glm::vec3(this->position.x, this->position.y, this->position.z - 1));
+
 	}
 
+	glm::vec3 Building::GetRandomSpawnLocation()
+	{
+		srand(time(NULL));
+		int test = rand() % this->spawnPoints.size();
+		return this->spawnPoints[test];
+	}
 }

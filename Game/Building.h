@@ -40,11 +40,24 @@ namespace v_game
 
 	public:
 
+		std::vector<glm::vec3> SpawnPoints() const
+		{
+			return spawnPoints;
+		}
+
+		// TODO: Modify this lateron when we want flag points.
+		void SetSpawnPoints(const std::vector<glm::vec3>& _spawnPoints)
+		{
+			spawnPoints = _spawnPoints;
+		}
+
 		float GetCurrentHPPerc();
 
 		explicit Building(unsigned _health, BuildingType _type, glm::vec3 _position);
 
 		~Building() = default;
+
+		glm::vec3 GetRandomSpawnLocation();
 
 	};
 
