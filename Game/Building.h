@@ -36,13 +36,13 @@ namespace v_game
 	private:
 		const unsigned short maxHealth = 1000;
 
-		glm::vec3 spawnPoint;
+		std::vector<glm::vec3> spawnPoints;
 
 	public:
 
 		float GetCurrentHPPerc();
 
-		explicit Building(unsigned _health, BuildingType _type, glm::vec3 _spawnPoint, glm::vec3 _position);
+		explicit Building(unsigned _health, BuildingType _type, glm::vec3 _position);
 
 		~Building() = default;
 
