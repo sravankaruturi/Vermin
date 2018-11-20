@@ -10,24 +10,24 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/Engine/Deps/glfw-3.2.1/)
+add_subdirectory(${CMAKE_SOURCE_DIR}/Engine/EngineDeps/Deps/glfw-3.2.1/)
 
 #if(NOT MSVC)
 # Assimp Stuff.
 set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE BOOL "" FORCE)
 set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Deps/assimp/)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/EngineDeps/Deps/assimp/)
 
 message(STATUS ${CMAKE_LIBRARY_PATH})
 #endif()
 
 # Glad Stuff
-add_library(GLAD ${CMAKE_CURRENT_SOURCE_DIR}/Deps/third_party/glad.c)
-target_include_directories(GLAD PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Includes/)
+add_library(GLAD ${CMAKE_CURRENT_SOURCE_DIR}/EngineDeps/Deps/third_party/glad.c)
+target_include_directories(GLAD PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/EngineDeps/Includes/)
 
 # ImGUI Stuff
 file(GLOB IMGUI_SRC
-        ${CMAKE_CURRENT_SOURCE_DIR}/Deps/third_party/Imgui/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/EngineDeps/Deps/third_party/Imgui/*.cpp
         )
 
 add_library(IMGUI
@@ -36,16 +36,16 @@ add_library(IMGUI
 
 target_include_directories(IMGUI
         PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/Deps/third_party/Imgui/
-        ${CMAKE_CURRENT_SOURCE_DIR}/Includes/
+        ${CMAKE_CURRENT_SOURCE_DIR}/EngineDeps/Deps/third_party/Imgui/
+        ${CMAKE_CURRENT_SOURCE_DIR}/EngineDeps/Includes/
         )
 
 file(GLOB VERMIN_HEADERS
-        ${CMAKE_CURRENT_SOURCE_DIR}/*.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
         )
 
 file(GLOB VERMIN_SOURCE
-        ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
         )
 
 add_library(Vermin
@@ -55,8 +55,8 @@ add_library(Vermin
 
 set(Includes
         "${CMAKE_CURRENT_SOURCE_DIR}/"
-        "${CMAKE_CURRENT_SOURCE_DIR}/Includes/"
-        "${CMAKE_CURRENT_SOURCE_DIR}/Deps/third_party/Imgui/"
+        "${CMAKE_CURRENT_SOURCE_DIR}/EngineDeps/Includes/"
+        "${CMAKE_CURRENT_SOURCE_DIR}/EngineDeps/Deps/third_party/Imgui/"
         "${OPENGL_INCLUDE_DIRS}"
         "${ASSIMP_INCLUDE_DIRS}"
         "${IMGUI_INCLUDE_DIRS}"
@@ -68,7 +68,7 @@ message("${Includes}")
 target_include_directories(Vermin PUBLIC ${Includes})
 
 #if(MSVC)
-#target_link_libraries(Vermin ${CMAKE_CURRENT_SOURCE_DIR}/Deps/binaries/assimp.lib)
+#target_link_libraries(Vermin ${CMAKE_CURRENT_SOURCE_DIR}/EngineDeps/Deps/binaries/assimp.lib)
 #endif()
 
 #find_package(ASSIMP REQUIRED)

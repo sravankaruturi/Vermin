@@ -5,7 +5,7 @@
 #ifndef GAME_UNIT_H
 #define GAME_UNIT_H
 #include "AnimatedEntity.h"
-#include "../Engine/Terrain.h"
+#include "Terrain.h"
 
 
 namespace v_game {

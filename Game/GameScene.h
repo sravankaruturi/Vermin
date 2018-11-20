@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../Engine/library.h"
-#include "../Engine/Terrain.h"
+#include "library.h"
+#include "Terrain.h"
 #include "glm/detail/type_mat.hpp"
-
 
 #include "GamePlayManager.h"
 #include "Building.h"

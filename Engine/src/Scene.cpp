@@ -7,7 +7,7 @@
 #include "Window.h"
 
 #if ENABLE_GUI
-#include "Deps/third_party/Imgui/imgui.h"
+#include "imgui.h"
 #endif
 
 namespace vermin

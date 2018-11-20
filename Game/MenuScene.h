@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Engine/library.h"
+#include "library.h"
 #include "glm/detail/type_mat.hpp"
 
 namespace v_game{

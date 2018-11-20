@@ -7,8 +7,8 @@
 
 #if ENABLE_GUI
 
-#include <Deps/third_party/Imgui/imgui_impl_opengl3.h>
-#include <Deps/third_party/Imgui/imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+#include <imgui_impl_glfw.h>
 
 #endif
 

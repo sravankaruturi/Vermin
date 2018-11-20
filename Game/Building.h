@@ -5,7 +5,7 @@
 #ifndef GAME_BUILDING_H
 #define GAME_BUILDING_H
 
-#include "../Engine/Entity.h"
+#include "Entity.h"
 
 namespace v_game
 {

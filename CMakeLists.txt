@@ -7,6 +7,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory("Engine")
 
+target_include_directories(IMGUI
+        PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/Engine/src/
+        )
+
 add_executable(
         Game
         Game/main.cpp

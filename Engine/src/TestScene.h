@@ -23,7 +23,7 @@ namespace vermin {
 
 		// The Position in the array can be used as the Index
 		//int index;
-		std::shared_ptr<Camera> camera;
+		std::shared_ptr<vermin::Camera> camera;
 		bool isOrthogonal = false;
 
 	};
