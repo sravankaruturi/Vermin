@@ -17,12 +17,19 @@ namespace v_game {
 		Ai
 	};
 
+	enum class PlayerMode
+	{
+		Placing,
+		Playing
+	};
+
 	struct Player{
 
 		unsigned int rWood = 0;
 		unsigned int rStone = 0;
 
 		PlayerType pType = PlayerType::Ai;
+		PlayerMode pMode = PlayerMode::Playing;
 
 		glm::vec4 pColour{0 ,0, 1, 0.3};
 
@@ -40,13 +47,13 @@ namespace v_game {
 			pType = _pType;
 
 			// Let us give some wood and stone to the Player.
-			rWood = 100;
-			rStone = 100;
+			rWood = 1200;
+			rStone = 1200;
 
 			pColour = (pType == PlayerType::Human) ? glm::vec4(1, 0, 0, 0.3) : glm::vec4(0, 0, 1, 0.3);
 
 			// Add One Building.
-			this->buildings.emplace_back(std::make_shared<Building>(300, BuildingType::towncenter, baseStartPosition));
+			this->buildings.emplace_back(std::make_shared<Building>(BuildingType::towncenter, baseStartPosition));
 
 			this->units.emplace_back(std::make_shared<Unit>(UnitType::villager));
 			this->units[0]->SetPosition(this->buildings[0]->SpawnPoints()[0]);
@@ -126,6 +133,9 @@ namespace v_game {
 		float minIntDistance = INT_MAX;
 		glm::vec3 rayStart;
 
+		/* Temporary Entities */
+		std::vector<std::unique_ptr<Building>> buildingPlacers;
+
 
 	public:
 
@@ -151,6 +161,8 @@ namespace v_game {
 
 		/* Game Functions */
 		bool AddUnit(UnitType _type, Player& _player);
+
+		bool AddBuilding(BuildingType _type, Player& _player, const glm::vec3& _position) const;
 
 	};
 

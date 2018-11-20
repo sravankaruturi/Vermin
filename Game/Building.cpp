@@ -12,9 +12,21 @@ namespace v_game
 		return ((float)health / maxHealth);
 	}
 
-	Building::Building(unsigned _health, BuildingType _type, glm::vec3 _position)
-		: Entity("building", "Medieval_House/Medieval_House.obj", "town_center", glm::vec3(-120, 0, -120), glm::vec3(150, 200, 200)), health(_health)
+	Building::Building(BuildingType _type, glm::vec3 _position)
+		: Entity("building", "Medieval_House/Medieval_House.obj", "town_center", glm::vec3(-120, 0, -120), glm::vec3(150, 200, 200))
 	{
+		switch (_type)
+		{
+		case BuildingType::towncenter:
+			health = 1000;
+			break;
+		case BuildingType::barracks:
+			health = 600;
+			break;
+		case BuildingType::siegefactory:
+			health = 800;
+			break;
+		}
 
 		this->SetScale(glm::vec3(1 / 256.0f));
 		this->SetPosition(_position);

@@ -761,6 +761,7 @@ namespace vermin {
         }
 
         pointedNodeIndices = closest_node;
+		pointedNodePosition = tiles[pointedNodeIndices.x][pointedNodeIndices.y].GetPosition();
         this->HighlightNode(pointedNodeIndices.x, pointedNodeIndices.y);
 
     }
