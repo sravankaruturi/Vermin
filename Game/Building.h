@@ -16,6 +16,14 @@ namespace v_game
 		siegefactory
 	};
 
+	const int required_wood_for_buildings[3] = {
+		600, 120, 120
+	};
+
+	const int required_stone_for_buildings[3] = {
+		600, 0, 120
+	};
+
 	class Building : public vermin::Entity{
 
 	private:
@@ -53,7 +61,7 @@ namespace v_game
 
 		float GetCurrentHPPerc();
 
-		explicit Building(unsigned _health, BuildingType _type, glm::vec3 _position);
+		explicit Building(BuildingType _type, glm::vec3 _position);
 
 		~Building() = default;
 

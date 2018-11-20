@@ -46,11 +46,11 @@ namespace v_game {
 		}
 	};
 
-	const int required_wood[3] = {
+	const int required_wood_for_units[3] = {
 		30, 30, 40
 	};
 
-	const int required_stone[3] = {
+	const int required_stone_for_units[3] = {
 		30, 40, 40
 	};
 

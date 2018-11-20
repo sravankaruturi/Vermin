@@ -181,6 +181,8 @@ namespace vermin {
          */
         glm::ivec2 pointedNodeIndices{INT_MAX, INT_MAX};
 
+		glm::vec3 pointedNodePosition;
+
         /**
          * \brief The Accuracy by which we say, that a Ray has a Point on it. Lower is more Accurate.
          */

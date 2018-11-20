@@ -131,6 +131,14 @@ namespace v_game {
 			it->Render();
 		}
 
+		if ( humanPlayer.pMode == PlayerMode::Placing)
+		{
+			for (const auto& it : this->buildingPlacers)
+			{
+				it->Render();
+			}
+		}
+
 		ASMGR.shaders.at("unit")->use();
 		ASMGR.shaders.at("unit")->setVec4("u_PlayerColour", aiPlayer.pColour);
 		for (const auto& it : aiPlayer.units) {
@@ -267,6 +275,11 @@ namespace v_game {
 
 			ImGui::Separator();
 
+			if (ImGui::ImageButton((ImTextureID)ASMGR.textures.at("grass")->GetTextureId(), ImVec2(50, 50)))
+			{
+				this->humanPlayer.pMode = PlayerMode::Placing;
+			}
+
 			ImGui::End();
 
 		}
@@ -385,6 +398,13 @@ namespace v_game {
 			this->displayLogWindow = !this->displayLogWindow;
 		}
 
+		if (this->humanPlayer.pMode == PlayerMode::Placing && window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1))
+		{
+			// Place that building.
+			this->AddBuilding(BuildingType::towncenter, humanPlayer, gameTerrain->pointedNodePosition);
+			this->humanPlayer.pMode = PlayerMode::Playing;
+		}
+
 	}
 
 	GameScene::GameScene(std::shared_ptr<vermin::Window> _window)
@@ -427,6 +447,10 @@ namespace v_game {
 		LOGGER.AddToLog("Cameras Initialized...");
 
 		gManager->StartGame();
+
+		buildingPlacers.emplace_back(
+			std::make_unique<Building>(BuildingType::towncenter, glm::vec3(0, 0, 0))
+		);
 
 	}
 
@@ -491,6 +515,12 @@ namespace v_game {
 			if (it->IsSelectedInScene()) {
 				this->sWorker = it.get();
 			}
+		}
+
+		if ( humanPlayer.pMode == PlayerMode::Placing)
+		{
+			this->buildingPlacers[0]->SetPosition(gameTerrain->pointedNodePosition);
+			this->buildingPlacers[0]->Update(_deltaTime);
 		}
 
 	}
@@ -575,8 +605,8 @@ namespace v_game {
 	bool GameScene::AddUnit(UnitType _type, Player& _player){
 
 		// We Get the Unit Cost
-		int w_cost = required_wood[static_cast<int>(_type)];
-		int s_cost = required_stone[static_cast<int>(_type)];
+		int w_cost = required_wood_for_units[static_cast<int>(_type)];
+		int s_cost = required_stone_for_units[static_cast<int>(_type)];
 
 		if ( _player.rWood < w_cost || _player.rStone < s_cost ){
 			LOGGER.AddToLog("Not Enough resources", vermin::PE_LOG_WARN);
@@ -598,4 +628,28 @@ namespace v_game {
 
 	}
 
+	// Lets deal with the Barracks First.
+	bool GameScene::AddBuilding(BuildingType _type, Player& _player, const glm::vec3& _position) const
+	{
+
+		int w_cost = required_wood_for_buildings[static_cast<int>(_type)];
+		int s_cost = required_stone_for_buildings[static_cast<int>(_type)];
+
+		if (_player.rWood < w_cost || _player.rStone < s_cost) {
+			LOGGER.AddToLog("Not Enough resources", vermin::PE_LOG_WARN);
+			return false;
+		}
+
+		_player.rWood -= w_cost;
+		_player.rStone -= s_cost;
+
+		unsigned t_index = _player.units.size();
+
+		_player.buildings.emplace_back(
+			std::make_shared<Building>(_type, _position)
+		);
+
+		return true;
+
+	}
 }
