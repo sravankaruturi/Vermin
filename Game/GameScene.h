@@ -30,7 +30,6 @@ namespace v_game {
 		std::vector<std::shared_ptr<Unit>> units{};
 
 		glm::vec3 baseStartPosition{0};
-		glm::vec3 villagerStartPosition{0};
 
 		Player() = default;
 
@@ -40,10 +39,6 @@ namespace v_game {
 
 			pType = _pType;
 
-			villagerStartPosition = baseStartPosition;
-			villagerStartPosition.x += 1.5;
-			villagerStartPosition.z -= 1.5;
-
 			// Let us give some wood and stone to the Player.
 			rWood = 100;
 			rStone = 100;
@@ -51,13 +46,10 @@ namespace v_game {
 			pColour = (pType == PlayerType::Human) ? glm::vec4(1, 0, 0, 0.3) : glm::vec4(0, 0, 1, 0.3);
 
 			// Add One Building.
-			this->buildings.emplace_back(std::make_shared<Building>(300, BuildingType::towncenter, baseStartPosition, villagerStartPosition));
+			this->buildings.emplace_back(std::make_shared<Building>(300, BuildingType::towncenter, baseStartPosition));
 
 			this->units.emplace_back(std::make_shared<Unit>(UnitType::villager));
-			this->units[0]->SetPosition(villagerStartPosition);
-
-			villagerStartPosition.x -= 1.5;
-			villagerStartPosition.z += 1.5;
+			this->units[0]->SetPosition(this->buildings[0]->SpawnPoints()[0]);
 
 		}
 

@@ -592,10 +592,7 @@ namespace v_game {
 				std::make_shared<Unit>(_type)
 				);
 
-		_player.units[t_index]->SetPosition(_player.villagerStartPosition);
-
-		_player.villagerStartPosition.x += 1.5;
-		_player.villagerStartPosition.z += 1.5;
+		_player.units[t_index]->SetPosition(_player.buildings.back()->GetRandomSpawnLocation());
 
 		return true;
 
