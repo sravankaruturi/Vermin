@@ -1,7 +1,7 @@
 #ifndef VERMIN_LIBRARY_H
 #define VERMIN_LIBRARY_H
 
-#include "Configurations.h"
+#include "../Configurations.h"
 #include "Window.h"
 #include "TestScene.h"
 #include "LoggingManager.h"

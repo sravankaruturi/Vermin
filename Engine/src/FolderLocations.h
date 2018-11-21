@@ -1,7 +1,7 @@
 ﻿//#define SHADER_FOLDER "../../Engine/Shaders/"
 #pragma once
 
-#include "Configurations.h"
+#include "../Configurations.h"
 
 #if IS_HOME_PC
 
