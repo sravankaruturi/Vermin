@@ -434,6 +434,12 @@ namespace v_game {
 		humanPlayer = { glm::vec3(2, y1, 2), PlayerType::Human };
 		aiPlayer = { glm::vec3(22, y2, 22), PlayerType::Ai };
 
+		this->AddBuilding(BuildingType::towncenter, humanPlayer, humanPlayer.baseStartPosition);
+		this->AddBuilding(BuildingType::towncenter, aiPlayer, aiPlayer.baseStartPosition);
+
+		this->AddUnit(UnitType::villager, humanPlayer);
+		this->AddUnit(UnitType::villager, aiPlayer);
+
 	};
 
 	void GameScene::InitEntities()
@@ -649,7 +655,45 @@ namespace v_game {
 			std::make_shared<Building>(_type, _position)
 		);
 
+		this->SetTerrainObstacleForBuilding(gameTerrain->GetNodeIndicesFromPos(_position));
+
 		return true;
+
+	}
+
+	void GameScene::SetTerrainObstacleForBuilding(const glm::ivec2& _buildingPosition) const
+	{
+
+		glm::ivec2 target_node = _buildingPosition;
+
+		gameTerrain->SetTerrainNodeObstacle(target_node);
+
+		target_node.y = _buildingPosition.y - 1;
+		gameTerrain->SetTerrainNodeObstacle(target_node);
+
+		target_node.y = _buildingPosition.y + 1;
+		gameTerrain->SetTerrainNodeObstacle(target_node);
+		
+		target_node.x = _buildingPosition.x + 1;
+		target_node.y = _buildingPosition.y;
+		gameTerrain->SetTerrainNodeObstacle(target_node);
+
+		target_node.y = _buildingPosition.y - 1;
+		gameTerrain->SetTerrainNodeObstacle(target_node);
+
+		target_node.y = _buildingPosition.y + 1;
+		gameTerrain->SetTerrainNodeObstacle(target_node);
+		
+		target_node.x = _buildingPosition.x - 1;
+		target_node.y = _buildingPosition.y;
+		gameTerrain->SetTerrainNodeObstacle(target_node);
+
+		target_node.y = _buildingPosition.y - 1;
+		gameTerrain->SetTerrainNodeObstacle(target_node);
+
+		target_node.y = _buildingPosition.y + 1;
+		gameTerrain->SetTerrainNodeObstacle(target_node);
+
 
 	}
 }
