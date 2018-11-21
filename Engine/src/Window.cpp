@@ -4,6 +4,7 @@
 
 #include "Window.h"
 #include <iostream>
+#include <limits>
 
 #if ENABLE_GUI
 #include <imgui.h>

@@ -1,7 +1,7 @@
 ﻿//#define SHADER_FOLDER "../../Engine/Shaders/"
 #pragma once
 
-#include "../Configurations.h"
+#include "Configurations.h"
 
 #if IS_HOME_PC
 
@@ -11,6 +11,15 @@
 #define SCENES_FOLDER			"C:/dev/Vermin/Assets/Scenes/"
 										
 #define EXTERNAL_FILES			"C:/dev/Vermin/Engine/Deps/third_party/"
+
+#elif IS_HOME_LINUX
+
+#define SHADER_FOLDER			"/home/sravan/Projects/Vermin/Shaders/"
+#define TEXTURE_FOLDER			"/home/sravan/Projects/Vermin/Assets/Textures/"
+#define MODEL_FOLDER			"/home/sravan/Projects/Vermin/Assets/Models/"
+#define SCENES_FOLDER			"/home/sravan/Projects/Vermin/Assets/Scenes/"
+
+#define EXTERNAL_FILES			"/home/sravan/Projects/Vermin/Engine/Deps/third_party/"
 
 #elif MACBOOK
 

@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory("Engine")
 
-target_include_directories(IMGUI
+target_include_directories(Vermin
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/src/
         )

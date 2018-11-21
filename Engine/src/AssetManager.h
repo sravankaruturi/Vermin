@@ -24,6 +24,7 @@
 
 #include "LoggingManager.h"
 #include "PE_GL.h"
+#include <algorithm>
 
 
 #ifdef _DEBUG

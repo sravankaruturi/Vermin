@@ -6,7 +6,7 @@
 #include <string>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "../Configurations.h"
+#include "Configurations.h"
 
 #define MAX_KEYS		1024
 #define MAX_BUTTONS		16
