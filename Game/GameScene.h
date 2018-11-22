@@ -51,12 +51,6 @@ namespace v_game {
 
 			pColour = (pType == PlayerType::Human) ? glm::vec4(1, 0, 0, 0.3) : glm::vec4(0, 0, 1, 0.3);
 
-			// Add One Building.
-			this->buildings.emplace_back(std::make_shared<Building>(BuildingType::towncenter, baseStartPosition));
-
-			this->units.emplace_back(std::make_shared<Unit>(UnitType::villager));
-			this->units[0]->SetPosition(this->buildings[0]->SpawnPoints()[0]);
-
 		}
 
 	};
@@ -162,6 +156,8 @@ namespace v_game {
 		bool AddUnit(UnitType _type, Player& _player);
 
 		bool AddBuilding(BuildingType _type, Player& _player, const glm::vec3& _position) const;
+
+		void SetTerrainObstacleForBuilding(const glm::ivec2& _buildingPosition ) const;
 
 	};
 
