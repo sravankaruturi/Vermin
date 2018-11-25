@@ -100,6 +100,7 @@ namespace v_game {
 		bool buildingSelected = false;
 		Building * sBuilding = nullptr;	// Selected Building Pointer
 
+		bool enemyUnitSelected = false;
 		bool workerSelected = false;
 		Unit * sWorker = nullptr;
 

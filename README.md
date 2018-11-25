@@ -13,3 +13,10 @@ https://sravankaruturi.github.io/Vermin/
 
 # Documentation:
 https://sravankaruturi.github.io/Vermin/documentation/html/index.html
+
+# Dependencies:
+
+Ubuntu:
+
+xorg-dev
+libglu1-mesa-dev

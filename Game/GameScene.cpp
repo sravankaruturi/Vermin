@@ -1,5 +1,4 @@
 #include "GameScene.h"
-#include <glm/gtc/matrix_transform.inl>
 #include <imgui_internal.h>
 
 #define		NO_CAMERA_CONSTRAINTS	1
@@ -275,9 +274,10 @@ namespace v_game {
 
 			ImGui::Separator();
 
-			if (ImGui::ImageButton((ImTextureID)ASMGR.textures.at("grass")->GetTextureId(), ImVec2(50, 50)))
-			{
-				this->humanPlayer.pMode = PlayerMode::Placing;
+			if ( !this->enemyUnitSelected) {
+				if (ImGui::ImageButton((ImTextureID) ASMGR.textures.at("grass")->GetTextureId(), ImVec2(50, 50))) {
+					this->humanPlayer.pMode = PlayerMode::Placing;
+				}
 			}
 
 			ImGui::End();
@@ -520,6 +520,14 @@ namespace v_game {
 			this->workerSelected |= it->IsSelectedInScene();
 			if (it->IsSelectedInScene()) {
 				this->sWorker = it.get();
+			}
+		}
+
+		for (const auto& it : aiPlayer.units) {
+			this->workerSelected |= it->IsSelectedInScene();
+			if (it->IsSelectedInScene()) {
+				this->sWorker = it.get();
+				this->enemyUnitSelected = true;
 			}
 		}
 

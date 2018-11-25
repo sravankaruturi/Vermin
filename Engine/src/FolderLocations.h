@@ -14,12 +14,12 @@
 
 #elif IS_HOME_LINUX
 
-#define SHADER_FOLDER			"/home/sravan/Projects/Vermin/Shaders/"
-#define TEXTURE_FOLDER			"/home/sravan/Projects/Vermin/Assets/Textures/"
-#define MODEL_FOLDER			"/home/sravan/Projects/Vermin/Assets/Models/"
-#define SCENES_FOLDER			"/home/sravan/Projects/Vermin/Assets/Scenes/"
+#define SHADER_FOLDER			"/home/ant/projects/Vermin/Shaders/"
+#define TEXTURE_FOLDER			"/home/ant/projects/Vermin/Assets/Textures/"
+#define MODEL_FOLDER			"/home/ant/projects/Vermin/Assets/Models/"
+#define SCENES_FOLDER			"/home/ant/projects/Vermin/Assets/Scenes/"
 
-#define EXTERNAL_FILES			"/home/sravan/Projects/Vermin/Engine/Deps/third_party/"
+#define EXTERNAL_FILES			"/home/ant/projects/Vermin/Engine/Deps/third_party/"
 
 #elif MACBOOK
 

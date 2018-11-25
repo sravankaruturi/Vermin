@@ -51,7 +51,7 @@ file(GLOB VERMIN_SOURCE
 add_library(Vermin
         ${VERMIN_HEADERS}
         ${VERMIN_SOURCE}
-        )
+        src/Configurations.h)
 
 set(Includes
         "${CMAKE_CURRENT_SOURCE_DIR}/"
