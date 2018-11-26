@@ -52,6 +52,14 @@ namespace v_game {
 
 		AnimatedEntity::Update(_deltaTime);
 
+		if ( this->gPlay.health <= 0 )
+		{
+			// Mark for Deletion.
+			this->gPlay.toBeDeleted = true;
+			this->SetObjectName(deathObjectName);
+			this->gPlay.attacker->gPlay.attackingMode = false;
+		}
+
 		this->position.y = _terrain->GetHeightAtPos(this->position.x, this->position.z);
 
 		_terrain->GetTileFromIndices(_terrain->GetNodeIndicesFromPos(position))->occupiedBy = static_cast<Entity *>(this);
@@ -109,7 +117,8 @@ namespace v_game {
 				// Start Attacking
 				this->currentState = UnitState::attacking;
 				this->SetObjectName(attackObjectName);
-				this->target->TakeDamage(_deltaTime * this->gPlay.attackDamage);
+				this->gPlay.attackTarget->TakeDamage(_deltaTime * this->gPlay.attackDamage);
+				this->gPlay.attackTarget->gPlay.attacker = this;
 
 			}
 
@@ -176,13 +185,4 @@ namespace v_game {
 	void Unit::setCurrentState(UnitState currentState) {
 		Unit::currentState = currentState;
 	}
-
-	vermin::Entity *Unit::getTarget() const {
-		return target;
-	}
-
-	void Unit::setTarget(vermin::Entity *target) {
-		Unit::target = target;
-	}
-
 }

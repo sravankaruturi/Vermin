@@ -60,6 +60,8 @@ namespace vermin {
 
         float attackDamage = 10.0f;
 
+		bool toBeDeleted = false;
+
     };
 
     class Entity {

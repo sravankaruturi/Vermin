@@ -92,13 +92,7 @@ namespace v_game {
 
 		UnitState currentState = UnitState::idle;
 
-		vermin::Entity * target = nullptr;
-
 	public:
-
-		Entity *getTarget() const;
-
-		void setTarget(Entity *target);
 
 		UnitState getCurrentState() const;
 
