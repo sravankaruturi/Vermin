@@ -142,6 +142,10 @@ namespace v_game {
 		ASMGR.shaders.at("unit")->use();
 		ASMGR.shaders.at("unit")->setVec4("u_PlayerColour", aiPlayer.pColour);
 		for (const auto& it : aiPlayer.units) {
+			if (it->gPlay.toBeDeleted)
+			{
+				continue;
+			}
 			it->Render();
 		}
 
@@ -487,10 +491,8 @@ namespace v_game {
 		}
 
 		for ( const auto& it: humanPlayer.units ){
-
 			it->Update(_deltaTime, gameTerrain.get());
 			it->PlayAnimation(_deltaTime, _totalTime);
-			
 		}
 
 		for (const auto& it : aiPlayer.buildings) {
@@ -499,9 +501,13 @@ namespace v_game {
 
 		for (const auto& it : aiPlayer.units) {
 
+			if ( it->gPlay.toBeDeleted )
+			{
+				continue;
+			}
+
 			it->Update(_deltaTime, gameTerrain.get());
 			it->PlayAnimation(_deltaTime, _totalTime);
-
 		}
 
 

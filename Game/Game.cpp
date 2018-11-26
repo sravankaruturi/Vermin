@@ -34,7 +34,10 @@ namespace v_game {
 
 	}
 
-	Game::~Game() = default;
+	Game::~Game()
+	{
+		std::cout << "Quitting Game\n";
+	}
 
 	void Game::Init()
 	{
