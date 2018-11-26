@@ -3,7 +3,6 @@
 //
 
 #include "Unit.h"
-#include "LoggingManager.h"
 #include "AssetManager.h"
 
 namespace v_game {
@@ -17,6 +16,7 @@ namespace v_game {
 		this->idleObjectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::idle)];
 		this->walkObjectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::walking)];
 		this->deathObjectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::death)];
+		this->attackObjectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::attack)];
 
 		this->SetScale(glm::vec3(1 / 64.0f));
 		this->SetRotation(glm::vec3(0, 0, 0));
@@ -24,18 +24,18 @@ namespace v_game {
 		switch (_type)
 		{
 		case UnitType::villager:
-			this->health = 50;
-			this->maxHealth = 100;
+			this->gPlay.health = 50;
+			this->gPlay.maxHealth = 100;
 			this->faceTextureID = ASMGR.textures.at("WorkerFace")->GetTextureId();
 			break;
 		case UnitType::warrior:
-			this->health = 29;
-			this->maxHealth = 120;
+			this->gPlay.health = 29;
+			this->gPlay.maxHealth = 120;
 			this->faceTextureID = ASMGR.textures.at("KnightFace")->GetTextureId();
 			break;
 		default:
-			this->health = 0;
-			this->maxHealth = 0;
+			this->gPlay.health = 0;
+			this->gPlay.maxHealth = 0;
 			this->faceTextureID = 0;
 			break;
 		}
@@ -44,7 +44,7 @@ namespace v_game {
 
 	float Unit::GetCurrentHPPerc()
 	{
-		return (float)health / maxHealth;
+		return (float)this->gPlay.health/this->gPlay.maxHealth;
 	}
 
 	void Unit::Update(float _deltaTime, vermin::Terrain * _terrain)
@@ -65,10 +65,6 @@ namespace v_game {
 		_terrain->HighlightNode(this->targetNode.x, this->targetNode.y);
 
 		path = _terrain->GetPathFromPositions(this->position, endPosition);
-
-		/*std::string log_temp = "The path b/w the tiles, ";
-
-		log_temp += Vec3ToString(startPosition) + " and " + Vec3ToString(endPosition) + " has " + std::to_string(path.size()) + " nodes";*/
 
 		////if (it->gPlay.attackingMode && !path.empty()) {
 		////	// If you are attacking, you stop one tile before the actual target.
@@ -102,7 +98,23 @@ namespace v_game {
 		////	}
 		////}
 		//else
-		{
+
+		// Check if you are attacking.
+		if ( this->gPlay.attackingMode ){
+
+			path.pop_back();
+
+			if ( path.size() < 2 ){
+
+				// Start Attacking
+				this->currentState = UnitState::attacking;
+				this->SetObjectName(attackObjectName);
+				this->target->TakeDamage(_deltaTime * this->gPlay.attackDamage);
+
+			}
+
+		}
+		else {
 			if (path.empty())
 			{
 				if (idleObjectName != this->objectName && deathObjectName != this->objectName)
@@ -156,4 +168,21 @@ namespace v_game {
 		}
 
 	}
+
+	UnitState Unit::getCurrentState() const {
+		return currentState;
+	}
+
+	void Unit::setCurrentState(UnitState currentState) {
+		Unit::currentState = currentState;
+	}
+
+	vermin::Entity *Unit::getTarget() const {
+		return target;
+	}
+
+	void Unit::setTarget(vermin::Entity *target) {
+		Unit::target = target;
+	}
+
 }

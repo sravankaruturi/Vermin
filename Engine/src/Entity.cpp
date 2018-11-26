@@ -8,8 +8,6 @@
 #include "PEHelpers.h"
 
 #include "Terrain.h"
-#include <glm/gtc/matrix_transform.inl>
-#include "Colours.h"
 
 namespace vermin {
     void Entity::SaveToFile(std::ofstream &_out) {
@@ -153,7 +151,7 @@ namespace vermin {
         ImGui::DragInt2("Target Node", glm::value_ptr(this->targetNode));
 
         ImGui::Separator();
-        ImGui::DragFloat("Health: ", &this->gPlay.health);
+        ImGui::DragInt("Health: ", (int *)&this->gPlay.health);
 
     }
 }

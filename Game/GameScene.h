@@ -130,6 +130,9 @@ namespace v_game {
 		/* Temporary Entities */
 		std::vector<std::unique_ptr<Building>> buildingPlacers;
 
+		// There can only be one entity hovered over at a time.
+		vermin::Entity * hoveredEntity;
+
 
 	public:
 
@@ -151,6 +154,9 @@ namespace v_game {
 		template <class T>
 		void CheckIfPicked(std::vector<std::shared_ptr<T>> _entities);
 
+		template <class T>
+		void CheckIfHovered(std::vector<std::shared_ptr<T>> _entities);
+
 		void RayPicking();
 
 		/* Game Functions */
@@ -159,6 +165,8 @@ namespace v_game {
 		bool AddBuilding(BuildingType _type, Player& _player, const glm::vec3& _position) const;
 
 		void SetTerrainObstacleForBuilding(const glm::ivec2& _buildingPosition ) const;
+
+		vermin::Entity * GetEntityAtNodeIndex(const glm::ivec2& _nodeIndices);
 
 	};
 

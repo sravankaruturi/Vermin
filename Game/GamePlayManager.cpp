@@ -97,8 +97,8 @@ namespace v_game
 				std::string("Knight_Diffuse")
 			},
 			{
-				MODEL_FOLDER + std::string("RTSDemo/SwordAndShieldSlash.fbx"),
-				std::string("Knight_Sword_Slash"),
+				MODEL_FOLDER + std::string("RTSDemo/Knight_Attack.fbx"),
+				std::string("Knight_Attack"),
 				MODEL_FOLDER + std::string("RTSDemo/Materials/DemoTexture.png"),
 				std::string("Knight_Diffuse")
 			}

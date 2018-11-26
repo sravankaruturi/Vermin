@@ -27,7 +27,9 @@ namespace vermin {
         /**
         * \brief Health
         */
-        float health = 10;
+        short health = 10;
+
+        short maxHealth = 100;
 
         /**
         * \brief Moving to Attack, or Attacking
@@ -53,6 +55,11 @@ namespace vermin {
          * \brief Movement Speed
          */
         float movementSpeed = 1.0f;
+
+        float beingAttackedTimer = 0.0f;
+
+        float attackDamage = 10.0f;
+
     };
 
     class Entity {
@@ -92,6 +99,8 @@ namespace vermin {
          * We use the Current Position as the Start Position.
          */
         glm::ivec2 targetNode{};
+
+
 
     public:
 
@@ -238,6 +247,19 @@ namespace vermin {
          * \brief Display this Entity's details in ImGUI.
          */
         void DisplayDetailsImgui();
+
+        void TakeDamage(float _damageMultipliedWithDeltaTime){
+
+            this->gPlay.beingAttackedTimer += _damageMultipliedWithDeltaTime;
+
+            if ( this->gPlay.beingAttackedTimer > 1.0f){
+                int damage = (static_cast<int>(glm::floor(this->gPlay.beingAttackedTimer)));
+                this->gPlay.beingAttackedTimer -= damage;
+                this->gPlay.health -= damage;
+            }
+
+        }
+
 
     };
 }

@@ -24,25 +24,35 @@ namespace v_game {
 		
 		idle,
 		walking,
-		death
+		death,
+		attack
 
 	};
 
-	const std::string animation_names[3][3] = {
+	enum class UnitState{
+		walking,
+		idle,
+		attacking
+	};
+
+	const std::string animation_names[3][4] = {
 		{
 			"Worker_Happy_Idle",
 			"Worker_Walking",
 			"Worker_Dying",
+			"Knight_Attack",
 		},
 		{
 			"Knight_Happy_Idle",
 			"Knight_Walking",
 			"Knight_Dying",
+			"Knight_Attack"
 		},
 		{
 			"Catapult_Happy_Idle",
 			"Catapult_Walking",
 			"Catapult_Dying",
+			"Catapult_Attack"
 		}
 	};
 
@@ -75,14 +85,25 @@ namespace v_game {
 
 		std::string idleObjectName;
 		std::string walkObjectName;
+		std::string attackObjectName;
 		std::string deathObjectName;
-
-		short health = 0;
-		short maxHealth = 100;
 
 		unsigned int faceTextureID;
 
+		UnitState currentState = UnitState::idle;
+
+		vermin::Entity * target = nullptr;
+
 	public:
+
+		Entity *getTarget() const;
+
+		void setTarget(Entity *target);
+
+		UnitState getCurrentState() const;
+
+		void setCurrentState(UnitState currentState);
+
 		unsigned FaceTextureId() const
 		{
 			return faceTextureID;
@@ -92,6 +113,7 @@ namespace v_game {
 		{
 			faceTextureID = _faceTextureId;
 		}
+
 	};
 
 }

@@ -567,6 +567,9 @@ namespace v_game {
 
 	void GameScene::RayPicking() {
 
+		// We should refresh this every frame.
+		this->minIntDistance = INT_MAX;
+
 		rayStart = this->activeCamera->GetPosition();
 		mousePointerRay = activeCamera->GetMouseRayDirection(window->mouseX, window->mouseY, window->GetWidth(), window->GetHeight(), projectionMatrix);
 
@@ -578,6 +581,7 @@ namespace v_game {
 
 		const glm::ivec2 target_node = gameTerrain->pointedNodeIndices;
 
+		this->minIntDistance = INT_MAX;
 		this->CheckIfPicked<vermin::Entity>(entities);
 		this->CheckIfPicked<vermin::AnimatedEntity>(animatedEntities);
 		this->CheckIfPicked<Building>(humanPlayer.buildings);
@@ -585,30 +589,62 @@ namespace v_game {
 		this->CheckIfPicked<Building>(aiPlayer.buildings);
 		this->CheckIfPicked<Unit>(aiPlayer.units);
 
+
+
 		for ( auto it: selectedEntities){
 			it->SetSelectedInScene(true);
 		}
 
 		if ( window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_2))
 		{
-			
-			const int number_of_selected_entities = selectedEntities.size();
-			const int number_of_rows = glm::ceil(glm::sqrt(number_of_selected_entities));
-			const int number_of_columns = glm::ceil((float)number_of_selected_entities / number_of_rows);
-			int entity_counter = 0;
 
-			for (int row_counter = 0; row_counter < number_of_rows; row_counter++) {
-				for (int column_counter = 0; column_counter < number_of_columns; column_counter++) {
+			// Check if there is an Entity where the Node is pressed
+			this->hoveredEntity = nullptr;
+			this->minIntDistance = INT_MAX;
+			this->CheckIfHovered<vermin::Entity>(entities);
+			this->CheckIfHovered<vermin::AnimatedEntity>(animatedEntities);
+//			this->CheckIfHovered<Building>(humanPlayer.buildings);
+//			this->CheckIfHovered<Unit>(humanPlayer.units);
+			this->CheckIfHovered<Building>(aiPlayer.buildings);
+			this->CheckIfHovered<Unit>(aiPlayer.units);
 
-					if (entity_counter >= number_of_selected_entities) {
-						break;
+			if (nullptr != hoveredEntity){
+
+				// If there is, attack it.
+				// TODO: What if it is our Entity?
+				// We can surround it first, and then attack.
+				// We would only make the last selected Entity attack for now.
+				selectedEntities.back()->gPlay.attackingMode = true;
+				selectedEntities.back()->gPlay.attackTarget = hoveredEntity;
+				selectedEntities.back()->setTargetNode(gameTerrain->GetNodeIndicesFromPos(hoveredEntity->GetPosition()));
+
+
+			}
+
+
+
+
+			// We would get the hovered Entity. If there was none, go ahead and continue.
+			if ( nullptr == hoveredEntity) {
+
+				const int number_of_selected_entities = selectedEntities.size();
+				const int number_of_rows = glm::ceil(glm::sqrt(number_of_selected_entities));
+				const int number_of_columns = glm::ceil((float) number_of_selected_entities / number_of_rows);
+				int entity_counter = 0;
+
+				for (int row_counter = 0; row_counter < number_of_rows; row_counter++) {
+					for (int column_counter = 0; column_counter < number_of_columns; column_counter++) {
+
+						if (entity_counter >= number_of_selected_entities) {
+							break;
+						}
+
+						glm::ivec2 temp_target_node = target_node;
+						temp_target_node.x += (row_counter - number_of_rows / 2);
+						temp_target_node.y += (column_counter - number_of_rows / 2);
+						selectedEntities[entity_counter++]->setTargetNode(temp_target_node);
+
 					}
-
-					glm::ivec2 temp_target_node = target_node;
-					temp_target_node.x += (row_counter - number_of_rows / 2);
-					temp_target_node.y += (column_counter - number_of_rows / 2);
-					selectedEntities[entity_counter++]->setTargetNode(temp_target_node);
-
 				}
 			}
 
@@ -702,6 +738,60 @@ namespace v_game {
 		target_node.y = _buildingPosition.y + 1;
 		gameTerrain->SetTerrainNodeObstacle(target_node);
 
+
+	}
+
+	vermin::Entity *GameScene::GetEntityAtNodeIndex(const glm::ivec2 &_nodeIndices) {
+
+		// Go through each of the Entity to find their respective Positions.
+		// Then Go to the Terrain and find the indices.
+		// If Matched return it.
+
+		for ( const auto& it: humanPlayer.buildings){
+			if ( gameTerrain->GetNodeIndicesFromPos(it->GetPosition()) == _nodeIndices ){
+				return it.get();
+			}
+		}
+
+		for ( const auto& it: humanPlayer.units){
+			if ( gameTerrain->GetNodeIndicesFromPos(it->GetPosition()) == _nodeIndices ){
+				return it.get();
+			}
+		}
+
+		for ( const auto& it: aiPlayer.buildings){
+			if ( gameTerrain->GetNodeIndicesFromPos(it->GetPosition()) == _nodeIndices ){
+				return it.get();
+			}
+		}
+
+		for ( const auto& it: aiPlayer.units){
+			if ( gameTerrain->GetNodeIndicesFromPos(it->GetPosition()) == _nodeIndices ){
+				return it.get();
+			}
+		}
+
+		return nullptr;
+
+	}
+
+	template<class T>
+	void GameScene::CheckIfHovered(std::vector<std::shared_ptr<T>> _entities) {
+
+		for (auto& it : _entities)
+		{
+			// We cast all the Units to Entity*
+			auto entIt = (vermin::Entity*)(it.get());
+
+			if (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance))
+			{
+				if (intDistance < minIntDistance)
+				{
+					minIntDistance = intDistance;
+					hoveredEntity = entIt;
+				}
+			}
+		}
 
 	}
 }
