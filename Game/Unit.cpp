@@ -67,47 +67,16 @@ namespace v_game {
 
 
 		/* Pathing */
-
 		glm::vec3 endPosition = _terrain->GetTileFromIndices(this->targetNode)->GetPosition();
-
-		_terrain->HighlightNode(this->targetNode.x, this->targetNode.y);
+        // Update the Target based position.
+        if ( this->gPlay.attackTarget != nullptr ){
+            endPosition = this->gPlay.attackTarget->GetPosition();
+        }
 
 		path = _terrain->GetPathFromPositions(this->position, endPosition);
 
-		////if (it->gPlay.attackingMode && !path.empty()) {
-		////	// If you are attacking, you stop one tile before the actual target.
-		////	path.pop_back();
-		////}
 
-		////if (it->gPlay.attackingMode) {
 
-		////	// Close enough
-		////	if (path.size() < 2 && it->gPlay.attackTarget->gPlay.attacker == nullptr)
-		////	{
-		////		it->gPlay.attackTarget->gPlay.attacker = it.get();
-		////		// That object immediately starts attacking the current player.
-		////		it->gPlay.attackTarget->gPlay.attackingMode = true;
-		////		it->gPlay.attackTarget->gPlay.attackTarget = it.get();
-		////		if ("SwordAndShieldSlash" != it->GetObjectName() && "Dying" != it->GetObjectName())
-		////		{
-		////			it->SetAnimationTotalTime(0);
-		////			it->SetObjectName("SwordAndShieldSlash");
-		////		}
-		////	}
-		////	else if (path.size() > 2 && it->gPlay.attackTarget->gPlay.attacker == it.get())
-		////	{
-		////		it->gPlay.attackTarget->gPlay.attacker = nullptr;
-
-		////		if ("Walking" != it->GetObjectName())
-		////		{
-		////			it->SetAnimationTotalTime(0);
-		////			it->SetObjectName("Walking");
-		////		}
-		////	}
-		////}
-		//else
-
-		// Check if you are attacking.
 		if ( this->gPlay.attackingMode ){
 
 			path.pop_back();
