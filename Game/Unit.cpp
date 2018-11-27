@@ -63,6 +63,12 @@ namespace v_game {
 			}
 		}
 
+		if ( this->gPlay.attacker != nullptr && this->currentState == UnitState::idle)
+		{
+			this->gPlay.attackTarget = this->gPlay.attacker;
+			this->gPlay.attackingMode = true;
+		}
+
 		AnimatedEntity::Update(_deltaTime);
 
 		if ( this->gPlay.health <= 0 && this->gPlay.active && !this->gPlay.toBeDeleted)
@@ -93,9 +99,12 @@ namespace v_game {
 
 		if ( this->gPlay.attackingMode ){
 
-			path.pop_back();
+			if ( path.size() >= 3)
+			{
+				path.pop_back();
+			}
 
-			if ( path.size() < 2 ){
+			if ( path.size() <= 1 ){
 
 				// Start Attacking
 				this->currentState = UnitState::attacking;
