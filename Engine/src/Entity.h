@@ -62,6 +62,12 @@ namespace vermin {
 
 		bool toBeDeleted = false;
 
+		float deathTimer = 3.0f;
+
+		float deathTimeCounter = 0.0f;
+
+		bool active = true;
+
     };
 
     class Entity {

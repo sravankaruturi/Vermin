@@ -142,10 +142,6 @@ namespace v_game {
 		ASMGR.shaders.at("unit")->use();
 		ASMGR.shaders.at("unit")->setVec4("u_PlayerColour", aiPlayer.pColour);
 		for (const auto& it : aiPlayer.units) {
-			if (it->gPlay.toBeDeleted)
-			{
-				continue;
-			}
 			it->Render();
 		}
 
@@ -410,6 +406,14 @@ namespace v_game {
 			this->humanPlayer.pMode = PlayerMode::Playing;
 		}
 
+		if (window->IsKeyPressedOrHeld(GLFW_KEY_DELETE))
+		{
+			for ( auto& it: selectedEntities)
+			{
+				this->KillUnit(it);
+			}
+		}
+
 	}
 
 	GameScene::GameScene(std::shared_ptr<vermin::Window> _window)
@@ -500,12 +504,6 @@ namespace v_game {
 		}
 
 		for (const auto& it : aiPlayer.units) {
-
-			if ( it->gPlay.toBeDeleted )
-			{
-				continue;
-			}
-
 			it->Update(_deltaTime, gameTerrain.get());
 			it->PlayAnimation(_deltaTime, _totalTime);
 		}
@@ -673,15 +671,50 @@ namespace v_game {
 		_player.rWood -= w_cost;
 		_player.rStone -= s_cost;
 
-		unsigned t_index = _player.units.size();
+		unsigned t_index = INT_MAX;
 
-		_player.units.emplace_back(
+		// Check if there are any inactive idiots lying around.
+		for ( auto& it: _player.units)
+		{
+			if( !it->gPlay.active && it->Type() == _type)
+			{
+				// Use That.
+				it->gPlay.active = true;
+				t_index = &it - &_player.units[0];
+
+				break;
+			}
+		}
+
+		t_index = (t_index > _player.units.size()) ? _player.units.size() : t_index;
+
+		if ( t_index == _player.units.size() )
+		{
+			_player.units.emplace_back(
 				std::make_shared<Unit>(_type)
-				);
+			);
+		}
+
+		auto& new_unit = _player.units[t_index];
 
 		_player.units[t_index]->SetPosition(_player.buildings.back()->GetRandomSpawnLocation());
+		_player.units[t_index]->setTargetNode(_player.buildings.back()->GetRandomSpawnLocation());
+		_player.units[t_index]->SetAnimationTotalTime(0);
 
 		return true;
+
+	}
+
+	bool GameScene::KillUnit(vermin::Entity * _entity)
+	{
+
+		_entity->gPlay.attacker = nullptr;
+		_entity->gPlay.attackingMode = false;
+		_entity->gPlay.attackTarget = nullptr;
+		_entity->gPlay.beingAttacked = false;
+		_entity->gPlay.toBeDeleted = true;
+
+		return (_entity->gPlay.active);
 
 	}
 

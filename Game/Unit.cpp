@@ -8,7 +8,7 @@
 namespace v_game {
 
 	Unit::Unit(UnitType _type)
-		: AnimatedEntity("Unit", "Villager/Worker_Happy_Idle.FBX", "unit", glm::vec3(-10, 0, -10), glm::vec3(10, 50, 10))
+		: AnimatedEntity("Unit", "Villager/Worker_Happy_Idle.FBX", "unit", glm::vec3(-10, 0, -10), glm::vec3(10, 50, 10)), type(_type)
 	{
 
 		this->objectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::idle)];
@@ -50,14 +50,28 @@ namespace v_game {
 	void Unit::Update(float _deltaTime, vermin::Terrain * _terrain)
 	{
 
+		if ( !this->gPlay.active )
+		{
+			return;
+		}
+
+		if ( this->gPlay.toBeDeleted)
+		{
+			if ( this->objectName != deathObjectName)
+			{
+				this->objectName = deathObjectName;
+			}
+		}
+
 		AnimatedEntity::Update(_deltaTime);
 
-		if ( this->gPlay.health <= 0 )
+		if ( this->gPlay.health <= 0 && this->gPlay.active && !this->gPlay.toBeDeleted)
 		{
 			// Mark for Deletion.
 			this->gPlay.toBeDeleted = true;
 			this->SetObjectName(deathObjectName);
 			this->gPlay.attacker->gPlay.attackingMode = false;
+			this->SetAnimationTotalTime(0.0f);
 		}
 
 		this->position.y = _terrain->GetHeightAtPos(this->position.x, this->position.z);

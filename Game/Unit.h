@@ -92,7 +92,13 @@ namespace v_game {
 
 		UnitState currentState = UnitState::idle;
 
+		UnitType type;
+
 	public:
+		UnitType Type() const
+		{
+			return type;
+		}
 
 		UnitState getCurrentState() const;
 

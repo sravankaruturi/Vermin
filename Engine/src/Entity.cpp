@@ -101,6 +101,19 @@ namespace vermin {
             matrixDirty = false;
         }
 #endif
+
+		if ( this->gPlay.toBeDeleted )
+		{
+			this->gPlay.deathTimeCounter += _deltaTime;
+		}
+
+		if ( this->gPlay.deathTimeCounter >= this->gPlay.deathTimer)
+		{
+			this->gPlay.active = false;
+			this->gPlay.toBeDeleted = false;
+			this->gPlay.deathTimeCounter = 0.0f;
+		}
+
     }
 
     void Entity::Render() {

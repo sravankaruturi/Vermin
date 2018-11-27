@@ -54,6 +54,11 @@ namespace vermin {
 
     void AnimatedEntity::Render() {
 
+		if( !this->gPlay.active )
+		{
+			return;
+		}
+
         ASMGR.shaders.at(shaderName)->use();
 
         auto loc = ASMGR.shaders.at(shaderName)->GetUniformLocation("u_BoneMatrices");

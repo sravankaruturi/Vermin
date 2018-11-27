@@ -162,6 +162,8 @@ namespace v_game {
 		/* Game Functions */
 		bool AddUnit(UnitType _type, Player& _player);
 
+		bool KillUnit(vermin::Entity * _entity);
+
 		bool AddBuilding(BuildingType _type, Player& _player, const glm::vec3& _position) const;
 
 		void SetTerrainObstacleForBuilding(const glm::ivec2& _buildingPosition ) const;
