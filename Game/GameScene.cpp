@@ -472,6 +472,8 @@ namespace v_game {
 	void GameScene::OnUpdate(float _deltaTime, float _totalTime)
 	{
 
+		this->enemyUnitSelected = false;
+
 		gameTerrain->ClearColours();
 
 		projectionMatrix = glm::perspective(45.0f, float(window->GetWidth()) / window->GetHeight(), 0.1f, 100.0f);
