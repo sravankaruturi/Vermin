@@ -49,7 +49,7 @@ namespace v_game {
 	void Game::Run()
 	{
 
-		while ( !menuScene->StartGame() && !menuScene->QuitGame()){
+		while ( !menuScene->StartGame() && !menuScene->QuitGame() && !menuScene->ShutDown()){
 			menuScene->RunScene();
 		}
 
