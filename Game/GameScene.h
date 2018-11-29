@@ -7,6 +7,7 @@
 #include "GamePlayManager.h"
 #include "Building.h"
 #include "Unit.h"
+#include "Tree.h"
 
 namespace v_game {
 
@@ -132,6 +133,8 @@ namespace v_game {
 
 		// There can only be one entity hovered over at a time.
 		vermin::Entity * hoveredEntity;
+
+		std::vector<std::unique_ptr<Tree>> trees;
 
 
 	public:

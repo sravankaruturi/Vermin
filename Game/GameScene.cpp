@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include <imgui_internal.h>
 #include <glm/gtc/matrix_transform.inl>
+#include <src/Colours.h>
 
 #define		NO_CAMERA_CONSTRAINTS	1
 
@@ -36,7 +37,9 @@ namespace v_game {
 		const ImGuiStyle &style = g.Style;
 
 		ImVec2 pos = window->DC.CursorPos;
-		ImVec2 size = ImGui::CalcItemSize(size_arg, ImGui::CalcItemWidth(), g.FontSize + style.FramePadding.y * 2.0f);
+		ImVec2 size = ImGui::CalcItemSize(
+				size_arg, ImGui::CalcItemWidth(), g.FontSize + style.FramePadding.y * 2.0f
+				);
 		ImVec2 other_pos = ImVec2(pos.x + size.x, pos.y + size.y);
 		ImRect bb(
 			pos,
@@ -51,8 +54,14 @@ namespace v_game {
 		ImGui::RenderFrame(bb.Min, bb.Max, ImGui::GetColorU32(ImGuiCol_FrameBg), true, style.FrameRounding);
 		bb.Expand(ImVec2(-style.FrameBorderSize, -style.FrameBorderSize));
 		const ImVec2 fill_br = ImVec2(ImLerp(bb.Min.x, bb.Max.x, _perc), bb.Max.y);
-		ImGui::RenderRectFilledRangeH(window->DrawList, bb, ImGui::ColorConvertFloat4ToU32(bar_colour), 0.0f, _perc,
-			style.FrameRounding);
+		ImGui::RenderRectFilledRangeH(
+				window->DrawList,
+			   	bb,
+				ImGui::ColorConvertFloat4ToU32(bar_colour), 
+				0.0f, 
+				_perc, 
+				style.FrameRounding
+				);
 
 		// Default displaying the fraction as percentage string, but user can override it
 		char overlay_buf[32];
@@ -151,6 +160,11 @@ namespace v_game {
 			it->Render();
 		}
 
+		ASMGR.shaders.at("town_center")->use();
+		ASMGR.shaders.at("town_center")->setVec4("u_PlayerColour", glm::vec4(yellow, 1.0f));
+		for (const auto& it : trees) {
+			it->Render();
+		}
 
 		gameTerrain->Render();
 		// grid.Render();
@@ -467,6 +481,12 @@ namespace v_game {
 			std::make_unique<Building>(BuildingType::towncenter, glm::vec3(0, 0, 0))
 		);
 
+		this->trees.push_back(
+				std::make_unique<Tree>(
+						glm::vec3(5, 0.5, 5)
+						)
+				);
+
 	}
 
 	void GameScene::OnUpdate(float _deltaTime, float _totalTime)
@@ -508,6 +528,10 @@ namespace v_game {
 		for (const auto& it : aiPlayer.units) {
 			it->Update(_deltaTime, gameTerrain.get());
 			it->PlayAnimation(_deltaTime, _totalTime);
+		}
+
+		for (const auto& it : trees){
+			it->Update(_deltaTime);
 		}
 
 
