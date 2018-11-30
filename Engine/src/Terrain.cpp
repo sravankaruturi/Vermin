@@ -246,7 +246,28 @@ namespace vermin {
         areVerticesDirty = true;
     }
 
-    bool Terrain::CanPlaceHere(unsigned _x, unsigned _z)
+	bool Terrain::CanPlaceHere(glm::ivec2 _nodeIndex)
+	{
+		return this->CanPlaceHere(_nodeIndex.x, _nodeIndex.y);
+	}
+
+	bool Terrain::CanPlaceHere(unsigned _x, unsigned _z)
+	{
+		if (_x < nodeCountX && _x >= 0) {
+			if (_z < nodeCountZ && _z >= 0) {
+				MapTile * current_tile = GetTileFromIndices(_x, _z);
+				return !current_tile->navObstacle;
+			}
+		}
+		return false;
+	}
+
+	bool Terrain::CanPlaceBuildingHere(glm::ivec2 _nodeIndex)
+	{
+		return this->CanPlaceBuildingHere(_nodeIndex.x, _nodeIndex.y);
+	}
+
+	bool Terrain::CanPlaceBuildingHere(unsigned _x, unsigned _z)
     {
 
         if (_x < nodeCountX - 1 && _x >= 1)

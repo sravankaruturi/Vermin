@@ -609,7 +609,7 @@ namespace vermin {
 			const glm::ivec2 target_node = testTerrain->pointedNodeIndices;
 
 			// Check if you can place the building there.
-			bool test_can_place = testTerrain->CanPlaceHere(target_node.x, target_node.y);
+			bool test_can_place = testTerrain->CanPlaceBuildingHere(target_node.x, target_node.y);
 
 			const MapTile * current_tile = testTerrain->GetTileFromIndices(target_node.x, target_node.y);
 			buildingPlacer->SetPosition(current_tile->GetPosition());

@@ -316,7 +316,13 @@ namespace vermin {
          */
         void HighlightNode(unsigned int _x, unsigned int _z);
 
-        bool CanPlaceHere(unsigned int _x, unsigned int _z);
+		bool CanPlaceHere(glm::ivec2 _nodeIndex);
+
+		bool CanPlaceHere(unsigned int _x, unsigned int _y);
+
+		bool CanPlaceBuildingHere(glm::ivec2 _nodeIndex);
+
+        bool CanPlaceBuildingHere(unsigned int _x, unsigned int _z);
 
         /**
          * \brief Clear any highlights we made in the previous frame.

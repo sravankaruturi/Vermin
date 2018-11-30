@@ -2,8 +2,7 @@
 // Created by skk7174 on 11/12/2018.
 //
 
-#ifndef GAME_BUILDING_H
-#define GAME_BUILDING_H
+#pragma once
 
 #include "Entity.h"
 
@@ -70,6 +69,3 @@ namespace v_game
 	};
 
 }
-
-
-#endif //GAME_BUILDING_H

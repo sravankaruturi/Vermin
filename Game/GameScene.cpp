@@ -487,6 +487,8 @@ namespace v_game {
 
 		for ( const auto& it: humanPlayer.units ){
 
+			// Set this current Node to obstacle? No..
+
 			it->Update(_deltaTime, gameTerrain.get());
 			it->PlayAnimation(_deltaTime, _totalTime);
 			
@@ -628,7 +630,13 @@ namespace v_game {
 				std::make_shared<Unit>(_type)
 				);
 
-		_player.units[t_index]->SetPosition(_player.buildings.back()->GetRandomSpawnLocation());
+		glm::vec3 spawn_location = _player.buildings.back()->GetRandomSpawnLocation();
+
+		while (!gameTerrain->CanPlaceHere(gameTerrain->GetNodeIndicesFromPos(spawn_location))) {
+			spawn_location = _player.buildings.back()->GetRandomSpawnLocation();
+		}
+
+		_player.units[t_index]->SetPosition(spawn_location);
 
 		return true;
 
