@@ -638,17 +638,29 @@ namespace v_game {
 //			this->CheckIfHovered<Unit>(humanPlayer.units);
 			this->CheckIfHovered<Building>(aiPlayer.buildings);
 			this->CheckIfHovered<Unit>(aiPlayer.units);
+			this->CheckIfHovered<Tree>(trees);
 
 			if (nullptr != hoveredEntity){
 
-				// If there is, attack it.
-				// TODO: What if it is our Entity?
-				// We can surround it first, and then attack.
-				// We would only make the last selected Entity attack for now.
-				selectedEntities.back()->gPlay.attackingMode = true;
-				selectedEntities.back()->gPlay.attackTarget = hoveredEntity;
-				selectedEntities.back()->setTargetNode(gameTerrain->GetNodeIndicesFromPos(hoveredEntity->GetPosition()));
+				auto& test = typeid(*hoveredEntity);
 
+				// If the hovered entity is a tree.
+				if (typeid(*hoveredEntity) == typeid(Tree)) {
+
+					LOGGER.AddToLog("Hovering over a Tree");
+
+				}
+				else if (typeid(*hoveredEntity) == typeid(Unit)) {
+
+					// If there is, attack it.
+					// TODO: What if it is our Entity?
+					// We can surround it first, and then attack.
+					// We would only make the last selected Entity attack for now.
+					selectedEntities.back()->gPlay.attackingMode = true;
+					selectedEntities.back()->gPlay.attackTarget = hoveredEntity;
+					selectedEntities.back()->setTargetNode(gameTerrain->GetNodeIndicesFromPos(hoveredEntity->GetPosition()));
+
+				}
 
 			}
 
@@ -845,6 +857,26 @@ namespace v_game {
 	void GameScene::CheckIfHovered(std::vector<std::shared_ptr<T>> _entities) {
 
 		for (auto& it : _entities)
+		{
+			// We cast all the Units to Entity*
+			auto entIt = (vermin::Entity*)(it.get());
+
+			if (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance))
+			{
+				if (intDistance < minIntDistance)
+				{
+					minIntDistance = intDistance;
+					hoveredEntity = entIt;
+				}
+			}
+		}
+
+	}
+
+	template <class T>
+	void GameScene::CheckIfHovered(std::vector<std::unique_ptr<T>>& _entities)
+	{
+		for (const auto& it : _entities)
 		{
 			// We cast all the Units to Entity*
 			auto entIt = (vermin::Entity*)(it.get());

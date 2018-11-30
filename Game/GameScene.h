@@ -160,6 +160,9 @@ namespace v_game {
 		template <class T>
 		void CheckIfHovered(std::vector<std::shared_ptr<T>> _entities);
 
+		template <class T>
+		void CheckIfHovered(std::vector<std::unique_ptr<T>>& _entities);
+
 		void RayPicking();
 
 		/* Game Functions */

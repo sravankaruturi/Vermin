@@ -268,6 +268,7 @@ namespace vermin {
 
         }
 
+		virtual std::string GetType() = 0;
 
     };
 }
