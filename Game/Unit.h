@@ -10,6 +10,8 @@
 
 namespace v_game {
 
+	class ResourceObject;
+
 	enum class UnitType
 	{
 
@@ -21,7 +23,7 @@ namespace v_game {
 
 	enum class AnimType
 	{
-		
+
 		idle,
 		walking,
 		death,
@@ -32,6 +34,7 @@ namespace v_game {
 	enum class UnitState{
 		walking,
 		idle,
+		gathering,
 		attacking
 	};
 
@@ -66,55 +69,80 @@ namespace v_game {
 
 	class Unit : public vermin::AnimatedEntity {
 
-	public:
+		public:
 
-		explicit Unit(UnitType _type);
+			explicit Unit(UnitType _type);
 
-		float GetCurrentHPPerc();
+			float GetCurrentHPPerc();
 
-		~Unit() = default;
+			~Unit() = default;
 
-		void Update(float _deltaTime, vermin::Terrain * _terrain);
+			void Update(float _deltaTime, vermin::Terrain * _terrain);
 
-	protected:
+			float resourceTimer = 0.0f;
+			float resourceTimeLimit = 2.0f;
 
-		/* Pathing Stuff */
-		std::vector<vermin::MapTile *> path;
-		float totalTimeCounterForPathing = 0;
-		float movementSpeed = 2.0f;
+			ResourceObject * resourceEntity = nullptr;
 
-		std::string idleObjectName;
-		std::string walkObjectName;
-		std::string attackObjectName;
-		std::string deathObjectName;
+		protected:
 
-		unsigned int faceTextureID;
+			/* Pathing Stuff */
+			std::vector<vermin::MapTile *> path;
+			float totalTimeCounterForPathing = 0;
+			float movementSpeed = 2.0f;
 
-		UnitState currentState = UnitState::idle;
+			std::string idleObjectName;
+			std::string walkObjectName;
+			std::string attackObjectName;
+			std::string deathObjectName;
 
-		UnitType type;
+			unsigned int faceTextureID;
 
-	public:
-		UnitType Type() const
-		{
-			return type;
-		}
+			UnitState currentState = UnitState::idle;
 
-		UnitState getCurrentState() const;
+			UnitType type;
 
-		void setCurrentState(UnitState currentState);
 
-		unsigned FaceTextureId() const
-		{
-			return faceTextureID;
-		}
+		public:
+			UnitType Type() const
+			{
+				return type;
+			}
 
-		void SetFaceTextureId(unsigned _faceTextureId)
-		{
-			faceTextureID = _faceTextureId;
-		}
+			UnitState getCurrentState() const;
+
+			void setCurrentState(UnitState currentState);
+
+			unsigned FaceTextureId() const
+			{
+				return faceTextureID;
+			}
+
+			void SetFaceTextureId(unsigned _faceTextureId)
+			{
+				faceTextureID = _faceTextureId;
+			}
+
+			std::string GetType() override{
+				return "Unit";
+			}
+
+			const static std::string ToString(UnitState _state){
+				switch(_state){
+					case UnitState::attacking:
+						return "Attacking";
+					case UnitState::idle:
+						return "Idle";
+					case UnitState::walking:
+						return "Walking";
+					case UnitState::gathering:
+						return "Gathering";
+				}
+			}
 
 	};
+
+
 
 }
 

@@ -268,7 +268,10 @@ namespace vermin {
 
         }
 
-		virtual std::string GetType() = 0;
+		// Override this method as we see fit
+		virtual std::string GetType(){
+			return "Entity";
+		}
 
     };
 }

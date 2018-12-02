@@ -13,4 +13,15 @@ namespace v_game{
 		this->SetScale(glm::vec3(1/512.0f));
 		this->SetPosition(_position);
 	}
+
+	void Tree::Update(float _deltaTime){
+
+		//this->SetScale(this->GetScale() * ((resourceAmount)/100.0f) );
+		if ( this->resourceAmount <= 0.0f ){
+			this->gPlay.active = false;
+		}
+
+		Entity::Update(_deltaTime);
+
+	}
 }

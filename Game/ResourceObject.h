@@ -6,20 +6,25 @@
 
 #pragma once
 
-class ResourceObject {
+namespace v_game{
 
-protected:
+	class ResourceObject {
 
-	int resourceAmount = 0;
+	public:
 
-	ResourceObject(int _amount) : resourceAmount(_amount){
+			int resourceAmount = 100;
 
-	}
+			explicit ResourceObject(int _amount){
+				this->resourceAmount = _amount;
+			}
 
-public :
 
-	virtual void MineResources(int _amount) = 0;
+			void MineResources(int _amount){
+				this->resourceAmount -= _amount;
+			}
 
-};
+	};
 
+
+}
 

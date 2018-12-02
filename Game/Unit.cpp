@@ -2,6 +2,7 @@
 // Created by skk7174 on 11/12/2018.
 //
 
+#include "ResourceObject.h"
 #include "Unit.h"
 #include "AssetManager.h"
 
@@ -53,6 +54,18 @@ namespace v_game {
 		if ( !this->gPlay.active )
 		{
 			return;
+		}
+
+		if ( this->currentState == UnitState::gathering){
+			this->resourceTimer += _deltaTime;
+			if ( this->resourceTimer > resourceTimeLimit ){
+				this->resourceTimer = 0.0f;
+				if ( nullptr == this->resourceEntity ){
+					this->currentState = UnitState::idle;
+				}else{
+					this->resourceEntity->MineResources(10.0f);
+				}
+			}
 		}
 
 		if ( this->gPlay.toBeDeleted)

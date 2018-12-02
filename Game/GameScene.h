@@ -158,6 +158,9 @@ namespace v_game {
 		void CheckIfPicked(std::vector<std::shared_ptr<T>> _entities);
 
 		template <class T>
+		void CheckIfPicked(std::vector<std::unique_ptr<T>>& _entities);
+
+		template <class T>
 		void CheckIfHovered(std::vector<std::shared_ptr<T>> _entities);
 
 		template <class T>

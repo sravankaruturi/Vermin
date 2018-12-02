@@ -118,6 +118,10 @@ namespace vermin {
 
     void Entity::Render() {
 
+		if ( !this->gPlay.active ){
+			return;
+		}
+
         PE_ASSERT(!shaderName.empty() && !objectName.empty());
 
         // Use the Current Shader.

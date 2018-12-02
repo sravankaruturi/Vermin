@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <src/Entity.h>
 #include "ResourceObject.h"
+#include <src/Entity.h>
 
 namespace v_game{
 
@@ -14,11 +14,11 @@ namespace v_game{
 	public:
 		explicit Tree(glm::vec3 _position);
 
-		void MineResources(int _amount) override {
-
-			this->resourceAmount -= _amount;
-
+		std::string GetType() override{
+			return "Tree";
 		}
+
+		void Update(float _deltaTime);
 
 	};
 

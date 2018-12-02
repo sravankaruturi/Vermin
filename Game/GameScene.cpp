@@ -162,6 +162,7 @@ namespace v_game {
 
 		ASMGR.shaders.at("town_center")->use();
 		ASMGR.shaders.at("town_center")->setVec4("u_PlayerColour", glm::vec4(yellow, 1.0f));
+
 		for (const auto& it : trees) {
 			it->Render();
 		}
@@ -234,6 +235,14 @@ namespace v_game {
 
 		ImGui::End();
 
+		ImGui::Begin("Selected Units");
+		{
+			for ( auto& it : selectedEntities ){
+				ImGui::Text("%s", it->GetEntityName().c_str());
+			}
+		}
+		ImGui::End();
+
 		if ( displayLogWindow ){
 			LOGGER.Render(&displayLogWindow);
 		}
@@ -299,7 +308,34 @@ namespace v_game {
 
 		}
 
+		if ( !selectedEntities.empty() ){
 
+			Tree * t = dynamic_cast<Tree*>(selectedEntities.back());
+			if (nullptr!=t ){
+
+				window_pos.y = ImGui::GetIO().DisplaySize.y - distanceFromEdges;
+				window_pos.x = ImGui::GetIO().DisplaySize.x / 2;
+
+				window_pos_pivot.y = 1;
+				window_pos_pivot.x = 0.5;
+
+				ImGui::SetNextWindowSize(swSize);
+				ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
+
+				ImGui::Begin("Tree Stats", nullptr, swFlags);
+
+				ImGui::Image((ImTextureID)(1), ImVec2(50, 50));
+
+				ImGui::DragInt( "Tree Res Amount", &(((Tree *)selectedEntities.back())->resourceAmount));
+
+				ImGui::Separator();
+
+				ImGui::End();
+
+
+			}
+
+		}
 
 		
 		
@@ -570,31 +606,6 @@ namespace v_game {
 
 	}
 
-	template <class T>
-	void GameScene::CheckIfPicked(std::vector<std::shared_ptr<T>> _entities){
-
-		for (auto& it : _entities)
-		{
-			// We cast all the Units to Entity*
-			auto entIt = (vermin::Entity*)(it.get());
-
-			if ((window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1)) && (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance)))
-			{
-				if (intDistance < minIntDistance)
-				{
-					minIntDistance = intDistance;
-					if (!window->IsKeyPressedOrHeld(GLFW_KEY_LEFT_SHIFT)) {
-						selectedEntities.clear();
-					}
-					if (std::find(selectedEntities.begin(), selectedEntities.end(), entIt) == selectedEntities.end()) {
-						selectedEntities.push_back(entIt);
-					}
-				}
-			}
-			entIt->SetSelectedInScene(false);
-		}
-	}
-
 
 	void GameScene::RayPicking() {
 
@@ -619,6 +630,7 @@ namespace v_game {
 		this->CheckIfPicked<Unit>(humanPlayer.units);
 		this->CheckIfPicked<Building>(aiPlayer.buildings);
 		this->CheckIfPicked<Unit>(aiPlayer.units);
+		this->CheckIfPicked<Tree>(trees);
 
 
 
@@ -632,7 +644,8 @@ namespace v_game {
 			// Check if there is an Entity where the Node is pressed
 			this->hoveredEntity = nullptr;
 			this->minIntDistance = INT_MAX;
-			this->CheckIfHovered<vermin::Entity>(entities);
+
+//			this->CheckIfHovered<vermin::Entity>(entities);
 			this->CheckIfHovered<vermin::AnimatedEntity>(animatedEntities);
 //			this->CheckIfHovered<Building>(humanPlayer.buildings);
 //			this->CheckIfHovered<Unit>(humanPlayer.units);
@@ -642,15 +655,28 @@ namespace v_game {
 
 			if (nullptr != hoveredEntity){
 
-				auto& test = typeid(*hoveredEntity);
-
 				// If the hovered entity is a tree.
-				if (typeid(*hoveredEntity) == typeid(Tree)) {
+				// Try the Dynamic Cast Method.
+				v_game::Tree * t = dynamic_cast<v_game::Tree*>(hoveredEntity);
+				v_game::Unit * u = dynamic_cast<v_game::Unit*>(hoveredEntity);
+
+				if ( nullptr != t) {
 
 					LOGGER.AddToLog("Hovering over a Tree");
 
+					if ( !selectedEntities.empty() ){
+						
+						for ( auto& it: selectedEntities ){
+							if ( "Unit" == it->GetType() ){
+								((Unit*)it)->setCurrentState(UnitState::gathering);
+								((Unit*)it)->resourceEntity = (ResourceObject*)hoveredEntity;
+							}	
+						}
+
+					}
+
 				}
-				else if (typeid(*hoveredEntity) == typeid(Unit)) {
+				else if ( nullptr != u ) {
 
 					// If there is, attack it.
 					// TODO: What if it is our Entity?
@@ -889,6 +915,57 @@ namespace v_game {
 					hoveredEntity = entIt;
 				}
 			}
+		}
+
+	}
+
+	template <class T>
+	void GameScene::CheckIfPicked(std::vector<std::shared_ptr<T>> _entities){
+
+		for (auto& it : _entities)
+		{
+			// We cast all the Units to Entity*
+			auto entIt = (vermin::Entity*)(it.get());
+
+			if ((window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1)) && (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance)))
+			{
+				if (intDistance < minIntDistance)
+				{
+					minIntDistance = intDistance;
+					if (!window->IsKeyPressedOrHeld(GLFW_KEY_LEFT_SHIFT)) {
+						selectedEntities.clear();
+					}
+					if (std::find(selectedEntities.begin(), selectedEntities.end(), entIt) == selectedEntities.end()) {
+						selectedEntities.push_back(entIt);
+					}
+				}
+			}
+			entIt->SetSelectedInScene(false);
+		}
+	}
+
+	template<class T>
+	void GameScene::CheckIfPicked(std::vector<std::unique_ptr<T>>& _entities) {
+
+		for (auto& it : _entities)
+		{
+			// We cast all the Units to Entity*
+			auto entIt = (vermin::Entity*)(it.get());
+
+			if ((window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1)) && (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance)))
+			{
+				if (intDistance < minIntDistance)
+				{
+					minIntDistance = intDistance;
+					if (!window->IsKeyPressedOrHeld(GLFW_KEY_LEFT_SHIFT)) {
+						selectedEntities.clear();
+					}
+					if (std::find(selectedEntities.begin(), selectedEntities.end(), entIt) == selectedEntities.end()) {
+						selectedEntities.push_back(entIt);
+					}
+				}
+			}
+			entIt->SetSelectedInScene(false);
 		}
 
 	}
