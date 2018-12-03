@@ -518,10 +518,14 @@ namespace v_game {
 		);
 
 		this->trees.push_back(
-				std::make_unique<Tree>(
+				std::make_shared<Tree>(
 						glm::vec3(5, 0.5, 5)
 						)
 				);
+
+		for ( auto& it: trees){
+			this->gameEntities.push_back(it);
+		}
 
 	}
 
@@ -624,6 +628,7 @@ namespace v_game {
 		const glm::ivec2 target_node = gameTerrain->pointedNodeIndices;
 
 		this->minIntDistance = INT_MAX;
+		/*
 		this->CheckIfPicked<vermin::Entity>(entities);
 		this->CheckIfPicked<vermin::AnimatedEntity>(animatedEntities);
 		this->CheckIfPicked<Building>(humanPlayer.buildings);
@@ -631,8 +636,10 @@ namespace v_game {
 		this->CheckIfPicked<Building>(aiPlayer.buildings);
 		this->CheckIfPicked<Unit>(aiPlayer.units);
 		this->CheckIfPicked<Tree>(trees);
+		*/
 
-
+		GetPickedEntity();
+		
 
 		for ( auto it: selectedEntities){
 			it->SetSelectedInScene(true);
@@ -645,13 +652,7 @@ namespace v_game {
 			this->hoveredEntity = nullptr;
 			this->minIntDistance = INT_MAX;
 
-//			this->CheckIfHovered<vermin::Entity>(entities);
-			this->CheckIfHovered<vermin::AnimatedEntity>(animatedEntities);
-//			this->CheckIfHovered<Building>(humanPlayer.buildings);
-//			this->CheckIfHovered<Unit>(humanPlayer.units);
-			this->CheckIfHovered<Building>(aiPlayer.buildings);
-			this->CheckIfHovered<Unit>(aiPlayer.units);
-			this->CheckIfHovered<Tree>(trees);
+			hoveredEntity = this->GetHoveredEntity();
 
 			if (nullptr != hoveredEntity){
 
@@ -757,6 +758,10 @@ namespace v_game {
 			_player.units.emplace_back(
 				std::make_shared<Unit>(_type)
 			);
+			this->gameEntities.push_back(std::static_pointer_cast<vermin::Entity>(
+						_player.units[t_index]
+						)
+					);
 		}
 
 		auto& new_unit = _player.units[t_index];
@@ -783,7 +788,7 @@ namespace v_game {
 	}
 
 	// Lets deal with the Barracks First.
-	bool GameScene::AddBuilding(BuildingType _type, Player& _player, const glm::vec3& _position) const
+	bool GameScene::AddBuilding(BuildingType _type, Player& _player, const glm::vec3& _position)
 	{
 
 		int w_cost = required_wood_for_buildings[static_cast<int>(_type)];
@@ -797,11 +802,15 @@ namespace v_game {
 		_player.rWood -= w_cost;
 		_player.rStone -= s_cost;
 
-		unsigned t_index = _player.units.size();
+		unsigned t_index = _player.buildings.size();
 
 		_player.buildings.emplace_back(
 			std::make_shared<Building>(_type, _position)
-		);
+			);
+
+		this->gameEntities.emplace_back(
+				std::static_pointer_cast<vermin::Entity>(_player.buildings.at(t_index))
+				);
 
 		this->SetTerrainObstacleForBuilding(gameTerrain->GetNodeIndicesFromPos(_position));
 
@@ -879,10 +888,42 @@ namespace v_game {
 
 	}
 
-	template<class T>
-	void GameScene::CheckIfHovered(std::vector<std::shared_ptr<T>> _entities) {
+	vermin::Entity * GameScene::GetPickedEntity(){
 
-		for (auto& it : _entities)
+		for (auto& it : this->gameEntities)
+		{
+
+			if ((window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1)) && (it->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance)))
+			{
+				if (intDistance < minIntDistance)
+				{
+					minIntDistance = intDistance;
+					if (!window->IsKeyPressedOrHeld(GLFW_KEY_LEFT_SHIFT)) {
+						selectedEntities.clear();
+					}
+					if (std::find(selectedEntities.begin(), selectedEntities.end(), it.get()) == selectedEntities.end()) {
+						selectedEntities.push_back(it.get());
+					}
+				}
+			}
+			it->SetSelectedInScene(false);
+		}
+
+		for (const auto& it: this->gameEntities){
+			if ( it->IsSelectedInScene() ){
+				return it.get();
+			}
+		}
+
+		return nullptr;
+
+	}
+
+	vermin::Entity * GameScene::GetHoveredEntity(){
+
+	    this->hoveredEntity = nullptr;
+
+		for (const auto& it : this->gameEntities)
 		{
 			// We cast all the Units to Entity*
 			auto entIt = (vermin::Entity*)(it.get());
@@ -897,76 +938,8 @@ namespace v_game {
 			}
 		}
 
-	}
-
-	template <class T>
-	void GameScene::CheckIfHovered(std::vector<std::unique_ptr<T>>& _entities)
-	{
-		for (const auto& it : _entities)
-		{
-			// We cast all the Units to Entity*
-			auto entIt = (vermin::Entity*)(it.get());
-
-			if (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance))
-			{
-				if (intDistance < minIntDistance)
-				{
-					minIntDistance = intDistance;
-					hoveredEntity = entIt;
-				}
-			}
-		}
+		return hoveredEntity;
 
 	}
 
-	template <class T>
-	void GameScene::CheckIfPicked(std::vector<std::shared_ptr<T>> _entities){
-
-		for (auto& it : _entities)
-		{
-			// We cast all the Units to Entity*
-			auto entIt = (vermin::Entity*)(it.get());
-
-			if ((window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1)) && (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance)))
-			{
-				if (intDistance < minIntDistance)
-				{
-					minIntDistance = intDistance;
-					if (!window->IsKeyPressedOrHeld(GLFW_KEY_LEFT_SHIFT)) {
-						selectedEntities.clear();
-					}
-					if (std::find(selectedEntities.begin(), selectedEntities.end(), entIt) == selectedEntities.end()) {
-						selectedEntities.push_back(entIt);
-					}
-				}
-			}
-			entIt->SetSelectedInScene(false);
-		}
-	}
-
-	template<class T>
-	void GameScene::CheckIfPicked(std::vector<std::unique_ptr<T>>& _entities) {
-
-		for (auto& it : _entities)
-		{
-			// We cast all the Units to Entity*
-			auto entIt = (vermin::Entity*)(it.get());
-
-			if ((window->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1)) && (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance)))
-			{
-				if (intDistance < minIntDistance)
-				{
-					minIntDistance = intDistance;
-					if (!window->IsKeyPressedOrHeld(GLFW_KEY_LEFT_SHIFT)) {
-						selectedEntities.clear();
-					}
-					if (std::find(selectedEntities.begin(), selectedEntities.end(), entIt) == selectedEntities.end()) {
-						selectedEntities.push_back(entIt);
-					}
-				}
-			}
-			entIt->SetSelectedInScene(false);
-		}
-
-	}
 }
