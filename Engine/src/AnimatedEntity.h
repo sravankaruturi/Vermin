@@ -46,7 +46,7 @@ namespace vermin {
         /**
          * \brief This function is used when you are loading in Animated Entities from the File.
          */
-        AnimatedEntity() = default;
+        AnimatedEntity(){ entityType = 1; };
 
         AnimatedEntity(const std::string &_entityName, const std::string &_objectPath, const std::string &_shaderName,
                        glm::vec3 _bboxLeast = glm::vec3(-1, -1, -1), glm::vec3 _bboxHigh = glm::vec3(1, 1, 1));

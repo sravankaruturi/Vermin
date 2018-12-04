@@ -15,6 +15,8 @@ namespace vermin {
                                    const std::string &_shaderName, glm::vec3 _bboxLeast, glm::vec3 _bboxHigh)
             : Entity(_entityName, _objectPath, _shaderName, _bboxLeast, _bboxHigh) {
 
+				entityType = 1;
+
         //matrixDirty = true;
         for (int i = 0; i < 32; i++) {
             boneMatrices.push_back(glm::mat4(1.0f));

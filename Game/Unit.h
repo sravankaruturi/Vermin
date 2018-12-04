@@ -75,7 +75,7 @@ namespace v_game {
 
 			float GetCurrentHPPerc();
 
-			~Unit() = default;
+			~Unit() { entityType = 1; }
 
 			void Update(float _deltaTime, vermin::Terrain * _terrain);
 

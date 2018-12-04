@@ -93,6 +93,9 @@ namespace vermin {
 
         bool matrixDirty = true;
 
+		// When this is 0, it means that it is a based Entity.
+		// All the other Derived classes would make it different
+
         glm::vec3 boundingBoxLeastVertex{-1, -1, -1};
         glm::vec3 boundingBoxHighVertex{1, 1, 1};
 
@@ -229,6 +232,8 @@ namespace vermin {
         void UpdateMatrices();
 
     public:
+
+		short entityType = 0;
 
         Entity() = default;
 

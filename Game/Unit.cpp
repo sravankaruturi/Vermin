@@ -12,6 +12,8 @@ namespace v_game {
 		: AnimatedEntity("Unit", "Villager/Worker_Happy_Idle.FBX", "unit", glm::vec3(-10, 0, -10), glm::vec3(10, 50, 10)), type(_type)
 	{
 
+		entityType = 2;
+
 		this->objectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::idle)];
 
 		this->idleObjectName = animation_names[static_cast<int>(_type)][static_cast<int>(AnimType::idle)];

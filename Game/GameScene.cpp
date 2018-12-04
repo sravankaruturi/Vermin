@@ -310,9 +310,7 @@ namespace v_game {
 
 		if ( !selectedEntities.empty() ){
 
-			Tree * t = dynamic_cast<Tree*>(selectedEntities.back());
-			if (nullptr!=t ){
-
+			if (selectedEntities[0]->entityType == 3){
 				window_pos.y = ImGui::GetIO().DisplaySize.y - distanceFromEdges;
 				window_pos.x = ImGui::GetIO().DisplaySize.x / 2;
 
@@ -326,7 +324,7 @@ namespace v_game {
 
 				ImGui::Image((ImTextureID)(1), ImVec2(50, 50));
 
-				ImGui::DragInt( "Tree Res Amount", &(((Tree *)selectedEntities.back())->resourceAmount));
+				ImGui::DragInt( "Tree Res Amount", &(((Tree *)selectedEntities[0])->resourceAmount));
 
 				ImGui::Separator();
 
@@ -523,7 +521,7 @@ namespace v_game {
 						)
 				);
 
-		for ( auto& it: trees){
+		for ( auto it: trees){
 			this->gameEntities.push_back(it);
 		}
 
@@ -628,18 +626,8 @@ namespace v_game {
 		const glm::ivec2 target_node = gameTerrain->pointedNodeIndices;
 
 		this->minIntDistance = INT_MAX;
-		/*
-		this->CheckIfPicked<vermin::Entity>(entities);
-		this->CheckIfPicked<vermin::AnimatedEntity>(animatedEntities);
-		this->CheckIfPicked<Building>(humanPlayer.buildings);
-		this->CheckIfPicked<Unit>(humanPlayer.units);
-		this->CheckIfPicked<Building>(aiPlayer.buildings);
-		this->CheckIfPicked<Unit>(aiPlayer.units);
-		this->CheckIfPicked<Tree>(trees);
-		*/
 
 		GetPickedEntity();
-		
 
 		for ( auto it: selectedEntities){
 			it->SetSelectedInScene(true);
@@ -654,14 +642,9 @@ namespace v_game {
 
 			hoveredEntity = this->GetHoveredEntity();
 
-			if (nullptr != hoveredEntity){
+			if (nullptr != hoveredEntity ){
 
-				// If the hovered entity is a tree.
-				// Try the Dynamic Cast Method.
-				v_game::Tree * t = dynamic_cast<v_game::Tree*>(hoveredEntity);
-				v_game::Unit * u = dynamic_cast<v_game::Unit*>(hoveredEntity);
-
-				if ( nullptr != t) {
+				if (hoveredEntity->entityType == 3) {
 
 					LOGGER.AddToLog("Hovering over a Tree");
 
@@ -677,7 +660,7 @@ namespace v_game {
 					}
 
 				}
-				else if ( nullptr != u ) {
+				else if (hoveredEntity->entityType == 2) {
 
 					// If there is, attack it.
 					// TODO: What if it is our Entity?
@@ -808,7 +791,7 @@ namespace v_game {
 			std::make_shared<Building>(_type, _position)
 			);
 
-		this->gameEntities.emplace_back(
+		this->gameEntities.push_back(
 				std::static_pointer_cast<vermin::Entity>(_player.buildings.at(t_index))
 				);
 
@@ -928,7 +911,7 @@ namespace v_game {
 			// We cast all the Units to Entity*
 			auto entIt = (vermin::Entity*)(it.get());
 
-			if (entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance))
+			if ( entIt->gPlay.active && entIt->CheckIfMouseOvered(rayStart, mousePointerRay, minIntDistance))
 			{
 				if (intDistance < minIntDistance)
 				{
