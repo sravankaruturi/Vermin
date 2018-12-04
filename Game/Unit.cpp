@@ -67,8 +67,11 @@ namespace v_game {
 					this->currentState = UnitState::idle;
 				}else{
 					// TODO: Fix this. We need to make sure we update the corresponding Resource
+					if ( this->rType == ResourceType::Wood ){
 						_resources.rWood += ( this->resourceEntity->MineResources(10) ) ? 10 : 0;
-						//_resources.rStone += ( this->resourceEntity->MineResources(10) ) ? 10 : 0;
+					}else if ( this->rType == ResourceType::Stone ){
+						_resources.rStone += ( this->resourceEntity->MineResources(10) ) ? 10 : 0;
+					}
 				}
 			}
 		}

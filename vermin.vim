@@ -3,30 +3,36 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/projects/Vermin
+silent tabonly
+cd ~/CLionProjects/Vermin
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
 badd +54 Game/GameScene.h
-badd +712 Game/GameScene.cpp
+badd +2 Game/GameScene.cpp
 badd +35 ~/.vimrc
 badd +67 Engine/src/Scene.h
-badd +21 Game/Tree.cpp
+badd +15 Game/Tree.cpp
 badd +1 Game/GameSceneh
-badd +100 Game/Unit.h
-badd +69 Game/Unit.cpp
+badd +29 Game/Unit.h
+badd +66 Game/Unit.cpp
 badd +27 Game/ResourceObject.h
 badd +8 Engine/src/LoggingManager.h
+badd +1 Unit.g
+badd +11 Game/gameDefinitions.h
 argglobal
 silent! argdel *
 $argadd Game/GameScene.h
-edit Game/Unit.cpp
+edit Game/gameDefinitions.h
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
-set winminheight=1 winheight=1 winminwidth=1 winwidth=1
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -37,14 +43,14 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 54 - ((6 * winheight(0) + 21) / 43)
+let s:l = 8 - ((7 * winheight(0) + 18) / 36)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-54
-normal! 090|
+8
+normal! 0
 tabnext 1
-if exists('s:wipebuf')
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf

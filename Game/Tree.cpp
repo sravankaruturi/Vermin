@@ -5,13 +5,14 @@
 #include "Tree.h"
 #include "FolderLocations.h"
 #include "LoggingManager.h"
+#include "gameDefinitions.h"
 
 namespace v_game{
 
 	Tree::Tree(glm::vec3 _position)
 	: Entity("Tree", "Medieval_House/Medieval_House.obj", "town_center", glm::vec3(-120, 0, -120), glm::vec3(150, 200, 200)), ResourceObject(100)
 	{
-		entityType = 3;
+		entityType = ENTITY_TYPE_TREE;
 		this->SetScale(glm::vec3(1/512.0f));
 		this->SetPosition(_position);
 		LOGGER.AddToLog(std::string("Created a new Tree, with resource value: ") + std::string("%u",this->resourceAmount) );

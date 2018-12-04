@@ -84,6 +84,7 @@ namespace v_game {
 			float resourceTimeLimit = 2.0f;
 
 			ResourceObject * resourceEntity = nullptr;
+			ResourceType rType;
 
 		protected:
 

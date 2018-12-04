@@ -683,8 +683,10 @@ namespace v_game {
 								it->gPlay.attackingMode = false;
 
 								if ( hoveredEntity->entityType == 3 ){
+									temp_unit->rType = ResourceType::Wood;
 									temp_unit->resourceEntity = (ResourceObject*)((Tree*)(hoveredEntity));
 								}else if ( hoveredEntity->entityType == 4 ){
+									temp_unit->rType = ResourceType::Stone;
 									temp_unit->resourceEntity = (ResourceObject*)((Stone*)(hoveredEntity));
 								}
 

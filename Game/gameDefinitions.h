@@ -5,18 +5,31 @@
 #ifndef GAME_GAMEDEFINITIONS_H
 #define GAME_GAMEDEFINITIONS_H
 
-struct Resources{
+#define ENTITY_TYPE_TREE		3
+#define ENTITY_TYPE_STONE		4
 
-    int rWood = 100;
-    int rStone = 100;
+namespace v_game{
 
-    Resources() = default;
+	enum class ResourceType{
+		Wood,
+		Stone
+	};
 
-    Resources(int _wood, int _stone){
-        rWood = _wood;
-        rStone = _stone;
-    }
+	struct Resources{
 
-};
+		int rWood = 100;
+		int rStone = 100;
+
+		Resources() = default;
+
+		Resources(int _wood, int _stone){
+			rWood = _wood;
+			rStone = _stone;
+		}
+
+	};
+
+}
+
 
 #endif //GAME_GAMEDEFINITIONS_H
