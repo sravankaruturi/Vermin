@@ -5,6 +5,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 #include "GUIHelpers.h"
 
 #define LOGGER vermin::LoggingManager::GetInstance()

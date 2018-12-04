@@ -9,6 +9,12 @@
 #include "Unit.h"
 #include "Tree.h"
 
+#include "gameDefinitions.h"
+#include "Stone.h"
+
+#define HUMAN_PLAYER_TEAM 0
+#define AI_PLAYER_TEAM 1
+
 namespace v_game {
 
 	enum class PlayerType
@@ -23,10 +29,11 @@ namespace v_game {
 		Playing
 	};
 
+
+
 	struct Player{
 
-		unsigned int rWood = 0;
-		unsigned int rStone = 0;
+		Resources resources;
 
 		PlayerType pType = PlayerType::Ai;
 		PlayerMode pMode = PlayerMode::Playing;
@@ -47,8 +54,7 @@ namespace v_game {
 			pType = _pType;
 
 			// Let us give some wood and stone to the Player.
-			rWood = 1200;
-			rStone = 1200;
+			resources = Resources(1200, 1200);
 
 			pColour = (pType == PlayerType::Human) ? glm::vec4(1, 0, 0, 0.3) : glm::vec4(0, 0, 1, 0.3);
 
@@ -135,6 +141,8 @@ namespace v_game {
 		vermin::Entity * hoveredEntity;
 
 		std::vector<std::shared_ptr<Tree>> trees;
+
+		std::vector<std::shared_ptr<Stone>> stones;
 
 		std::vector<std::shared_ptr<vermin::Entity>> gameEntities;
 

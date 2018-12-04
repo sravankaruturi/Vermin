@@ -6,6 +6,7 @@
 #define GAME_UNIT_H
 #include "AnimatedEntity.h"
 #include "Terrain.h"
+#include "gameDefinitions.h"
 
 
 namespace v_game {
@@ -71,13 +72,13 @@ namespace v_game {
 
 		public:
 
-			explicit Unit(UnitType _type);
+			explicit Unit(UnitType _type, short _team);
 
 			float GetCurrentHPPerc();
 
 			~Unit() { entityType = 1; }
 
-			void Update(float _deltaTime, vermin::Terrain * _terrain);
+			void Update(float _deltaTime, vermin::Terrain * _terrain, Resources& _resources);
 
 			float resourceTimer = 0.0f;
 			float resourceTimeLimit = 2.0f;
@@ -121,10 +122,6 @@ namespace v_game {
 			void SetFaceTextureId(unsigned _faceTextureId)
 			{
 				faceTextureID = _faceTextureId;
-			}
-
-			std::string GetType() override{
-				return "Unit";
 			}
 
 			const static std::string ToString(UnitState _state){

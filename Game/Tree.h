@@ -14,10 +14,6 @@ namespace v_game{
 	public:
 		explicit Tree(glm::vec3 _position);
 
-		std::string GetType() override{
-			return "Tree";
-		}
-
 		void Update(float _deltaTime);
 
 	};

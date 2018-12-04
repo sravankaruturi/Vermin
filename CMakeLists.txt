@@ -27,6 +27,6 @@ add_executable(
         Game/Unit.h Game/Villager.cpp Game/Villager.h Game/Warrior.cpp Game/Warrior.h Game/Catapult.cpp Game/Catapult.h Game/Building.cpp Game/Building.h Game/Barracks.cpp Game/Barracks.h Game/SiegeFactory.cpp Game/SiegeFactory.h
         Game/MenuScene.h
         Game/MenuScene.cpp
-        Game/Tree.cpp Game/Tree.h Game/ResourceObject.h)
+        Game/Tree.cpp Game/Tree.h Game/ResourceObject.h Game/gameDefinitions.h Game/Stone.cpp Game/Stone.h)
 
 target_link_libraries(Game Vermin)

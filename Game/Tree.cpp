@@ -4,6 +4,7 @@
 
 #include "Tree.h"
 #include "FolderLocations.h"
+#include "LoggingManager.h"
 
 namespace v_game{
 
@@ -13,11 +14,13 @@ namespace v_game{
 		entityType = 3;
 		this->SetScale(glm::vec3(1/512.0f));
 		this->SetPosition(_position);
+		LOGGER.AddToLog(std::string("Created a new Tree, with resource value: ") + std::string("%u",this->resourceAmount) );
 	}
 
 	void Tree::Update(float _deltaTime){
 
-		//this->SetScale(this->GetScale() * ((resourceAmount)/100.0f) );
+		//std::cout << "Resources: " << this->resourceAmount << std::endl;
+
 		if ( this->resourceAmount <= 0.0f ){
 			this->gPlay.active = false;
 		}

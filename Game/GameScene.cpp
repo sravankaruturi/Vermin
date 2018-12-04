@@ -42,9 +42,9 @@ namespace v_game {
 				);
 		ImVec2 other_pos = ImVec2(pos.x + size.x, pos.y + size.y);
 		ImRect bb(
-			pos,
-			other_pos
-		);
+				pos,
+				other_pos
+				);
 		ImGui::ItemSize(bb, style.FramePadding.y);
 		if (!ImGui::ItemAdd(bb, 0))
 			return;
@@ -56,7 +56,7 @@ namespace v_game {
 		const ImVec2 fill_br = ImVec2(ImLerp(bb.Min.x, bb.Max.x, _perc), bb.Max.y);
 		ImGui::RenderRectFilledRangeH(
 				window->DrawList,
-			   	bb,
+				bb,
 				ImGui::ColorConvertFloat4ToU32(bar_colour), 
 				0.0f, 
 				_perc, 
@@ -73,8 +73,8 @@ namespace v_game {
 		ImVec2 overlay_size = ImGui::CalcTextSize(overlay, NULL);
 		if (overlay_size.x > 0.0f)
 			ImGui::RenderTextClipped(ImVec2(ImClamp(fill_br.x + style.ItemSpacing.x, bb.Min.x,
-				bb.Max.x - overlay_size.x - style.ItemInnerSpacing.x), bb.Min.y), bb.Max,
-				overlay, NULL, &overlay_size, ImVec2(0.0f, 0.5f), &bb);
+							bb.Max.x - overlay_size.x - style.ItemInnerSpacing.x), bb.Min.y), bb.Max,
+					overlay, NULL, &overlay_size, ImVec2(0.0f, 0.5f), &bb);
 
 	}
 
@@ -161,9 +161,16 @@ namespace v_game {
 		}
 
 		ASMGR.shaders.at("town_center")->use();
-		ASMGR.shaders.at("town_center")->setVec4("u_PlayerColour", glm::vec4(yellow, 1.0f));
+		ASMGR.shaders.at("town_center")->setVec4("u_PlayerColour", glm::vec4(yellow, 0.8f));
 
 		for (const auto& it : trees) {
+			it->Render();
+		}
+
+		ASMGR.shaders.at("town_center")->use();
+		ASMGR.shaders.at("town_center")->setVec4("u_PlayerColour", glm::vec4(blue, 0.8f));
+
+		for (const auto& it : stones) {
 			it->Render();
 		}
 
@@ -205,12 +212,12 @@ namespace v_game {
 
 
 		ImGui::Begin("Resources", nullptr, resWinSize, 0.4f, resWinFlags | ImGuiWindowFlags_NoTitleBar);
-		ImGui::LabelText("Wood", "%d", humanPlayer.rWood);
-		ImGui::LabelText("Stone", "%d", humanPlayer.rStone);
+		ImGui::LabelText("Wood", "%d", humanPlayer.resources.rWood);
+		ImGui::LabelText("Stone", "%d", humanPlayer.resources.rStone);
 		ImGui::End();
 
 		window_pos = ImVec2((pccCorner & 1) ? ImGui::GetIO().DisplaySize.x - distanceFromEdges : distanceFromEdges,
-							(pccCorner & 2) ? ImGui::GetIO().DisplaySize.y - distanceFromEdges : distanceFromEdges);
+				(pccCorner & 2) ? ImGui::GetIO().DisplaySize.y - distanceFromEdges : distanceFromEdges);
 		window_pos_pivot = ImVec2((pccCorner & 1) ? 1.0f : 0.0f, (pccCorner & 2) ? 1.0f : 0.0f);
 		if (pccCorner != -1)
 			ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
@@ -251,7 +258,7 @@ namespace v_game {
 
 		// IF One of the Buildings is selected.
 		if (buildingSelected) {
-			
+
 			window_pos.y = ImGui::GetIO().DisplaySize.y - distanceFromEdges;
 			window_pos.x = ImGui::GetIO().DisplaySize.x / 2;
 
@@ -310,7 +317,7 @@ namespace v_game {
 
 		if ( !selectedEntities.empty() ){
 
-			if (selectedEntities[0]->entityType == 3){
+			if (selectedEntities[0]->entityType == 3 || selectedEntities[0]->entityType == 4){
 				window_pos.y = ImGui::GetIO().DisplaySize.y - distanceFromEdges;
 				window_pos.x = ImGui::GetIO().DisplaySize.x / 2;
 
@@ -323,8 +330,13 @@ namespace v_game {
 				ImGui::Begin("Tree Stats", nullptr, swFlags);
 
 				ImGui::Image((ImTextureID)(1), ImVec2(50, 50));
-
-				ImGui::DragInt( "Tree Res Amount", &(((Tree *)selectedEntities[0])->resourceAmount));
+				
+				if ( selectedEntities[0]->entityType == 3 )
+				{
+					ImGui::LabelText("Resource: %u", "%u",((Tree*)selectedEntities[0])->resourceAmount);
+				}else if ( selectedEntities[0]->entityType == 4 ){
+					ImGui::LabelText("Resource: %u", "%u",((Stone*)selectedEntities[0])->resourceAmount);
+				}
 
 				ImGui::Separator();
 
@@ -335,8 +347,8 @@ namespace v_game {
 
 		}
 
-		
-		
+
+
 		ImGui::ShowDemoWindow();
 
 	}
@@ -392,7 +404,7 @@ namespace v_game {
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_W))
 		{
-			
+
 #if NO_CAMERA_CONSTRAINTS
 			activeCamera->ProcessKeyboard(vermin::Camera::forward, _deltaTime);
 #else
@@ -403,7 +415,7 @@ namespace v_game {
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_S))
 		{
-			
+
 #if NO_CAMERA_CONSTRAINTS
 			activeCamera->ProcessKeyboard(vermin::Camera::back, _deltaTime);
 #else
@@ -414,7 +426,7 @@ namespace v_game {
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_A))
 		{
-			
+
 #if NO_CAMERA_CONSTRAINTS
 			activeCamera->ProcessKeyboard(vermin::Camera::leftside, _deltaTime);
 #else
@@ -425,7 +437,7 @@ namespace v_game {
 
 		if (window->IsKeyPressedOrHeld(GLFW_KEY_D))
 		{
-			
+
 #if NO_CAMERA_CONSTRAINTS
 			activeCamera->ProcessKeyboard(vermin::Camera::rightside, _deltaTime);
 #else
@@ -465,7 +477,7 @@ namespace v_game {
 	}
 
 	GameScene::GameScene(std::shared_ptr<vermin::Window> _window)
-			: Scene(std::move(_window))
+		: Scene(std::move(_window))
 	{
 
 		deltaTime = glfwGetTime() - 0.0f;
@@ -474,8 +486,8 @@ namespace v_game {
 		grid.Init();
 
 		gameTerrain = std::make_shared<vermin::Terrain>(
-			25, 25, 0.5, 0.5, std::string(TEXTURE_FOLDER) + std::string("heightmap.jpg")
-			);
+				25, 25, 0.5, 0.5, std::string(TEXTURE_FOLDER) + std::string("heightmap.jpg")
+				);
 		LOGGER.AddToLog("Terrain Loaded...");
 
 		gManager = std::make_unique<GamePlayManager>();
@@ -512,17 +524,27 @@ namespace v_game {
 		gManager->StartGame();
 
 		buildingPlacers.emplace_back(
-			std::make_unique<Building>(BuildingType::towncenter, glm::vec3(0, 0, 0))
-		);
+				std::make_unique<Building>(BuildingType::towncenter, glm::vec3(0, 0, 0))
+				);
 
 		this->trees.push_back(
 				std::make_shared<Tree>(
-						glm::vec3(5, 0.5, 5)
-						)
+					glm::vec3(5, 0.5, 5)
+					)
 				);
 
 		for ( auto it: trees){
 			this->gameEntities.push_back(it);
+		}
+
+		this->stones.push_back(
+		        std::make_shared<Stone>(
+		                glm::vec3(7, 0.5, 5)
+		                )
+		        );
+
+		for (auto it: stones){
+		    this->gameEntities.push_back(it);
 		}
 
 	}
@@ -555,7 +577,7 @@ namespace v_game {
 		}
 
 		for ( const auto& it: humanPlayer.units ){
-			it->Update(_deltaTime, gameTerrain.get());
+			it->Update(_deltaTime, gameTerrain.get(), humanPlayer.resources);
 			it->PlayAnimation(_deltaTime, _totalTime);
 		}
 
@@ -564,11 +586,15 @@ namespace v_game {
 		}
 
 		for (const auto& it : aiPlayer.units) {
-			it->Update(_deltaTime, gameTerrain.get());
+			it->Update(_deltaTime, gameTerrain.get(), aiPlayer.resources);
 			it->PlayAnimation(_deltaTime, _totalTime);
 		}
 
 		for (const auto& it : trees){
+			it->Update(_deltaTime);
+		}
+
+		for (const auto& it : stones){
 			it->Update(_deltaTime);
 		}
 
@@ -644,31 +670,48 @@ namespace v_game {
 
 			if (nullptr != hoveredEntity ){
 
-				if (hoveredEntity->entityType == 3) {
-
-					LOGGER.AddToLog("Hovering over a Tree");
+				if (hoveredEntity->entityType == 3 || hoveredEntity->entityType == 4) {
 
 					if ( !selectedEntities.empty() ){
-						
+
 						for ( auto& it: selectedEntities ){
-							if ( "Unit" == it->GetType() ){
-								((Unit*)it)->setCurrentState(UnitState::gathering);
-								((Unit*)it)->resourceEntity = (ResourceObject*)hoveredEntity;
+							if ( it->entityType == 2 ){
+
+								auto temp_unit = (Unit*)it;
+
+								temp_unit->setCurrentState(UnitState::gathering);
+								it->gPlay.attackingMode = false;
+
+								if ( hoveredEntity->entityType == 3 ){
+									temp_unit->resourceEntity = (ResourceObject*)((Tree*)(hoveredEntity));
+								}else if ( hoveredEntity->entityType == 4 ){
+									temp_unit->resourceEntity = (ResourceObject*)((Stone*)(hoveredEntity));
+								}
+
 							}	
 						}
 
 					}
 
 				}
-				else if (hoveredEntity->entityType == 2) {
-
+				else if (hoveredEntity->entityType == 2 ) 
+				{
+					
 					// If there is, attack it.
 					// TODO: What if it is our Entity?
 					// We can surround it first, and then attack.
 					// We would only make the last selected Entity attack for now.
-					selectedEntities.back()->gPlay.attackingMode = true;
-					selectedEntities.back()->gPlay.attackTarget = hoveredEntity;
-					selectedEntities.back()->setTargetNode(gameTerrain->GetNodeIndicesFromPos(hoveredEntity->GetPosition()));
+					
+					for ( auto& it: selectedEntities ){
+						if ( it->gPlay.team == hoveredEntity->gPlay.team ){
+							continue;
+						}else{
+							it->gPlay.attackingMode = true;
+							it->gPlay.attackTarget = hoveredEntity;
+							it->setTargetNode(gameTerrain->GetNodeIndicesFromPos(hoveredEntity->GetPosition()));
+						}
+					}
+				
 
 				}
 
@@ -679,6 +722,18 @@ namespace v_game {
 
 			// We would get the hovered Entity. If there was none, go ahead and continue.
 			if ( nullptr == hoveredEntity) {
+
+				// Reset the state
+				for ( auto& it: selectedEntities ){
+					if ( it->entityType == 2 ){
+
+						auto temp_unit = (Unit*)it;
+
+						temp_unit->setCurrentState(UnitState::walking);
+						it->gPlay.attackingMode = false;
+
+					}
+				}
 
 				const int number_of_selected_entities = selectedEntities.size();
 				const int number_of_rows = glm::ceil(glm::sqrt(number_of_selected_entities));
@@ -711,13 +766,13 @@ namespace v_game {
 		int w_cost = required_wood_for_units[static_cast<int>(_type)];
 		int s_cost = required_stone_for_units[static_cast<int>(_type)];
 
-		if ( _player.rWood < w_cost || _player.rStone < s_cost ){
+		if ( _player.resources.rWood < w_cost || _player.resources.rStone < s_cost ){
 			LOGGER.AddToLog("Not Enough resources", vermin::PE_LOG_WARN);
 			return false;
 		}
 
-		_player.rWood -= w_cost;
-		_player.rStone -= s_cost;
+		_player.resources.rWood -= w_cost;
+		_player.resources.rStone -= s_cost;
 
 		unsigned t_index = INT_MAX;
 
@@ -728,6 +783,7 @@ namespace v_game {
 			{
 				// Use That.
 				it->gPlay.active = true;
+				it->gPlay.health = it->gPlay.maxHealth;
 				t_index = &it - &_player.units[0];
 
 				break;
@@ -739,8 +795,8 @@ namespace v_game {
 		if ( t_index == _player.units.size() )
 		{
 			_player.units.emplace_back(
-				std::make_shared<Unit>(_type)
-			);
+					std::make_shared<Unit>(_type, (short)_player.pType)
+					);
 			this->gameEntities.push_back(std::static_pointer_cast<vermin::Entity>(
 						_player.units[t_index]
 						)
@@ -777,19 +833,19 @@ namespace v_game {
 		int w_cost = required_wood_for_buildings[static_cast<int>(_type)];
 		int s_cost = required_stone_for_buildings[static_cast<int>(_type)];
 
-		if (_player.rWood < w_cost || _player.rStone < s_cost) {
+		if (_player.resources.rWood < w_cost || _player.resources.rStone < s_cost) {
 			LOGGER.AddToLog("Not Enough resources", vermin::PE_LOG_WARN);
 			return false;
 		}
 
-		_player.rWood -= w_cost;
-		_player.rStone -= s_cost;
+		_player.resources.rWood -= w_cost;
+		_player.resources.rStone -= s_cost;
 
 		unsigned t_index = _player.buildings.size();
 
 		_player.buildings.emplace_back(
-			std::make_shared<Building>(_type, _position)
-			);
+				std::make_shared<Building>(_type, _position)
+				);
 
 		this->gameEntities.push_back(
 				std::static_pointer_cast<vermin::Entity>(_player.buildings.at(t_index))
@@ -813,7 +869,7 @@ namespace v_game {
 
 		target_node.y = _buildingPosition.y + 1;
 		gameTerrain->SetTerrainNodeObstacle(target_node);
-		
+
 		target_node.x = _buildingPosition.x + 1;
 		target_node.y = _buildingPosition.y;
 		gameTerrain->SetTerrainNodeObstacle(target_node);
@@ -823,7 +879,7 @@ namespace v_game {
 
 		target_node.y = _buildingPosition.y + 1;
 		gameTerrain->SetTerrainNodeObstacle(target_node);
-		
+
 		target_node.x = _buildingPosition.x - 1;
 		target_node.y = _buildingPosition.y;
 		gameTerrain->SetTerrainNodeObstacle(target_node);
@@ -904,7 +960,7 @@ namespace v_game {
 
 	vermin::Entity * GameScene::GetHoveredEntity(){
 
-	    this->hoveredEntity = nullptr;
+		this->hoveredEntity = nullptr;
 
 		for (const auto& it : this->gameEntities)
 		{

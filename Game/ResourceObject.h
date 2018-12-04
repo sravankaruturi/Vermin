@@ -19,8 +19,12 @@ namespace v_game{
 			}
 
 
-			void MineResources(int _amount){
-				this->resourceAmount -= _amount;
+			bool MineResources(int _amount){
+				if ( this->resourceAmount >= _amount ){
+					this->resourceAmount -= _amount;
+					return true;
+				}
+				return false;
 			}
 
 	};

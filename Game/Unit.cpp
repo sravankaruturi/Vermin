@@ -8,7 +8,7 @@
 
 namespace v_game {
 
-	Unit::Unit(UnitType _type)
+	Unit::Unit(UnitType _type, short _team)
 		: AnimatedEntity("Unit", "Villager/Worker_Happy_Idle.FBX", "unit", glm::vec3(-10, 0, -10), glm::vec3(10, 50, 10)), type(_type)
 	{
 
@@ -23,6 +23,7 @@ namespace v_game {
 
 		this->SetScale(glm::vec3(1 / 64.0f));
 		this->SetRotation(glm::vec3(0, 0, 0));
+		this->gPlay.team = _team;
 
 		switch (_type)
 		{
@@ -50,7 +51,7 @@ namespace v_game {
 		return (float)this->gPlay.health/this->gPlay.maxHealth;
 	}
 
-	void Unit::Update(float _deltaTime, vermin::Terrain * _terrain)
+	void Unit::Update(float _deltaTime, vermin::Terrain * _terrain, Resources& _resources)
 	{
 
 		if ( !this->gPlay.active )
@@ -65,7 +66,9 @@ namespace v_game {
 				if ( nullptr == this->resourceEntity ){
 					this->currentState = UnitState::idle;
 				}else{
-					this->resourceEntity->MineResources(10.0f);
+					// TODO: Fix this. We need to make sure we update the corresponding Resource
+						_resources.rWood += ( this->resourceEntity->MineResources(10) ) ? 10 : 0;
+						//_resources.rStone += ( this->resourceEntity->MineResources(10) ) ? 10 : 0;
 				}
 			}
 		}
