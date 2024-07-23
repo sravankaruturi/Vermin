@@ -23,12 +23,12 @@
 
 #elif MACBOOK
 
-#define SHADER_FOLDER            "/Users/Sravan/ClionProjects/Vermin/Shaders/"
-#define TEXTURE_FOLDER            "/Users/Sravan/ClionProjects/Vermin/Assets/Textures/"
-#define MODEL_FOLDER            "/Users/Sravan/ClionProjects/Vermin/Assets/Models/"
-#define SCENES_FOLDER            "/Users/Sravan/ClionProjects/Vermin/Assets/Scenes/"
+#define SHADER_FOLDER            "/Users/sravankaruturi/dev/cpp/Vermin/Shaders/"
+#define TEXTURE_FOLDER            "/Users/sravankaruturi/dev/cpp/Vermin/Assets/Textures/"
+#define MODEL_FOLDER            "/Users/sravankaruturi/dev/cpp/Vermin/Assets/Models/"
+#define SCENES_FOLDER            "/Users/sravankaruturi/dev/cpp/Vermin/Assets/Scenes/"
 
-#define EXTERNAL_FILES            "/Users/Sravan/ClionProjects/Vermin/Engine/Deps/third_party/"
+#define EXTERNAL_FILES            "/Users/sravankaruturi/dev/cpp/Vermin/Engine/Deps/third_party/"
 
 #elif LAB_MACHINE
 
