@@ -15,6 +15,5 @@ Engine/Configurations.h
 *.cpp~~
 
 docs/.idea/*
-Engine/src/Configurations.h
 
 vermin.vim
